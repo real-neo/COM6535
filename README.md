@@ -4,6 +4,22 @@
 ### Description
 Describe your app here...
 
+### Development
+
+How to set development environment:
+
+Create database config file:
+`cp config/database_sample-sqlite.yml config/database.yml`
+
+Create database:
+`rails db:create`
+
+Migrate database:
+`rails db:migrate`
+
+Database seeds:
+`rails db:seed`
+
 ### Significant Features/Technology
 The system has the following:
 
