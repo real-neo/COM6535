@@ -16,19 +16,19 @@
 
 - collection = %w(These Are Some Options)
 
-= simple_form_for :form_examples do |f|
-  = f.input :string, as: :string
-  = f.input :text, as: :text
-  = f.input :select2, as: :select, collection: collection, input_html: { class: 'select2' }, include_blank: false
-  = f.input :select, as: :select, collection: collection
-  = f.input :radio_buttons, as: :radio_buttons, collection: collection
-  = f.input :inline_radio_buttons, as: :inline_radio_buttons, collection: collection
-  = f.input :check_boxes, as: :check_boxes, collection: collection
-  = f.input :inline_check_boxes, as: :inline_check_boxes, collection: collection
-  = f.input :boolean, as: :boolean
-  = f.input :addons, wrapper: :vertical_input_group do
-    %span.input-group-addon Addon
-    = f.input_field :toilet, class: "form-control"
+-#= simple_form_for :form_examples do |f|
+-#  = f.input :string, as: :string
+-#  = f.input :text, as: :text
+-#  = f.input :select2, as: :select, collection: collection, input_html: { class: 'select2' }, include_blank: false
+-#  = f.input :select, as: :select, collection: collection
+-#  = f.input :radio_buttons, as: :radio_buttons, collection: collection
+-#  = f.input :inline_radio_buttons, as: :inline_radio_buttons, collection: collection
+-#  = f.input :check_boxes, as: :check_boxes, collection: collection
+-#  = f.input :inline_check_boxes, as: :inline_check_boxes, collection: collection
+-#  = f.input :boolean, as: :boolean
+-#  = f.input :addons, wrapper: :vertical_input_group do
+-#    %span.input-group-addon Addon
+-#    = f.input_field :toilet, class: "form-control"
     
 :coffee
   $ ->
