@@ -1,0 +1,44 @@
+require 'rspec'
+require 'rails_helper'
+
+describe 'registration', js: true do
+  context 'When a new user tries to sign up' do
+    it 'they can register a new account' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "Welcome! You have signed up successfully."
+    end
+
+    it 'A user cannot register a new account without filling in the information' do
+      visit '/users/sign_up'
+      click_button 'Sign up'
+      expect(page).to have_content "Please review the problems below:"
+    end
+  end
+
+  context 'When a user has an account' do
+    it 'does not allow them to sign up with the same account' do
+      FactoryBot.create(:user, email: 'aioannou2@gmail.com')
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'aioannou2@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "has already been taken"
+    end
+  end
+
+end

@@ -1,0 +1,16 @@
+- content_for :title, "Home"
+
+.page-header
+  %h1 Hello #{current_user.firstname}
+
+
+%h2 Flash Examples
+.well
+  %button#show-flash.btn.btn-default{ type: :button }
+    Show flash message
+
+
+:coffee
+  $ ->
+    $('#show-flash').on 'click', ->
+      $.flashAlert('Hello world!', 'alert-success')

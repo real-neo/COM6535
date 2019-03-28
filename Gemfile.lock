@@ -367,6 +367,7 @@ DEPENDENCIES
   activerecord-session_store!
   airbrake!
   annotate
+  bcrypt
   bootsnap
   bootstrap-sass
   bootstrap-will_paginate

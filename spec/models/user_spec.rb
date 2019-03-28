@@ -25,5 +25,44 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  let(:user) { FactoryBot.create(:user)}
+
+  it "is valid with valid attributes" do
+    expect(user).to be_valid
+  end
+
+  it "is not valid without a firstname" do
+    subject.firstname = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without a lastname" do
+    subject.lastname = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without a location" do
+    subject.location=nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without a city" do
+    subject.city=nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without an email" do
+    subject.email = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without a username" do
+    subject.username = nil
+    expect(subject).to_not be_valid
+  end
+
+  it "is not valid without a password" do
+    subject.encrypted_password = nil
+    expect(subject).to_not be_valid
+  end
 end

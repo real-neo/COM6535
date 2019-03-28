@@ -24,6 +24,13 @@
 
 FactoryBot.define do
   factory :user do
-    
+    firstname {'Alexis'}
+    lastname {'Ioannou'}
+    location {'UK'}
+    city {'Sheffield'}
+    email {'aioannou2@gmail.com'}
+    username {'acp18ai'}
+    password {'qweqweqwe'}
+    # encrypted_password {'qweqweqwe'}
   end
 end
