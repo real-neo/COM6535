@@ -24,7 +24,7 @@
 
 class User < ApplicationRecord
   validates :firstname, :lastname, :location, :city, :username, presence: true
-  validates :username, :firstname, :lastname, :city, length: {minimum: 2, maximum: 25}
+  validates :firstname, :lastname, :city, :username, length: {minimum: 2, maximum: 25}
   validates :location, length: {minimum: 2, maximum: 55}
 
 

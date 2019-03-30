@@ -22,6 +22,160 @@ describe 'registration', js: true do
       click_button 'Sign up'
       expect(page).to have_content "Please review the problems below:"
     end
+
+    it 'they can register a new account' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "Welcome! You have signed up successfully."
+    end
+
+    it 'they cannot register an new account with less than 2 character for firstname' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'A')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too short (minimum is 2 characters)"
+    end
+
+    it 'they cannot register an new account with less than 2 character for lastname' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'A')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too short (minimum is 2 characters)"
+    end
+
+    it 'they cannot register an new account with less than 2 character for country' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'U')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too short (minimum is 2 characters)"
+    end
+
+    it 'they cannot register an new account with less than 2 character for city' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'S')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'acp18ai')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too short (minimum is 2 characters)"
+    end
+
+    it 'they cannot register an new account with less than 2 character for username' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'a')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too short (minimum is 2 characters)"
+    end
+
+    it 'they cannot register an new account with more than 25 character for firstname' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander This is going to be more than 25 characters long')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'aer')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too long (maximum is 25 characters)"
+    end
+
+    it 'they cannot register an new account with more than 25 character for lastname' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou  This is going to be more than 25 characters long')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'aer')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too long (maximum is 25 characters)"
+    end
+
+    it 'they cannot register an new account with more than 55 character for country' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK  This is going to be more than 55 characters long test')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'aer')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too long (maximum is 55 characters)"
+    end
+
+    it 'they cannot register an new account with more than 25 character for city' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield This is going to be more than 55 characters long')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'ad')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too long (maximum is 25 characters)"
+    end
+
+    it 'they cannot register an new account with more than 25 character for username' do
+      visit '/users/sign_up'
+      fill_in('Firstname', with: 'Alexander')
+      fill_in('Lastname', with: 'Arnaouzoglou')
+      fill_in('Country', with: 'UK')
+      fill_in('City', with: 'Sheffield')
+      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
+      fill_in('Username', with: 'a This is going to be more than 25 characters long')
+      fill_in('Password', with: 'qweqweqwe')
+      fill_in('Password confirmation', with: 'qweqweqwe')
+      click_button 'Sign up'
+      expect(page).to have_content "is too long (maximum is 25 characters)"
+    end
   end
 
   context 'When a user has an account' do

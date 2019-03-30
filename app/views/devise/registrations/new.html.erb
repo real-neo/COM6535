@@ -2,37 +2,19 @@
 
 <div class="container">
 
-  <div class="row">
-    <div class="col">col</div>
-    <div class="col">col</div>
-    <div class="w-100"></div>
-    <div class="col">col</div>
-    <div class="col">col</div>
-  </div>
-</div>
-
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
 
-    <div class="row" >
-
-      <div class="col-6" >
-        <%= f.input :firstname,
-                    required: true,
-                    autofocus: true ,
-                    input_html: { autocomplete: "firstname" }%>
-      </div>
-
-      <div class="col-6" >
-        <%= f.input :lastname,
-                      required: true,
-                      autofocus: true ,
-                      input_hml: { autocomplete: "lastname" }%>
-      </div>
-
-    </div>
+    <%= f.input :firstname,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "firstname" }%>
+    <%= f.input :lastname,
+                  required: true,
+                  autofocus: true ,
+                  input_hml: { autocomplete: "lastname" }%>
 
     <%= f.input :location,
                 required: true,
