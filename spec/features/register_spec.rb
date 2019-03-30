@@ -13,13 +13,13 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "Welcome! You have signed up successfully."
     end
 
     it 'A user cannot register a new account without filling in the information' do
       visit '/users/sign_up'
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "Please review the problems below:"
     end
 
@@ -33,7 +33,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "Welcome! You have signed up successfully."
     end
 
@@ -47,7 +47,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too short (minimum is 2 characters)"
     end
 
@@ -61,7 +61,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too short (minimum is 2 characters)"
     end
 
@@ -75,7 +75,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too short (minimum is 2 characters)"
     end
 
@@ -89,7 +89,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too short (minimum is 2 characters)"
     end
 
@@ -103,7 +103,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'a')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too short (minimum is 2 characters)"
     end
 
@@ -117,7 +117,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'aer')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too long (maximum is 25 characters)"
     end
 
@@ -131,7 +131,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'aer')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too long (maximum is 25 characters)"
     end
 
@@ -145,7 +145,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'aer')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too long (maximum is 55 characters)"
     end
 
@@ -159,7 +159,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'ad')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too long (maximum is 25 characters)"
     end
 
@@ -173,7 +173,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'a This is going to be more than 25 characters long')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "is too long (maximum is 25 characters)"
     end
   end
@@ -190,7 +190,7 @@ describe 'registration', js: true do
       fill_in('Username', with: 'acp18ai')
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Sign up'
+      click_button 'Join Now!'
       expect(page).to have_content "has already been taken"
     end
   end
