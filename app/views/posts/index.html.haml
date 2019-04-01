@@ -1,0 +1,25 @@
+- content_for :title, "Exercise Section"
+
+-#.page-header
+-#  %h1 Hello #{current_user.firstname}
+
+%h1 Exercise Section
+
+.container
+  .row
+    .col-md-3
+      .btn.btn-danger.btn-lg.btn-block.fill_container
+        Create Post
+    .col-md-3
+      .btn.btn-danger.btn-lg.btn-block.fill_container
+        Create Poll
+
+%h2 Flash Examples
+.well
+  %button#show-flash.btn.btn-default{ type: :button }
+    Show flash message
+
+:coffee
+  $ ->
+    $('#show-flash').on 'click', ->
+      $.flashAlert('Hello world!', 'alert-success')
