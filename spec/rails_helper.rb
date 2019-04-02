@@ -123,7 +123,7 @@ end
 
 Capybara.register_server :thin do |app, port|
   require 'rack/handler/thin'
-  Rack::Handler::Thin.run(app, Port: port)
+  Rack::Handler::Thin.run(app, Host: '127.0.0.1', Port: port)
 end
 
 Capybara.configure do |config|
