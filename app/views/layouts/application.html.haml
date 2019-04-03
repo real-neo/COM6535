@@ -34,10 +34,11 @@
                 Log out
           -else
             %li.h4
-              %a{:href => "#"} Login
+              = link_to new_user_session_path do
+                Login
             %li.h4
-              %a{:href => "#"} Register
-
+              = link_to new_user_registration_path do
+                Register
 
 
         %li.sidebar-brand
