@@ -94,17 +94,17 @@
                 %li
                   %a#menu-toggle{:href => "#menu-toggle"}
                     %i.fas.fa-align-justify{:style => 'font-size:30px'}
-    -if "posts" == controller_name
-      .row
-        .col-md-2.thumbnail
-          %img{:alt => "...", :src => "/images/exercise/img2.jpg"}
-        .col-md-2.thumbnail
-          %img{:alt => "...", :src => "/images/exercise/img3.jpg"}
-        .col-md-2.thumbnail
-          %img{:alt => "...", :src => "/images/exercise/img1.jpg"}
-        .col-md-2.thumbnail
-          %img{:alt => "...", :src => "/images/exercise/img6.jpg"}
-        %br
+        -if "posts" == controller_name
+          .row
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img2.jpg"}
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img3.jpg"}
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img1.jpg"}
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img6.jpg"}
+            %br
         #main-container.container
 
           = yield
