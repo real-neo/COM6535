@@ -23,6 +23,8 @@
 #
 
 class User < ApplicationRecord
+  has_many :posts
+
   validates :firstname, :lastname, :location, :city, :username, presence: true
   validates :firstname, :lastname, :city, :username, length: {minimum: 2, maximum: 25}
   validates :location, length: {minimum: 2, maximum: 55}

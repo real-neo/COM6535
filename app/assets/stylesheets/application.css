@@ -9,7 +9,9 @@
   *= require warning_page
   *= require custom_flash
   *= require environment_notice
+
 */
+
 
 
 /*img {*/
@@ -146,4 +148,10 @@
 
 fill_container{
     width: 100%;
+}
+
+.test
+{
+    width: 100%;
+    height: auto;
 }
