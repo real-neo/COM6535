@@ -9,6 +9,7 @@ end
 
 # added gems
 
+
 gem 'rails', '5.2.1'
 gem 'bootsnap'
 gem 'responders'

@@ -9,7 +9,9 @@
   *= require warning_page
   *= require custom_flash
   *= require environment_notice
+
 */
+
 
 
 /*img {*/
@@ -147,3 +149,19 @@
 fill_container{
     width: 100%;
 }
+
+.post_colour {
+    background-color: #f1e9eb;
+
+}
+
+.black_bg{
+    color: #000000;
+}
+
+move_right{
+    float: right !important;
+
+    display: block;
+}
+
