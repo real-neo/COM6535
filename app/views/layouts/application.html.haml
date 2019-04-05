@@ -40,7 +40,9 @@
           %h2
             Forums
         %li.h4
-          %a{:href => "#"} Exercise
+          %a
+            = link_to 'Exercise', posts_path
+
         %li.h4
           %a{:href => "#"} Diet
         %li.h4
@@ -71,7 +73,7 @@
             %p Please enable JavaScript or use a different web browser, or alternatively contact the CiCS Helpdesk for assistance.
 
       #wrap
-        %nav.navbar.navbar-default
+        %nav.navbar.navbar-default{:style => 'margin: 0; height: 0;'}
           .container-fluid
             / Brand and toggle get grouped for better mobile display
             .navbar-header
@@ -83,17 +85,26 @@
               %a.navbar-brand{:href => "#"} FITNESS GUIDE
             / Collect the nav links, forms, and other content for toggling
             #bs-example-navbar-collapse-1.collapse.navbar-collapse
-              %ul.nav.navbar-nav.navbar-right
+              %ul.nav.navbar-nav.navbar-right{:style => 'height: 0;'}
                 %li
                   %form.navbar-form.navbar-right
-                  .form-group
                     %input.form-control{:placeholder => "Search", :type => "text"}/
                 -#%li
                 -#  %i.fas.fa-portrait{:style => 'font-size:48px'}
                 %li
                   %a#menu-toggle{:href => "#menu-toggle"}
-                    %i.fas.fa-align-justify{:style => 'font-size:48px'}
-
+                    %i.fas.fa-align-justify{:style => 'font-size:30px'}
+        -if "posts" == controller_name
+          .row
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img2.jpg"}
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img3.jpg"}
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img1.jpg"}
+            .col-md-2.thumbnail
+              %img{:alt => "...", :src => "/images/exercise/img6.jpg"}
+            %br
         #main-container.container
 
           = yield

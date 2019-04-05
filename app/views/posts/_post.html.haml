@@ -1,6 +1,43 @@
-%tr
+-#%tr
   %td= post.title
   %td= post.description
   %td
 -#.pull-right=link_to 'Edit', edit_staff_consumable_path(consumable), title: "Edit stock level for #{consumable.name}", class: 'btn btn-default btn-xs', remote: true
-
+-#
+-#<div class="row">
+-#  <div class="col-sm-6 col-md-4">
+-#    <div class="thumbnail">
+-#      <img src="..." alt="...">
+-#      <div class="caption">
+-#        <h3>Thumbnail label</h3>
+-#        <p>...</p>
+-#        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+-#      </div>
+-#    </div>
+-#  </div>
+-#</div>
+%br
+.row
+  .col-sm-6.col-md-8
+    .panel.panel-default
+      .panel-heading
+        .row
+          .col-md-1
+            %img{:src => 'https://www.persofoto.com/persomat-3/images/idp.jpg', :style => 'width: 50px; height: 50px;'}
+          .col-md-9
+            %h3
+              =post.title
+          .col-md-2{:style => 'color: #797979'}
+            = time_ago_in_words(post.created_at)
+      .panel-body
+        .row
+          .col-md-9
+            %p
+              = post.description
+          .col-md-3
+            %button.btn.btn-danger 123123 comments
+      .row
+        .col-md-2
+        .col-md-2.center-block
+          %span.glyphicon.glyphicon-eye-open{"aria-hidden" => "true"}
+          %a{:href => "#", :role => "button"} View

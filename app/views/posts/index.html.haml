@@ -1,21 +1,23 @@
 - content_for :title, "Exercise Section"
 
-%h1 Exercise Section
-
 .container
-  .row
-    .col-md-3
-      -if user_signed_in?
-        %a.btn.btn-danger.btn-lg.btn-block.fill_container{"data-target" => "#basicModal", "data-toggle" => "modal", href: "#"}
-          Create Post
-      -else
-        %a#show-login-message.btn.btn-danger.btn-lg.btn-block.fill_container{href: "#"}
-          Create Post
+
+%h1{:style => 'font-size: 40px;'}
+  Exercise Community
+
+.row
+  .col-md-3
+    -if user_signed_in?
+      %a.btn.btn-danger.btn-lg.btn-block.fill_container{"data-target" => "#basicModal", "data-toggle" => "modal", href: "#"}
+        Create Post
+    -else
+      %a#show-login-message.btn.btn-danger.btn-lg.btn-block.fill_container{href: "#"}
+        Create Post
 
 
-    .col-md-3
-      .btn.btn-danger.btn-lg.btn-block.fill_container
-        Create Poll
+  .col-md-3
+    .btn.btn-danger.btn-lg.btn-block.fill_container
+      Create Poll
 
 #basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", role: "dialog", tabindex: "-1"}
   .modal-dialog
@@ -37,23 +39,23 @@
             %button.btn.btn-primary.center-block{:type => "submit"} Submit
 
 
-.panel.panel-default
-  .panel-heading
-    %h3.panel-title post
+-#.panel.panel-default
+-#  .panel-heading
+-#    %h3.panel-title post
 
-  %table.table#posts-table
-    %thead
-      %tr
-        %th Title
-        %th Description
+  -#%table.table#posts-table
+  -#  %thead
+  -#    %tr
+  -#      %th Title
+  -#      %th Description
 
     %tbody#posts_array
-
-      - if @posts.blank?
-        = no_record_tr(5)
-      - else
-        -#- @consumables.each do |post|
-        = render @posts
+#posts_array.container
+  - if @posts.blank?
+    = no_record_tr(5)
+  - else
+    -#- @consumables.each do |post|
+    = render @posts
 
 :coffee
   $ ->
