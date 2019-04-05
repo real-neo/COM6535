@@ -150,8 +150,18 @@ fill_container{
     width: 100%;
 }
 
-.test
-{
-    width: 100%;
-    height: auto;
+.post_colour {
+    background-color: #f1e9eb;
+
 }
+
+.black_bg{
+    color: #000000;
+}
+
+move_right{
+    float: right !important;
+
+    display: block;
+}
+

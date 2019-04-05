@@ -2,7 +2,7 @@ require 'rspec'
 require 'rails_helper'
 
 describe 'Forum' do
-  context 'When I am at the Exercise page' do
+  context 'When I am at the Exercise page', js:true do
     before(:each) do
       visit '/posts'
     end
@@ -20,6 +20,13 @@ describe 'Forum' do
     end
 
     context 'As a logged in user' do
+      before(:each) do
+        user = FactoryBot.create(:user, email: 'aioannou2@sheffield.ac.uk', password: 'qweqweqwe')
+        login_as(user, :scope => :user)
+        visit '/'
+        visit '/posts'
+      end
+
       it 'when I press the button to create a post I should see a popup' do
         click_link "Create Post"
         expect(page).to have_content "Create a Post"
@@ -32,14 +39,19 @@ describe 'Forum' do
 
       it 'when I fill in the popup I should be able to post a new thread and see it on the page' do
         click_link "Create Post"
-        fill_in('Title', with: "New post")
-        fill_in('Description', with: "Describing the post")
-        click_button "Save Post"
+        fill_in('post_title', with: "New Post")
+        fill_in('post_description', with: "Describing the post")
+        click_button "Submit"
         expect(page).to have_content "New Post"
         expect(page).to have_content "Describing the post"
       end
-
     end
 
+    context 'As a not logged in user' do
+      it 'when I press the button to create I should see a flash message telling me to log in' do
+        click_link "Create Post"
+        expect(page).to have_content "Log in to be able to post"
+      end
+    end
   end
 end

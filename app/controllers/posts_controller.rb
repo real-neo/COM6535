@@ -11,10 +11,7 @@ class PostsController < ApplicationController
 
   def create
 
-    @post = Post.new(allowed_params)
-    @post.user = current_user
-    @post.save
-
+    @post = Post.create!(allowed_params)
     respond_to do |f|
       f.html { redirect_to posts_url }
       f.js
@@ -22,7 +19,7 @@ class PostsController < ApplicationController
   end
 
   def allowed_params
-    params.require(:post).permit(:title,:description)
+    params.require(:post).permit(:title,:description).merge(:user_id => current_user.id)
   end
 
 end
