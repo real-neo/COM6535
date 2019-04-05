@@ -15,11 +15,18 @@ module ApplicationHelper
   end
 
   def no_record_tr(colspan, text = 'No records to display')
-    content_tag(:tr, content_tag(:td, text, colspan: colspan, class: 'text-center text-muted' ), class: 'tr-no-record')
+    content_tag(:tr, content_tag(:td, text, colspan: colspan, class: 'text-center text-muted'), class: 'tr-no-record')
   end
 
   def partial_exist?(partial_name, prefixes = lookup_context.prefixes)
     lookup_context.exists?(partial_name, prefixes, true)
   end
-  
+
+  def user_image(user)
+    if user.avatar.attached?
+      user.avatar
+    else
+      '/images/default-avatar.png'
+    end
+  end
 end

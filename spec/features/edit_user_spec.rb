@@ -34,8 +34,9 @@ describe 'edit user information' do
       expect(page).to have_content 'Update successfully!'
     end
 
-    pending 'user can change his profile image' do
+    it 'user can change his profile image' do
       click_link 'Change of profile image'
+      attach_file 'user[avatar]', File.join(Rails.root, '/spec/support/avatar.png')
       click_button 'Update'
       expect(page).to have_content 'Update successfully!'
     end
