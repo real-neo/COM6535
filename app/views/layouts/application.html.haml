@@ -22,24 +22,19 @@
     #sidebar-wrapper
       %ul.sidebar-nav
         %li.sidebar-brand
-          %h2
-            Account
-          -if user_signed_in?
-            %li.h4
-              %a{:href => "#"} #{current_user.email}
-            %li.h4
-              %a{:href => "#"} Settings
-            %li.h4
-              = link_to destroy_user_session_path, method: :delete, title: "Log out of the system" do
-                Log out
-          -else
-            %li.h4
-              = link_to new_user_session_path do
-                Login
-            %li.h4
-              = link_to new_user_registration_path do
-                Register
-
+          %h3 Account
+        - if user_signed_in?
+          %li.h4
+            %a{ href: '#' } #{ current_user.email }
+          %li.h4
+            = link_to 'Settings', edit_user_path(current_user)
+          %li.h4
+            = link_to 'Log out', destroy_user_session_path, method: :delete
+        - else
+          %li.h4
+            = link_to 'Login', new_user_session_path
+          %li.h4
+            = link_to 'Register', new_user_registration_path
 
         %li.sidebar-brand
           %h2

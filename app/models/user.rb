@@ -4,6 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  city                   :string
+#  details                :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
 #  firstname              :string
@@ -24,8 +25,8 @@
 
 class User < ApplicationRecord
   validates :firstname, :lastname, :location, :city, :username, presence: true
-  validates :firstname, :lastname, :city, :username, length: {minimum: 2, maximum: 25}
-  validates :location, length: {minimum: 2, maximum: 55}
+  validates :firstname, :lastname, :city, :username, length: { minimum: 2, maximum: 25 }
+  validates :location, length: { minimum: 2, maximum: 55 }
 
 
   # Include default devise modules. Others available are:

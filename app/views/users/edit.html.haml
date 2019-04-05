@@ -1,0 +1,38 @@
+= content_for :title, 'Settings'
+%h2 Hi, #{ @user.firstname }
+%h3 Here you can change your information
+
+%ul.nav.nav-pills.nav-stacked
+  %li.active
+    %a{ href: '#details', 'data-toggle': 'tab' } Change of personal details
+  %li
+    %a{ href: '#password', 'data-toggle': 'tab' } Change of password
+  %li
+    %a{ href: '#image', 'data-toggle': 'tab' } Change of profile image
+  %li
+    %a{ href: '#email', 'data-toggle': 'tab' } Change of email
+
+.tab-content
+  .tab-pane.active#details
+    = simple_form_for @user do |f|
+      .form-inputs
+        = f.input :details, label: 'Details', autofocus: true
+      .form-actions
+        = f.button :submit, 'Update'
+  .tab-pane#password
+    = simple_form_for @user do |f|
+      = f.input :reset_password_token, as: :hidden
+      .form-inputs
+        = f.input :password, label: 'New password', required: true, autofocus: true
+        = f.input :password_confirmation, label: 'Confirm new password', required: true
+      .form-actions
+        = f.button :submit, 'Update'
+  .tab-pane#image
+  .tab-pane#email
+    = simple_form_for @user do |f|
+      .form-inputs
+        = f.input :email, label: 'New email', required: true, autofocus: true
+      .form-inputs
+        = f.button :submit, 'Update'
+
+= link_to 'Back', :back
