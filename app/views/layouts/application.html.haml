@@ -1,13 +1,12 @@
 !!!
 %html
   %head
-    %title Fitness-for-students - #{content_for(:title)}
-    %meta{ name: "viewport", content: "width=device-width, initial-scale=1.0" }
-    %meta{ :'http-equiv' => 'X-UA-Compatible', content: 'IE=edge' }
-    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "content-type"}
-
-    = stylesheet_link_tag    "application", media: :all
-    = javascript_include_tag "application"
+    %title Fitness-for-students - #{ content_for(:title) }
+    %meta{ name: 'viewport', content: 'width=device-width, initial-scale=1.0' }
+    %meta{ 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' }
+    %meta{ 'http-equiv': 'content-type', content: 'text/html; charset=utf-8' }
+    = stylesheet_link_tag 'application', media: :all
+    = javascript_include_tag 'application'
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tags
     %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.0/css/all.css", :integrity => "sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", :rel => "stylesheet"}/
@@ -37,86 +36,87 @@
             = link_to 'Register', new_user_registration_path
 
         %li.sidebar-brand
-          %h2
-            Forums
+          %h3 Forums
         %li.h4
           %a
             = link_to 'Exercise', posts_path
 
         %li.h4
-          %a{:href => "#"} Diet
+          %a{ href: '#' } Diet
         %li.h4
-          %a{:href => "#"} Find an App
+          %a{ href: '#' } Find an App
         %li.h4
-          %a{:href => "#"} Find a Buddy
+          %a{ href: '#' } Find a Buddy
 
-    %body{ class: environment_notice_body_class }
+  %body.environment_notice_body_class
+    = render 'layouts/environment_notice'
+    .flash-messages
+      - flash.each do |name, msg|
+        - next unless name == 'alert' || name == 'notice'
+        .alert.fade.in
+          .container
+            - if name == 'notice'
+              = fa_icon 'check', class: 'flash-success'
+            - else
+              = fa_icon 'warning', class: 'flash-error'
+            = msg
+            %a{ href: '#', title: 'Hide this message', data: { dismiss: :alert } } Dismiss
 
-      = render 'layouts/environment_notice'
-      .flash-messages
-        - flash.each do |name, msg|
-          - next unless name == 'alert' || name == 'notice'
-          .alert.fade.in
-            .container
-              - if name == 'notice'
-                = fa_icon('check', class: 'flash-success')
-              - else
-                = fa_icon('warning', class: 'flash-error')
-              = msg
-              %a{ href: '#', title: 'Hide this message', data: { dismiss: :alert } } Dismiss
-
-
-      %noscript
-        .warning-page-cover
-          .alert.alert-info
-            %h2 Sorry, it appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
-            %p Please enable JavaScript or use a different web browser, or alternatively contact the CiCS Helpdesk for assistance.
+    %noscript
+      .warning-page-cover
+        .alert.alert-info
+          %h2 Sorry, it appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
+          %p Please enable JavaScript or use a different web browser, or alternatively contact the CiCS Helpdesk for assistance.
 
       #wrap
-        %nav.navbar.navbar-default{:style => 'margin: 0; height: 0;'}
+        %nav.navbar.navbar-default.navbar-fixed-top{:style => 'margin: 0; height: 0;'}
           .container-fluid
             / Brand and toggle get grouped for better mobile display
             .navbar-header
-              %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-                %span.sr-only Toggle navigation
-                %span.icon-bar
-                %span.icon-bar
-                %span.icon-bar
-              %a.navbar-brand{:href => "#"} FITNESS GUIDE
-            / Collect the nav links, forms, and other content for toggling
-            #bs-example-navbar-collapse-1.collapse.navbar-collapse
-              %ul.nav.navbar-nav.navbar-right{:style => 'height: 0;'}
-                %li
-                  %form.navbar-form.navbar-right
-                    %input.form-control{:placeholder => "Search", :type => "text"}/
-                -#%li
-                -#  %i.fas.fa-portrait{:style => 'font-size:48px'}
-                %li
-                  %a#menu-toggle{:href => "#menu-toggle"}
-                    %i.fas.fa-align-justify{:style => 'font-size:30px'}
+          %button.navbar-toggle.collapsed{ 'aria-expanded': 'false', 'data-target': '#bs-example-navbar-collapse-1', 'data-toggle': 'collapse', type: 'button' }
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to root_path, class: 'navbar-brand' do
+            = image_tag '/images/logo.webp', height: '32', alt: 'Fitness Guide'
+          .navbar-brand
+            FITNESS GUIDE
+
+        / Collect the nav links, forms, and other content for toggling
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse.navbar-right
+          %ul.nav.navbar-nav{:style => 'height: 0;'}
+            %li
+              %form.navbar-form
+                .form-group
+                  %input.form-control{:placeholder => "Search", :type => "text"}
+            %li
+              %a#menu-toggle{ href: '#menu-toggle'}
+                = fa_icon 'bars 2x'
+
         -if "posts" == controller_name
           .row
             .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img2.jpg"}
+              %img{:alt => "...", src: "/images/exercise/img2.jpg"}
             .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img3.jpg"}
+              %img{:alt => "...", src: "/images/exercise/img3.jpg"}
             .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img1.jpg"}
+              %img{:alt => "...", src: "/images/exercise/img1.jpg"}
             .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img6.jpg"}
+              %img{:alt => "...", src: "/images/exercise/img6.jpg"}
             %br
         #main-container.container
 
           = yield
 
-      %footer#footer
-        .container
-          %p
-            &copy;#{Date.today.year}
-            = link_to 'epiGenesys', 'https://www.epigenesys.org.uk', target: '_blank', title: 'Goto the epiGenesys website'
+    %footer#footer
+      .container
+        %p
+          &copy;#{ Date.today.year }
+          = link_to 'epiGenesys', 'https://www.epigenesys.org.uk', target: '_blank', title: 'Goto the epiGenesys website'
 
 :javascript
-  $("#menu-toggle").click(function(e) {
+  $('#menu-toggle').click(function(e) {
       e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
+      $('#wrapper').toggleClass('toggled');
   });

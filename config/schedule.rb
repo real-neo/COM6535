@@ -16,5 +16,5 @@ env :MAILTO, 'systems@epigenesys.org.uk'
 set :output, { standard: 'log/whenever.log' }
 
 every :reboot, roles: [ :db ] do
-  runner "require 'delayed/command'; Delayed::Command.create(['-p #{@delayed_job_args_p}', '-n #{@delayed_job_args_n}', 'start']).daemonize"
+  runner "require 'delayed/command'; Delayed::Command.new(['-p #{@delayed_job_args_p}', '-n #{@delayed_job_args_n}', 'start']).daemonize"
 end
