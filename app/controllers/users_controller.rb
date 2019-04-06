@@ -13,16 +13,21 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(user_params)
-      redirect_to edit_user_path(current_user), notice: 'Update successfully!'
+      bypass_sign_in(@user)
+      redirect_to edit_user_path(@user), notice: 'Update successfully!'
     else
-      redirect_to edit_user_path(current_user), alert: 'Operation failed!'
+      redirect_to edit_user_path(@user), alert: 'Operation failed!'
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:details, :email, :avatar, :reset_password_token,
-                                 :password, :password_confirmation)
+    params.require(:user).permit(:details, :email, :avatar, :password,
+                                 :reset_password_token, :password_confirmation)
+  end
+
+  rescue_from ActionController::ParameterMissing do |_e|
+    redirect_to edit_user_path(@user), alert: 'Operation failed!'
   end
 end
