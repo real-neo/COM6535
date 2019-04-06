@@ -10,11 +10,6 @@
     = javascript_include_tag "application"
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tags
-    %link{:crossorigin => "anonymous", :href => "https://use.fontawesome.com/releases/v5.7.0/css/all.css", :integrity => "sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ", :rel => "stylesheet"}/
-    -#
-    -#%link#bootstrap-css{:href => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css", :rel => "stylesheet"}/
-    -#%script{:src => "//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"}
-    -#%script{:src => "//code.jquery.com/jquery-1.11.1.min.js"}
 
   #wrapper
 
@@ -93,7 +88,7 @@
                 -#  %i.fas.fa-portrait{:style => 'font-size:48px'}
                 %li
                   %a#menu-toggle{:href => "#menu-toggle"}
-                    %i.fas.fa-align-justify{:style => 'font-size:30px'}
+                    = fa_icon 'bars 2x'
         -if "posts" == controller_name
           .row
             .col-md-2.thumbnail
