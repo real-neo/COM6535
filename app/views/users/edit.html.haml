@@ -20,7 +20,7 @@
           .form-inputs
             = f.input :details, label: 'Details', autofocus: true
           .form-actions
-            = f.button :submit, 'Update'
+            = f.button :submit, 'Update details'
       .tab-pane#password
         = simple_form_for @user do |f|
           = f.input :reset_password_token, as: :hidden
@@ -28,19 +28,19 @@
             = f.input :password, label: 'New password', required: true, autofocus: true
             = f.input :password_confirmation, label: 'Confirm new password', required: true
           .form-actions
-            = f.button :submit, 'Update'
+            = f.button :submit, 'Update password'
       .tab-pane#image
         = simple_form_for @user do |f|
           .form-inputs
-            = image_tag user_image(current_user), height: 100, width: 100, class: 'img-circle'
+            = image_tag user_image(@user), height: 100, width: 100, class: 'img-circle'
             = f.file_field :avatar
           .form-inputs
-            = f.button :submit, 'Update'
+            = f.button :submit, 'Update image'
       .tab-pane#email
         = simple_form_for @user do |f|
           .form-inputs
             = f.input :email, label: 'New email', required: true, autofocus: true
           .form-inputs
-            = f.button :submit, 'Update'
+            = f.button :submit, 'Update email'
 
 = link_to 'Back', :back

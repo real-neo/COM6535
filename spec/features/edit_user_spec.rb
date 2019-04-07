@@ -12,7 +12,7 @@ describe 'edit user information' do
   end
 
   context 'when a user has logged in' do
-    let(:user) { FactoryBot.create(:user, password: 'f4k3p455w0rd') }
+    let(:user) { FactoryBot.create(:user) }
 
     before do
       login_as user
@@ -22,7 +22,7 @@ describe 'edit user information' do
     it 'user can change his details' do
       click_link 'Change of personal details'
       fill_in 'Details', with: 'My new details'
-      click_button 'Update'
+      click_button 'Update details'
       expect(page).to have_content 'Update successfully!'
     end
 
@@ -30,22 +30,43 @@ describe 'edit user information' do
       click_link 'Change of password'
       fill_in 'New password', with: 'JustNewPassword'
       fill_in 'Confirm new password', with: 'JustNewPassword'
-      click_button 'Update'
+      click_button 'Update password'
       expect(page).to have_content 'Update successfully!'
+    end
+
+    it 'user can not change his password with two different new password' do
+      click_link 'Change of password'
+      fill_in 'New password', with: 'JustNewPassword1'
+      fill_in 'Confirm new password', with: 'JustNewPassword2'
+      click_button 'Update password'
+      expect(page).to have_content 'Operation failed!'
     end
 
     it 'user can change his profile image' do
       click_link 'Change of profile image'
       attach_file 'user[avatar]', File.join(Rails.root, '/spec/support/avatar.png')
-      click_button 'Update'
+      click_button 'Update image'
       expect(page).to have_content 'Update successfully!'
+    end
+
+    it 'user can not upload image when did not choose any file' do
+      click_link 'Change of profile image'
+      click_button 'Update image'
+      expect(page).to have_content 'Operation failed!'
     end
 
     it 'user can change his email' do
       click_link 'Change of email'
       fill_in 'New email', with: 'new@email.com'
-      click_button 'Update'
+      click_button 'Update email'
       expect(page).to have_content 'Update successfully!'
+    end
+
+    it 'user can not change his email to a invalid address' do
+      click_link 'Change of email'
+      fill_in 'New email', with: 'invalid.email.com'
+      click_button 'Update email'
+      expect(page).to have_content 'Operation failed!'
     end
   end
 end
