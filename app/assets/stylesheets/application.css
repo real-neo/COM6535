@@ -12,141 +12,64 @@
 
 */
 
-
-
-/*img {*/
-    /*max-width: 10%;*/
-    /*min-width: 10%;*/
-
-/*}*/
-
-/*!
- * Start Bootstrap - Simple Sidebar HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
-
-/* Toggle Styles */
-
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+.overlay.active {
+    right: 0;
 }
 
-#wrapper.toggled {
-    padding-right: 250px;
-}
-
-#sidebar-wrapper {
-    z-index: 1000;
-    position: fixed;
-    right: 250px;
-    width: 0;
+.overlay {
     height: 100%;
-    margin-right: -250px;
-    overflow-y: auto;
-    background: #c6c6c6;
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
+    width: 0;
+    position: fixed;
+    z-index: 9999;
+    top: 0;
+    right: -100%;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
 }
 
-#wrapper.toggled #sidebar-wrapper {
-    width: 250px;
-}
-
-#page-content-wrapper {
+.overlay-content {
+    position: relative;
     width: 100%;
-    position: absolute;
-    padding: 15px;
+    text-align: center;
+    margin-top: 60px;
 }
 
-#wrapper.toggled #page-content-wrapper {
-    position: absolute;
-    margin-left: -250px;
+.overlay a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 24px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
 }
 
-/* Sidebar Styles */
+.overlay a:hover, .overlay a:focus {
+    color: #f1f1f1;
+}
 
-.sidebar-nav {
+.overlay .close-btn {
     position: absolute;
     top: 0;
-    width: 250px;
-    margin: 0;
+    right: 40px;
     padding: 0;
-    list-style: none;
+    font-size: 50px;
 }
 
-.sidebar-nav li {
-    text-indent: 20px;
-    line-height: 40px;
-}
-
-.sidebar-nav li a {
-    display: block;
-    text-decoration: none;
-    color: #454545;
-}
-
-.sidebar-nav li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background: rgba(255,255,255,0.2);
-}
-
-.sidebar-nav li a:active,
-.sidebar-nav li a:focus {
-    text-decoration: none;
-}
-
-.sidebar-nav > .sidebar-brand {
-    height: 65px;
-    font-size: 18px;
-    line-height: 60px;
-}
-
-.sidebar-nav > .sidebar-brand a {
-    color: #999999;
-}
-
-.sidebar-nav > .sidebar-brand a:hover {
-    color: #fff;
-    background: none;
-}
-
-@media(min-width:768px) {
-    #wrapper {
-        padding-right: 250px;
-    }
-
-    #wrapper.toggled {
-        padding-right: 0;
-    }
-
-    #sidebar-wrapper {
-        width: 250px;
-    }
-
-    #wrapper.toggled #sidebar-wrapper {
-        width: 0;
-    }
-
-    #page-content-wrapper {
-        padding: 20px;
-        position: relative;
-    }
-
-    #wrapper.toggled #page-content-wrapper {
-        position: relative;
-        margin-left: 0;
+@media (max-width: 768px) {
+    .overlay {
+        width: 100%;
     }
 }
 
-fill_container{
+@media (min-width: 768px) {
+    .overlay {
+        width: 300px;
+    }
+}
+
+.fill_container {
     width: 100%;
 }
 
@@ -163,12 +86,11 @@ fill_container{
     color: #A9A9A9;
 }
 
-
 .black_bg{
     color: #000000;
 }
 
-move_right{
+.move_right{
     float: right !important;
     display: block;
 }

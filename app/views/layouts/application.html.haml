@@ -11,107 +11,52 @@
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tags
 
-  #wrapper
+  %body{ class: environment_notice_body_class }
+    = render 'layouts/environment_notice'
+    .flash-messages
+      - flash.each do |name, msg|
+        - next unless name == 'alert' || name == 'notice'
+        .alert.fade.in
+          .container
+            - if name == 'notice'
+              = fa_icon('check', class: 'flash-success')
+            - else
+              = fa_icon('warning', class: 'flash-error')
+            = msg
+            %a{ href: '#', title: 'Hide this message', data: { dismiss: :alert } } Dismiss
 
-    / Sidebar
-    #sidebar-wrapper
-      %ul.sidebar-nav
-        %li.sidebar-brand
-          %h3 Account
-        - if user_signed_in?
-          %li.h4
-            %a{ href: '#' } #{ current_user.email }
-          %li.h4
+    %noscript
+      .warning-page-cover
+        .alert.alert-info
+          %h2 Sorry, it appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
+          %p Please enable JavaScript or use a different web browser, or alternatively contact the CiCS Helpdesk for assistance.
+
+    %nav.navbar.navbar-default
+      .container
+        = link_to 'FITNESS GUIDE', root_path, class: 'navbar-brand'
+        = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'pull-right navbar-btn'
+
+    #main-container.container{ style: 'padding-top: 0;' }
+      .overlay#myNav
+        %a.close-btn.pull-right{ href: 'javascript:void(0)', onclick: 'toggleNav()' } &times;
+        .overlay-content
+          - if user_signed_in?
+            = image_tag user_image(current_user), height: 100, width: 100, class: 'img-circle'
             = link_to 'Settings', edit_user_path(current_user)
-          %li.h4
             = link_to 'Log out', destroy_user_session_path, method: :delete
-        - else
-          %li.h4
+          - else
             = link_to 'Login', new_user_session_path
-          %li.h4
             = link_to 'Register', new_user_registration_path
-
-        %li.sidebar-brand
-          %h2
-            Forums
-        %li.h4
-          %a
-            = link_to 'Exercise', posts_path
-
-        %li.h4
+          %hr
+          = link_to 'Exercise', posts_path
           %a{:href => "#"} Diet
-        %li.h4
           %a{:href => "#"} Find an App
-        %li.h4
           %a{:href => "#"} Find a Buddy
 
-    %body{ class: environment_notice_body_class }
+      = yield
 
-      = render 'layouts/environment_notice'
-      .flash-messages
-        - flash.each do |name, msg|
-          - next unless name == 'alert' || name == 'notice'
-          .alert.fade.in
-            .container
-              - if name == 'notice'
-                = fa_icon('check', class: 'flash-success')
-              - else
-                = fa_icon('warning', class: 'flash-error')
-              = msg
-              %a{ href: '#', title: 'Hide this message', data: { dismiss: :alert } } Dismiss
-
-
-      %noscript
-        .warning-page-cover
-          .alert.alert-info
-            %h2 Sorry, it appears that you are using a web browser without JavaScript which prevents us offering you a rich online experience.
-            %p Please enable JavaScript or use a different web browser, or alternatively contact the CiCS Helpdesk for assistance.
-
-      #wrap
-        %nav.navbar.navbar-default{:style => 'margin: 0; height: 0;'}
-          .container-fluid
-            / Brand and toggle get grouped for better mobile display
-            .navbar-header
-              %button.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-                %span.sr-only Toggle navigation
-                %span.icon-bar
-                %span.icon-bar
-                %span.icon-bar
-              %a.navbar-brand{:href => "#"} FITNESS GUIDE
-            / Collect the nav links, forms, and other content for toggling
-            #bs-example-navbar-collapse-1.collapse.navbar-collapse
-              %ul.nav.navbar-nav.navbar-right{:style => 'height: 0;'}
-                %li
-                  %form.navbar-form.navbar-right
-                    %input.form-control{:placeholder => "Search", :type => "text"}/
-                -#%li
-                -#  %i.fas.fa-portrait{:style => 'font-size:48px'}
-                %li
-                  %a#menu-toggle{:href => "#menu-toggle"}
-                    = fa_icon 'bars 2x'
-        -if "posts" == controller_name
-          .row
-            .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img2.jpg"}
-            .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img3.jpg"}
-            .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img1.jpg"}
-            .col-md-2.thumbnail
-              %img{:alt => "...", :src => "/images/exercise/img6.jpg"}
-            %br
-        #main-container.container
-
-          = yield
-
-      %footer#footer
-        .container
-          %p
-            &copy;#{Date.today.year}
-            = link_to 'epiGenesys', 'https://www.epigenesys.org.uk', target: '_blank', title: 'Goto the epiGenesys website'
-
-:javascript
-  $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#wrapper").toggleClass("toggled");
-  });
+    %footer#footer
+      .container
+        %p
+          &copy;#{Date.today.year}
+          = link_to 'epiGenesys', 'https://www.epigenesys.org.uk', target: '_blank', title: 'Goto the epiGenesys website'

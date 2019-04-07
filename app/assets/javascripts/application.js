@@ -8,3 +8,7 @@
 //= require modal
 //= require select2
 //= require select2_init
+
+function toggleNav() {
+    document.getElementById('myNav').classList.toggle('active');
+}
