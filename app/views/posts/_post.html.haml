@@ -27,8 +27,8 @@
           .col-md-9
             %h3
               =post.title
-          .col-md-2{:style => 'color: #797979'}
-            = time_ago_in_words(post.created_at)
+          .col-md-2.text_lightgrey
+            = time_ago_in_words(post.created_at) + ' ago'
       .panel-body
         .row
           .col-md-9
@@ -37,7 +37,8 @@
           .col-md-3
             %button.btn.btn-danger 123123 comments
       .row
-        .col-md-2
-        .col-md-2.center-block
-          %span.glyphicon.glyphicon-eye-open{"aria-hidden" => "true"}
-          %a{:href => "#", :role => "button"} View
+        .col-md-1
+        .col-md-2.center-block{style: 'text-decoration: none;'}
+          = link_to post_path(post) do
+            %span.glyphicon.glyphicon-eye-open.text_lightgrey{"aria-hidden" => "true"}
+            View

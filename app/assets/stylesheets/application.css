@@ -155,13 +155,21 @@ fill_container{
 
 }
 
+.text_lightgrey{
+    color: #A9A9A9;
+}
+
+.text_lightgrey{
+    color: #A9A9A9;
+}
+
+
 .black_bg{
     color: #000000;
 }
 
 move_right{
     float: right !important;
-
     display: block;
 }
 

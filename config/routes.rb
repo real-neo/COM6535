@@ -4,7 +4,12 @@ Rails.application.routes.draw do
 
   resources :users
   resources :posts
-  get "posts/new" => 'post#new', :as => :new
+  resources :replies
+
+
+  # get "replies/create_reply" => 'reply#new_reply', :as => :reply_new
+  # get '/posts/:id', to: 'posts#show', as: 'post'
+  # get "posts/new" => 'post#new', :as => :new
 
 
 

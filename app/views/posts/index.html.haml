@@ -39,22 +39,10 @@
             %button.btn.btn-primary.center-block{:type => "submit"} Submit
 
 
--#.panel.panel-default
--#  .panel-heading
--#    %h3.panel-title post
-
-  -#%table.table#posts-table
-  -#  %thead
-  -#    %tr
-  -#      %th Title
-  -#      %th Description
-
-    %tbody#posts_array
 #posts_array.container
   - if @posts.blank?
     = no_record_tr(5)
   - else
-    -#- @consumables.each do |post|
     = render @posts
 
 :coffee
