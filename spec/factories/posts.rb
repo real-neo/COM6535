@@ -18,8 +18,8 @@
 
 FactoryBot.define do
   factory :post do
-    title { "MyString" }
-    description { "MyString" }
+    title { "My Title" }
+    description { "My Description" }
     likes { 1 }
     dislikes { 1 }
     user { nil }

@@ -19,15 +19,25 @@ describe 'Forum' do
       expect(page).to have_content "Create Poll"
     end
 
-    # it ' i can see a view button for a post' do
-    #   user = FactoryBot.create(:user)
-    #   post = FactoryBot.create(:post, user: user)
-    #   expect(page).to have_button "View"
-    # end
+    it ' i can see a view button for a post' do
+      user = FactoryBot.create(:user)
+      post = FactoryBot.create(:post, user: user)
+      visit '/'
+      visit '/posts'
+      expect(page).to have_content "View"
+    end
 
-    # it 'when i press the view button i should redirect to a page with the post and its comments' do
-    # pending "add some examples to (or delete) #{__FILE__}"
-    # end
+    it 'when i press the view button i should redirect to a page with the post and its comments' do
+      user = FactoryBot.create(:user)
+      post = FactoryBot.create(:post, user: user)
+      visit '/'
+      visit '/posts'
+      expect(page).to_not have_content "Reply"
+      click_link 'View'
+      expect(page).to have_content "My Title"
+      expect(page).to have_content "My Description"
+      expect(page).to have_content "Reply"
+    end
 
 
     context 'As a logged in user' do
@@ -52,22 +62,35 @@ describe 'Forum' do
         expect(page).to have_content "Describing the post"
       end
 
+
       # it 'when I press the button to create a poll I should see a popup' do
       #   click_link "Create Post"
       #   expect(page).to have_content "Create a Poll"
       # end
 
-      # it 'when I press the popup I should be apble to close it by pressing X' do
-      #   click_link "Create Post"
-      #   expect(page).to have_content "Exercise Section"
-      # end
-      #
-      # it ' i can see a reply button for a post' do
-      #   user = FactoryBot.create(:user)
-      #   post = FactoryBot.create(:post, user: user)
-      #   expect(page).to have_button "Reply"
-      # end
-      #
+      it 'when I press the reply button I should see a pop up that allows me to submit my comment' do
+        user = FactoryBot.create(:user)
+        post = FactoryBot.create(:post, user: user)
+        visit '/'
+        visit '/posts'
+        click_link 'View'
+        click_link 'Reply'
+        fill_in('reply_comment',with: "My reply")
+        click_button 'Submit'
+        expect(page).to have_content "Your comment has been submitted!"
+        expect(page).to have_content "My reply"
+      end
+
+      it 'when I press the reply button I should see a pop up that allows me to submit my comment' do
+        user = FactoryBot.create(:user)
+        post = FactoryBot.create(:post, user: user)
+        visit '/'
+        visit '/posts'
+        click_link 'View'
+        click_link 'Reply'
+        expect(page).to have_content "Submit"
+      end
+
       # it ' i can see a report button for a post' do
       #   user = FactoryBot.create(:user)
       #   post = FactoryBot.create(:post, user: user)
@@ -83,21 +106,21 @@ describe 'Forum' do
         expect(page).to have_content "Log in to be able to post"
       end
 
-      # it 'when I press the reply button I should see a flash message telling me to log in' do
-      #   user = FactoryBot.create(:user)
-      #   post = FactoryBot.create(:post, user: user)
-      #   expect(page).to have_button "Reply"
-      # end
-      #
+      it 'when I press the reply button I should see a flash message telling me to log in' do
+        user = FactoryBot.create(:user)
+        post = FactoryBot.create(:post, user: user)
+        visit '/'
+        visit '/posts'
+        click_link 'View'
+        click_link 'Reply'
+        expect(page).to have_content "Log in to be able to reply"
+      end
+
       # it 'when I press the report button I should see a flash message telling me to log in' do
       #   user = FactoryBot.create(:user)
       #   post = FactoryBot.create(:post, user: user)
       #   expect(page).to have_button "Report"
       # end
-
-
-
-
 
     end
   end
