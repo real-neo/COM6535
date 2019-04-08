@@ -4,19 +4,19 @@ require 'rspec'
 require 'rails_helper'
 
 describe 'edit user information' do
+  let(:user) { FactoryBot.create(:user) }
+
   context 'when a user has not log in' do
     it 'should redirect to log in page' do
-      visit edit_user_path(1)
+      visit edit_user_path(user.id)
       expect(current_path).to eql(new_user_session_path)
     end
   end
 
   context 'when a user has logged in' do
-    let(:user) { FactoryBot.create(:user) }
-
     before do
       login_as user
-      visit edit_user_path(1)
+      visit edit_user_path(user.id)
     end
 
     it 'user can change his details' do
