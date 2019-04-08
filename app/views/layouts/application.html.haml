@@ -43,7 +43,7 @@
           - if user_signed_in?
             = image_tag user_image(current_user), height: 100, width: 100, class: 'img-circle'
             = link_to 'Settings', edit_user_path(current_user)
-            = link_to 'Log out', destroy_user_session_path, method: :delete
+            = link_to 'Logout', destroy_user_session_path, method: :delete
           - else
             = link_to 'Login', new_user_session_path
             = link_to 'Register', new_user_registration_path
