@@ -15,14 +15,16 @@
             .col-md-1
               = image_tag user_image(@post.user), height: 60, width: 60, class: 'img-circle'
             .col-md-7
-              %h2
+              %h2#post_title
                 = @post.title
-
-
-        .panel-body.reply_body_colour
+        .panel-body.reply_body_colour#post_body
           = @post.description
           %h6.text_lightgrey{style: 'fload: right'}
             = @post.created_at.strftime("Posted at %H:%M %F")
+          -if user_signed_in?
+            -if @post.user_id == current_user.id
+              = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, style: 'float: right;', class: "glyphicon glyphicon-trash"
+
 
 .row
   .col-md-4

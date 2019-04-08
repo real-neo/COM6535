@@ -53,6 +53,11 @@ describe 'Forum' do
         expect(page).to have_content "Create a Post"
       end
 
+      it 'when I press the button to create a post I should see a popup' do
+        click_link "Create Post"
+        expect(page).to have_content "Create a Post"
+      end
+
       it 'when I fill in the popup I should be able to post a new thread and see it on the page' do
         click_link "Create Post"
         fill_in('post_title', with: "New Post")
@@ -61,7 +66,6 @@ describe 'Forum' do
         expect(page).to have_content "New Post"
         expect(page).to have_content "Describing the post"
       end
-
 
       # it 'when I press the button to create a poll I should see a popup' do
       #   click_link "Create Post"
@@ -95,7 +99,6 @@ describe 'Forum' do
         expect(page).to have_content "MyString"
       end
 
-
       it 'when I press the reply button on a reply to a comment I should see a pop up that allows me to reply to it' do
         user = FactoryBot.create(:user)
         post = FactoryBot.create(:post, user: user)
@@ -128,8 +131,30 @@ describe 'Forum' do
       #   expect(page).to have_button "Report"
       # end
 
+      context 'When I am at a thread that I posted' do
+        it "I should be able to see a delete button" do
+          user = FactoryBot.create(:user)
+          post = FactoryBot.create(:post, user: user)
+          login_as(user, :scope => :user)
+          visit '/posts/1'
+          expect(page).to have_content "Delete"
+        end
 
+        it "I should be able to delete it" do
+          user = FactoryBot.create(:user)
+          post = FactoryBot.create(:post, user: user)
+          login_as(user, :scope => :user)
+          visit '/posts/1'
+          click_link "Delete"
+          expect(page).to have_content "Are you sure?"
+          click_button "Confirm"
+          expect(page).to have_content "Thread content deleted successfully."
+        end
+      end
     end
+
+
+
 
     context 'As a not logged in user' do
       it 'when I press the button to create I should see a flash message telling me to log in' do
@@ -146,13 +171,12 @@ describe 'Forum' do
         click_link 'Reply'
         expect(page).to have_content "Log in to be able to reply"
       end
-
+    end
       # it 'when I press the report button I should see a flash message telling me to log in' do
       #   user = FactoryBot.create(:user)
       #   post = FactoryBot.create(:post, user: user)
       #   expect(page).to have_button "Report"
       # end
-
-    end
   end
 end
+
