@@ -27,10 +27,10 @@
         =reply.comment
       -if user_signed_in?
         .panel-footer
-          %a{"data-target" => "#replyModal", "data-toggle" => "modal", href: "#"}
+          %a{"data-target" => "#reply_modal_#{reply.id}", "data-toggle" => "modal", href: "#"}
             Reply
 
-#replyModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "replyModal", role: "dialog", tabindex: "-1"}
+.modal.fade{id: "reply_modal_#{reply.id}","aria-hidden" => "true", "aria-labelledby" => "reply_modal_#{reply.id}", role: "dialog", tabindex: "-1"}
   .modal-dialog
     .modal-content
       .modal-header.post_colour
