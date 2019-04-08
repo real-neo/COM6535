@@ -20,6 +20,14 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :replies
 
+  before_destroy :destroy_replies
+
   validates :title, :description, presence: true
 
+
+  private
+
+  def destroy_replies
+    self.replies.destroy_all
+  end
 end

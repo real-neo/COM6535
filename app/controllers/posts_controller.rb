@@ -27,12 +27,8 @@ class PostsController < ApplicationController
 
   def destroy
     @post = Post.find(params[:id])
-    @post.update(title: "Title Removed", description: "Content Removed")
-    @post.save
-    respond_to do |f|
-      f.html { redirect_to post_url(@post) }
-      f.js
-    end
+    @post.destroy
+    redirect_to posts_path
   end
 
   private
