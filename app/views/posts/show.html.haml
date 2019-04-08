@@ -1,10 +1,6 @@
 - content_for :title, "Exercise Section"
-
-
-
 -#picture, name
 -# button to reply
-
 -#replys
 .container
   .row
@@ -21,39 +17,22 @@
           = @post.description
         .panel-footer
           %h6.text_lightgrey{style: 'fload: right'}
-            = @post.created_at.strftime("Posted at %H:%M %F")
+            = @post.time_posted
             -if user_signed_in?
               -if @post.user_id == current_user.id
-                = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, style: 'float: right;', class: "glyphicon glyphicon-trash"
+                = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-trash move_right"
 
+#modal_placeholder
 
 .row
   .col-md-4
   .col-md-3
     -if user_signed_in?
-      %a.btn.btn-danger.btn-lg.btn-block.fill_container{"data-target" => "#basicModal", "data-toggle" => "modal", href: "#"}
-        Reply
+      = link_to 'Reply', show_reply_modal_reply_path(@post.id, is_post: 1), remote: true, class: 'btn btn-danger btn-lg btn-block fill_container'
     -else
       %a#show-login-message.btn.btn-danger.btn-lg.btn-block.fill_container{href: "#"}
         Reply
 
-
-#basicModal.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "basicModal", role: "dialog", tabindex: "-1"}
-  .modal-dialog
-    .modal-content
-      .modal-header.post_colour
-        %h4#myModalLabel.modal-title Reply
-        %button.close.black_bg{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
-          %span{"aria-hidden" => "true"} ×
-      .modal-body
-
-        = form_for @reply, remote: true, method: :post do |f|
-          %form
-            .form-group
-              =f.text_field :comment, class: 'form-control', placeholder: 'Add your reply here ...'
-              =f.hidden_field :post_id, value: @post.id
-
-            %button.btn.btn-primary.center-block{:type => "submit"} Submit
 %br
 #replies_array.container
   - if @replies.blank?

@@ -12,11 +12,11 @@ Rails.application.routes.draw do
     end
   end
   resources :posts
-  resources :replies
-
-  # get "replies/create_reply" => 'reply#new_reply', :as => :reply_new
-  # get '/posts/:id', to: 'posts#show', as: 'post'
-  # get "posts/new" => 'post#new', :as => :new
+  resources :replies do
+    member do
+      get :show_reply_modal, path: ':is_post'
+    end
+  end
 
   root to: 'pages#home'
 
