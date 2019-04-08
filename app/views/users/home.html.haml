@@ -1,0 +1,11 @@
+- content_for :title, 'Home Page'
+
+.row
+  .col-sm-1
+  .col-sm-2
+    = image_tag user_image(current_user), height: 100, width: 100, class: 'img-circle'
+  .col-sm-8
+    %h2 Hi, #{ @user.firstname }
+
+    %h3 Your Posts
+    = render @posts
