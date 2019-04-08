@@ -22,5 +22,6 @@ FactoryBot.define do
     comment { "MyString" }
     user { nil }
     post { nil }
+    original { nil }
   end
 end
