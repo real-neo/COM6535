@@ -1,0 +1,8 @@
+$('#modal_placeholder').html('');
+
+<%- if @is_post == 1 %>
+$('#modal_placeholder').html('<%=  j render 'reply_modal', is_post: @is_post, post_id: @post_id%>');
+<%- else %>
+$('#modal_placeholder').html('<%=  j render 'reply_modal', is_post: @is_post, reply: @reply %>');
+<%- end %>
+$('#modal_testing_id_reply_modal').modal('show');

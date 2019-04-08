@@ -20,6 +20,20 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :replies
 
+  before_destroy :destroy_replies
+
   validates :title, :description, presence: true
+
+
+
+  def time_posted
+    self.created_at.strftime("Posted at %H:%M %F")
+  end
+
+  private
+
+  def destroy_replies
+    self.replies.destroy_all
+  end
 
 end

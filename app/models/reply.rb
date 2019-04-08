@@ -16,6 +16,7 @@
 #  index_replies_on_post_id      (post_id)
 #  index_replies_on_user_id      (user_id)
 #
+include ActionView::Helpers::DateHelper
 
 class Reply < ApplicationRecord
   belongs_to :user
@@ -23,4 +24,12 @@ class Reply < ApplicationRecord
 
   belongs_to :original, class_name: 'Reply',  optional: true
 
+
+  def fullname
+    self.user.firstname + " " + self.user.lastname
+  end
+
+  def time_since_posted
+    time_ago_in_words(self[:created_at]) + " ago"
+  end
 end

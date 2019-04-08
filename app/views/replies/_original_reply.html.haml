@@ -1,0 +1,12 @@
+.well
+  .row
+    .col-md-1
+      = image_tag user_image(reply.user), height: 35, width: 35, class: 'img-circle'
+    .col-md-8
+      %h5
+        = reply.fullname
+    .col-md-3
+      .text_lightgrey.float_right
+        = reply.time_since_posted
+  %p
+    = reply.comment
