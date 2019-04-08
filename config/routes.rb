@@ -1,17 +1,22 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   devise_for :users
 
-  resources :users
+  resources :users do
+    member do
+      get :home
+    end
+
+    collection do
+    end
+  end
   resources :posts
   resources :replies
-
 
   # get "replies/create_reply" => 'reply#new_reply', :as => :reply_new
   # get '/posts/:id', to: 'posts#show', as: 'post'
   # get "posts/new" => 'post#new', :as => :new
-
-
 
   root to: 'pages#home'
 

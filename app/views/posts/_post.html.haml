@@ -1,46 +1,23 @@
--#%tr
-  %td= post.title
-  %td= post.description
-  %td
--#.pull-right=link_to 'Edit', edit_staff_consumable_path(consumable), title: "Edit stock level for #{consumable.name}", class: 'btn btn-default btn-xs', remote: true
--#
--#<div class="row">
--#  <div class="col-sm-6 col-md-4">
--#    <div class="thumbnail">
--#      <img src="..." alt="...">
--#      <div class="caption">
--#        <h3>Thumbnail label</h3>
--#        <p>...</p>
--#        <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
--#      </div>
--#    </div>
--#  </div>
--#</div>
-%br
-.row
-  .col-sm-6.col-md-8
-    .panel.panel-default
-      .panel-heading
-        .row
-          .col-md-2
-            = image_tag user_image(post.user), height: 50, width: 50, class: 'img-circle'
-          .col-md-8
-            %h3
-              =post.title
-          .col-md-2.text_lightgrey
-            = time_ago_in_words(post.created_at) + ' ago'
-      .panel-body
-        .row
-          .col-md-9
-            %p
-              = post.description
-          .col-md-3
-            %button.btn.btn-danger{style: 'float: right;'}
-              = post.replies.count
-              comments
-      .row
-        .col-md-1
-        .col-md-2.center-block{style: 'text-decoration: none;'}
-          = link_to post_path(post) do
-            %span.glyphicon.glyphicon-eye-open.text_lightgrey{"aria-hidden" => "true"}
-            View
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-sm-1
+        = image_tag user_image(post.user), height: 40, width: 40, class: 'img-circle'
+      .col-sm-8
+        %h3{ style: 'display:table-cell;' }
+          = post.title
+      .col-sm-3
+        .text_lightgrey{ style: 'text-align: right;' }
+          = time_ago_in_words(post.created_at) + ' ago'
+  .panel-body
+    .row
+      .col-sm-9
+        %p
+          = post.description
+      .col-sm-3
+        %button.btn.btn-danger{style: 'float: right;'}
+          #{ post.replies.count } comments
+    .row
+      .col-md-2
+        = link_to post_path(post) do
+          = fa_icon 'eye', class: 'text_lightgrey', text: 'View'

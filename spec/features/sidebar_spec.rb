@@ -3,7 +3,7 @@
 require 'rspec'
 require 'rails_helper'
 
-describe 'use sidebar menu' do
+describe 'use sidebar menu', js: true do
   context 'when a user has not log in' do
     before do
       visit root_path
@@ -36,7 +36,7 @@ describe 'use sidebar menu' do
       page.find(:css, 'i[class="fa fa-bars fa-2x pull-right navbar-btn"]').click
       expect(page).to have_content 'Settings'
       click_link 'Settings'
-      expect(current_path).to eql(edit_user_path(1))
+      expect(current_path).to eql(edit_user_path(user.id))
     end
 
     it 'user can click logout link' do
@@ -48,4 +48,3 @@ describe 'use sidebar menu' do
     end
   end
 end
-

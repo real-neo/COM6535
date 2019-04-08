@@ -12,3 +12,7 @@
 function toggleNav() {
     document.getElementById('myNav').classList.toggle('active');
 }
+
+function showLoginMessage() {
+    $.flashAlert('Log in to be able to post', 'alert');
+}

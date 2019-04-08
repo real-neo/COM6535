@@ -20,6 +20,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def home
+    @user = current_user
+    @posts = Post.where(user_id: @user.id)
+  end
+
   private
 
   def user_params

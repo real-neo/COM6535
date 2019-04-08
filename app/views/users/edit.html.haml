@@ -1,4 +1,4 @@
-= content_for :title, 'Settings'
+- content_for :title, 'Settings'
 %h2 Hi, #{ @user.firstname }
 %h3 Here you can change your information
 
@@ -18,7 +18,7 @@
       .tab-pane.active#details
         = simple_form_for @user do |f|
           .form-inputs
-            = f.input :details, label: 'Details', autofocus: true
+            = f.input :details, label: 'Details', autofocus: true, as: :text
           .form-actions
             = f.button :submit, 'Update details'
       .tab-pane#password
