@@ -81,20 +81,20 @@
     background-color: #eaeaea;
 }
 
-.text_lightgrey{
+.text_lightgrey {
     color: #A9A9A9;
 }
 
-.black_bg{
+.black_bg {
     color: #000000;
 }
 
-.move_right{
+.move_right {
     float: right !important;
     display: block;
 }
 
-.reply_color{
+.reply_color {
     color: #000;
     background-color: #fffafa;
     border: 1px solid #A9A9A9;
@@ -103,7 +103,7 @@
     display: table;
 }
 
-.original_border{
+.original_border {
     color: #000;
     background-color: #dbd6d6;
     border: 1px solid #696969;
