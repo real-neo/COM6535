@@ -12,6 +12,9 @@ class PostsController < ApplicationController
   def show
     @reply = Reply.new
     @post = Post.find(params[:id])
+    @replies = @post.replies
+    @replies = @replies.sort { |b,a| a.created_at <=> b.created_at }
+
   end
 
   def create
