@@ -19,11 +19,12 @@
                 = @post.title
         .panel-body.reply_body_colour#post_body
           = @post.description
+        .panel-footer
           %h6.text_lightgrey{style: 'fload: right'}
             = @post.created_at.strftime("Posted at %H:%M %F")
-          -if user_signed_in?
-            -if @post.user_id == current_user.id
-              = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, style: 'float: right;', class: "glyphicon glyphicon-trash"
+            -if user_signed_in?
+              -if @post.user_id == current_user.id
+                = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, style: 'float: right;', class: "glyphicon glyphicon-trash", remote: :true
 
 
 .row

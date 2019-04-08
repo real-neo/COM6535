@@ -146,8 +146,6 @@ describe 'Forum' do
           login_as(user, :scope => :user)
           visit '/posts/1'
           click_link "Delete"
-          expect(page).to have_content "Are you sure?"
-          click_button "Confirm"
           expect(page).to have_content "Thread content deleted successfully."
         end
       end
