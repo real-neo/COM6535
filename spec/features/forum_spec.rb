@@ -81,6 +81,37 @@ describe 'Forum' do
         expect(page).to have_content "My reply"
       end
 
+      it 'when I press the reply button on a comment I should see a pop up that allows me to reply to it' do
+        user = FactoryBot.create(:user)
+        post = FactoryBot.create(:post, user: user)
+        reply = FactoryBot.create(:reply, user: user, post: post)
+        visit '/'
+        visit '/posts'
+        click_link 'View'
+        find("[data-target='#reply_modal_1']").click
+        fill_in('reply_comment',with: "My reply")
+        click_button 'Submit'
+        expect(page).to have_content "Your comment has been submitted!"
+        expect(page).to have_content "MyString"
+      end
+
+
+      it 'when I press the reply button on a reply to a comment I should see a pop up that allows me to reply to it' do
+        user = FactoryBot.create(:user)
+        post = FactoryBot.create(:post, user: user)
+        reply1 = FactoryBot.create(:reply, user: user, post: post)
+        reply2 = FactoryBot.create(:reply, user: user, post: post, original: reply1)
+
+        visit '/'
+        visit '/posts'
+        click_link 'View'
+        find("[data-target='#reply_modal_2']").click
+        fill_in('reply_comment',with: "My reply")
+        click_button 'Submit'
+        expect(page).to have_content "Your comment has been submitted!"
+        expect(page).to have_content "MyString"
+      end
+
       it 'when I press the reply button I should see a pop up that allows me to submit my comment' do
         user = FactoryBot.create(:user)
         post = FactoryBot.create(:post, user: user)
