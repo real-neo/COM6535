@@ -9,14 +9,19 @@
 .container
   .row
     .col-md-10
-      .panel.panel-default
+      .panel.panel-primary
         .panel-heading
-          %h3.panel-title
-            = @post.title
+          .row
+            .col-md-1
+              = image_tag user_image(@post.user), height: 60, width: 60, class: 'img-circle'
+            .col-md-7
+              %h2
+                = @post.title
 
-        .panel-body
+
+        .panel-body.reply_body_colour
           = @post.description
-          %h6.text_lightgrey
+          %h6.text_lightgrey{style: 'fload: right'}
             = @post.created_at.strftime("Posted at %H:%M %F")
 
 .row
@@ -45,14 +50,13 @@
               =f.text_field :comment, class: 'form-control', placeholder: 'Add your reply here ...'
               =f.hidden_field :post_id, value: @post.id
 
-
             %button.btn.btn-primary.center-block{:type => "submit"} Submit
 %br
 #replies_array.container
-  - if @post.replies.blank?
+  - if @replies.blank?
     = no_record_tr(5)
   - else
-    = render @post.replies
+    = render @replies
 
 :coffee
   $ ->

@@ -1,8 +1,47 @@
 .row
   .col-md-8
-    .panel.panel-default
+    .panel.panel-primary
       .panel-heading
-        %h3.panel-title
-        = reply.user.firstname + " " + reply.user.lastname
-      .panel-body
+        .row
+          .col-md-1
+            = image_tag user_image(reply.user), height: 40, width: 40, class: 'img-circle'
+          .col-md-7
+            %h4
+              = reply.user.firstname + " " + reply.user.lastname
+          .col-md-3.text_lightgrey{style: 'float: right;'}
+            = time_ago_in_words(reply.created_at) + ' ago'
+        -if !reply.original.nil?
+          .well{style: 'color: #000; margin-top: 4px; padding-top: 2px; padding-bottom: 2px'}
+            .row
+              .col-md-1
+                = image_tag user_image(reply.user), height: 35, width: 35, class: 'img-circle'
+              .col-md-8
+                %h5{style: 'text-decoration: underline;'}
+                  = reply.original.user.firstname + " " + reply.original.user.lastname
+              .col-md-3
+                .text_lightgrey{style: 'float: right;'}
+                  = time_ago_in_words(reply.original.created_at) + ' ago'
+            %p
+              =reply.original.comment
+      .panel-body.reply_body_colour
         =reply.comment
+      -if user_signed_in?
+        .panel-footer
+          %a{"data-target" => "#reply_modal_#{reply.id}", "data-toggle" => "modal", href: "#"}
+            Reply
+
+.modal.fade{id: "reply_modal_#{reply.id}","aria-hidden" => "true", "aria-labelledby" => "reply_modal_#{reply.id}", role: "dialog", tabindex: "-1"}
+  .modal-dialog
+    .modal-content
+      .modal-header.post_colour
+        %h4#myModalLabel.modal-title Reply Testing
+        %button.close.black_bg{"aria-label" => "Close", "data-dismiss" => "modal", type: "button"}
+          %span{"aria-hidden" => "true"} ×
+      .modal-body
+        = form_for Reply.new, remote: true, method: :post do |f|
+          %form
+            .form-group
+              =f.text_field :comment, class: 'form-control', placeholder: 'Add your reply here ...'
+              =f.hidden_field :post_id, value: reply.post_id
+              =f.hidden_field :original_id, value: reply.id
+            %button.btn.btn-primary.center-block{:type => "submit"} Submit
