@@ -24,17 +24,25 @@ class PostDecorator < Draper::Decorator
   end
 
   def display_like
-    is_liked = Like.where(user_id: h.current_user.id, post_id: model.id).exists? && Like.find_by(user_id: h.current_user.id, post_id: model.id).like
-    color = is_liked ? '#4169e1' : 'black'
+    if h.user_signed_in?
+      is_liked = Like.where(user_id: h.current_user.id, post_id: model.id).exists? && Like.find_by(user_id: h.current_user.id, post_id: model.id).like
+      color = is_liked ? '#4169e1' : 'black'
 
-    h.link_to h.fa_icon('thumbs-up 2x'), h.post_likes_path(model, liked: true), method: :post, remote: true, id: 'like_icon', style: "color: #{color};"
+      h.link_to h.fa_icon('thumbs-up 2x'), h.post_likes_path(model, liked: true), method: :post, remote: true, id: 'like_icon', style: "color: #{color};"
+    else
+      h.link_to h.fa_icon('thumbs-up 2x'), 'javascript: showLoginMessage()', id: 'like_icon', style: 'color: black;'
+    end
   end
 
   def display_dislike
-    is_disliked = (Like.where(user_id: h.current_user.id, post_id: model.id).exists? && !Like.find_by(user_id: h.current_user.id, post_id: model.id).like)
-    color = is_disliked ? '#ff0003' : 'black'
+    if h.user_signed_in?
+      is_disliked = Like.where(user_id: h.current_user.id, post_id: model.id).exists? && !Like.find_by(user_id: h.current_user.id, post_id: model.id).like
+      color = is_disliked ? '#ff0003' : 'black'
 
-    h.link_to h.fa_icon('thumbs-down 2x', class: 'fa-flip-horizontal'), h.post_likes_path(model, liked: false), method: :post, remote: true, id: 'dislike_icon', style: "color: #{color};"
+      h.link_to h.fa_icon('thumbs-down 2x', class: 'fa-flip-horizontal'), h.post_likes_path(model, liked: false), method: :post, remote: true, id: 'dislike_icon', style: "color: #{color};"
+    else
+      h.link_to h.fa_icon('thumbs-down 2x', class: 'fa-flip-horizontal'), 'javascript: showLoginMessage()', id: 'dislike_icon', style: 'color: black;'
+    end
   end
 
   def display_like_count
