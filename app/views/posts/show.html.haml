@@ -9,18 +9,16 @@
         .panel-heading
           .row
             .col-md-1
-              = image_tag user_image(@post.user), height: 60, width: 60, class: 'img-circle'
+              = @post.user.decorate.display_avatar(70,70)
             .col-md-7
               %h2#post_title
                 = @post.title
         .panel-body.reply_body_colour#post_body
           = @post.description
         .panel-footer
-          %h6.text_lightgrey{style: 'fload: right'}
+          %h6.text_lightgrey
             = @post.time_posted
-            -if user_signed_in?
-              -if @post.user_id == current_user.id
-                = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-trash move_right"
+            = @post.display_delete_link
 
 #modal_placeholder
 
@@ -28,17 +26,16 @@
   .col-md-4
   .col-md-3
     -if user_signed_in?
-      = link_to 'Reply', show_reply_modal_reply_path(@post.id, is_post: 1), remote: true, class: 'btn btn-danger btn-lg btn-block fill_container'
+      = @post.display_reply_button
     -else
       %a#show-login-message.btn.btn-danger.btn-lg.btn-block.fill_container{href: "#"}
         Reply
 
 %br
 #replies_array.container
-  - if @replies.blank?
-    = no_record_tr(5)
-  - else
-    = render @replies
+  = @replies.display_replies
+
+
 
 :coffee
   $ ->

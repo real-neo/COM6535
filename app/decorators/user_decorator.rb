@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# helper methods
 class UserDecorator < Draper::Decorator
   delegate_all
 
@@ -10,4 +13,30 @@ class UserDecorator < Draper::Decorator
   #     end
   #   end
 
+  def display_avatar(height, width)
+    # height, width = image_size(size)
+    h.image_tag user_image, height: height, width: width, class: 'img-circle'
+  end
+
+  private
+
+  # def image_size(size)
+  #   if size == 's'
+  #     height,width = 30
+  #   elsif size == 'md'
+  #     height,width = 60
+  #   else
+  #     height,width = 100
+  #   end
+  #
+  #   return height,width
+  # end
+
+  def user_image
+    if model.avatar.attached?
+      model.avatar
+    else
+      '/images/default-avatar.png'
+    end
+  end
 end

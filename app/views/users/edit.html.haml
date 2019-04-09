@@ -32,7 +32,7 @@
       .tab-pane#image
         = simple_form_for @user do |f|
           .form-inputs
-            = image_tag user_image(@user), height: 100, width: 100, class: 'img-circle'
+            = @user.display_avatar(100,100)
             = f.file_field :avatar
           .form-inputs
             = f.button :submit, 'Update image'

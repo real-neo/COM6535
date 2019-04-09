@@ -36,7 +36,6 @@
           Create a Post
           %button.close.black_bg{'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button'}
             %span{'aria-hidden': 'true'} &times;
-
       .modal-body
         = simple_form_for(@post, remote: true, method: :post) do |f|
           .form-group

@@ -42,7 +42,7 @@
         .overlay-content
           - if user_signed_in?
             = link_to home_user_path(current_user) do
-              = image_tag user_image(current_user), height: 100, width: 100, class: 'img-circle'
+              = current_user.decorate.display_avatar(100,100)
             = link_to 'Home', home_user_path(current_user)
             = link_to 'Settings', edit_user_path(current_user)
             = link_to 'Logout', destroy_user_session_path, method: :delete
