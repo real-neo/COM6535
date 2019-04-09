@@ -1,46 +1,40 @@
-- content_for :title, "Exercise Section"
+- content_for :title, 'Exercise Section'
 -#picture, name
 -# button to reply
 -#replys
-.container
-  .row
-    .col-md-10
-      .panel.panel-primary
-        .panel-heading
-          .row
-            .col-md-1
-              = image_tag user_image(@post.user), height: 60, width: 60, class: 'img-circle'
-            .col-md-7
-              %h2#post_title
-                = @post.title
-        .panel-body.reply_body_colour#post_body
-          = @post.description
-        .panel-footer
-          %h6.text_lightgrey{style: 'fload: right'}
-            = @post.time_posted
-            -if user_signed_in?
-              -if @post.user_id == current_user.id
-                = link_to 'Delete',  @post,  method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-trash move_right"
+.row
+  .col-sm-1
+  .col-sm-10
+    .panel.panel-default
+      .panel-heading
+        %h2.no-margin
+          = image_tag user_image(@post.user), height: 60, width: 60, class: 'img-circle'
+          = @post.title
+      .panel-body.reply-bg
+        = @post.description
+      .panel-footer
+        %h6.text-lightgrey.text-right
+          = @post.time_posted
+          -if user_signed_in? && @post.user_id == current_user.id
+            = link_to fa_icon('trash', text: 'Delete'),  @post,  method: :delete, data: { confirm: 'Are you sure?' }
 
 #modal_placeholder
 
 .row
-  .col-md-4
-  .col-md-3
+  .col-sm-4
+  .col-sm-4
     -if user_signed_in?
-      = link_to 'Reply', show_reply_modal_reply_path(@post.id, is_post: 1), remote: true, class: 'btn btn-danger btn-lg btn-block fill_container'
+      = link_to 'Reply', show_reply_modal_reply_path(@post.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block'
     -else
-      %a#show-login-message.btn.btn-danger.btn-lg.btn-block.fill_container{href: "#"}
+      .btn.btn-danger.btn-lg.btn-block{ onclick: 'showLoginMessage()' }
         Reply
 
-%br
-#replies_array.container
-  - if @replies.blank?
-    = no_record_tr(5)
-  - else
-    = render @replies
-
-:coffee
-  $ ->
-    $('#show-login-message').on 'click', ->
-      $.flashAlert('Log in to be able to reply', 'alert-success')
+.row
+  .col-sm-1
+  .col-sm-8
+    %br
+    #replies_array
+      - if @replies.blank?
+        = no_record_tr(5)
+      - else
+        = render @replies

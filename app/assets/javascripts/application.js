@@ -10,7 +10,7 @@
 //= require select2_init
 
 function toggleNav() {
-    document.getElementById('myNav').classList.toggle('active');
+    $('#myNav').toggleClass('active');
 }
 
 function showLoginMessage() {

@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Reply controller class
 class RepliesController < ApplicationController
   def create
     @post = Post.find(params.require(:reply).permit(:comment, :post_id, :original_id)[:post_id])

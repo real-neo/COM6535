@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: replies
@@ -16,20 +18,20 @@
 #  index_replies_on_post_id      (post_id)
 #  index_replies_on_user_id      (user_id)
 #
-include ActionView::Helpers::DateHelper
 
+# Reply class
 class Reply < ApplicationRecord
+  include ActionView::Helpers::DateHelper
   belongs_to :user
   belongs_to :post
 
-  belongs_to :original, class_name: 'Reply',  optional: true
-
+  belongs_to :original, class_name: 'Reply', optional: true
 
   def fullname
-    self.user.firstname + " " + self.user.lastname
+    user.firstname + ' ' + user.lastname
   end
 
   def time_since_posted
-    time_ago_in_words(self[:created_at]) + " ago"
+    time_ago_in_words(self[:created_at]) + ' ago'
   end
 end

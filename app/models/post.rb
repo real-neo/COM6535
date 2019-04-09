@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -16,7 +18,9 @@
 #  index_posts_on_user_id  (user_id)
 #
 
+# Post class
 class Post < ApplicationRecord
+  include ActionView::Helpers::DateHelper
   belongs_to :user
   has_many :replies
 
@@ -24,16 +28,17 @@ class Post < ApplicationRecord
 
   validates :title, :description, presence: true
 
-
-
   def time_posted
-    self.created_at.strftime("Posted at %H:%M %F")
+    created_at.strftime('Posted at %H:%M %F')
+  end
+
+  def time_since_posted
+    time_ago_in_words(self[:created_at]) + ' ago'
   end
 
   private
 
   def destroy_replies
-    self.replies.destroy_all
+    replies.destroy_all
   end
-
 end

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :replies do
     member do
-      get :show_reply_modal, path: ':is_post'
+      post :show_reply_modal
     end
   end
 

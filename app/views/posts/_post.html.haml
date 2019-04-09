@@ -7,15 +7,15 @@
         %h3{ style: 'display:table-cell;' }
           = post.title
       .col-sm-3
-        .text_lightgrey{ style: 'text-align: right;' }
-          = time_ago_in_words(post.created_at) + ' ago'
+        .text-lightgrey.text-right.float-right
+          = post.time_since_posted
   .panel-body
     .row
       .col-sm-9
         %p
           = post.description
       .col-sm-3
-        %button.btn.btn-danger{style: 'float: right;'}
+        %button.btn.btn-danger.float-right
           #{ post.replies.count } comments
     .row
       .col-md-2

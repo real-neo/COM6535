@@ -1,12 +1,26 @@
-.well
-  .row
-    .col-md-1
-      = image_tag user_image(reply.user), height: 35, width: 35, class: 'img-circle'
-    .col-md-8
-      %h5
-        = reply.fullname
-    .col-md-3
-      .text_lightgrey.float_right
+-#.well
+-#  .row
+-#    .col-sm-1
+-#      = image_tag user_image(reply.user), height: 35, width: 35, class: 'img-circle'
+-#    .col-sm-6
+-#      %h5
+-#        = reply.fullname
+-#    .col-sm-5
+-#      .text_lightgrey.float-right
+-#        = reply.time_since_posted
+-#  %p
+-#    %br
+-#    = reply.comment
+
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-md-1
+        = image_tag user_image(reply.user), height: 35, width: 35, class: 'img-circle'
+      .col-md-7
+        %h5
+          = reply.fullname
+      .col-md-3.text-lightgrey.text-right.float-right
         = reply.time_since_posted
-  %p
+  .panel-body
     = reply.comment

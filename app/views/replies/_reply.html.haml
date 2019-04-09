@@ -1,19 +1,17 @@
-.row
-  .col-md-8
-    .panel.panel-primary
-      .panel-heading
-        .row
-          .col-md-1
-            = image_tag user_image(reply.user), height: 40, width: 40, class: 'img-circle'
-          .col-md-7
-            %h4
-              = reply.fullname
-          .col-md-3.text_lightgrey.float_right
-            = reply.time_since_posted
-        -if !reply.original.nil?
-          = render 'replies/original_reply', reply: reply.original
-      .panel-body.reply_body_colour
-        = reply.comment
-      -if user_signed_in?
-        .panel-footer
-          = link_to 'Reply', show_reply_modal_reply_path(reply.id, is_post: 0), remote: true
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-md-1
+        = image_tag user_image(reply.user), height: 40, width: 40, class: 'img-circle'
+      .col-md-7
+        %h4
+          = reply.fullname
+      .col-md-3.text-lightgrey.text-right.float-right
+        = reply.time_since_posted
+  .panel-body.reply-bg
+    -if !reply.original.nil?
+      = render 'replies/original_reply', reply: reply.original
+    = reply.comment
+  -if user_signed_in?
+    .panel-footer
+      = link_to 'Reply', show_reply_modal_reply_path(reply.id, is_post: 0), method: :post, remote: true

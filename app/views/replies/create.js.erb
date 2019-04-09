@@ -1,8 +1,4 @@
-$('#basicModal').modal('hide');
-$('#replyModal').modal('hide');
-
-$('#reply_modal_<%= @reply.original.nil? ? 'Not_executed' : @reply.original.id%>').modal('hide');
-
+$('#reply_modal').modal('hide');
 //add code to empty form
 $('#replies_array').prepend('<%= j render @reply %>');
-$.flashAlert('Your comment has been submitted!', 'alert-success');
+$.flashAlert('Your comment has been submitted!', 'notice');

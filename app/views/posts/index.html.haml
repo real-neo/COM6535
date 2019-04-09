@@ -18,24 +18,24 @@
 .row
   .col-md-3
     -if user_signed_in?
-      %a.btn.btn-danger.btn-lg.btn-block.fill_container{'data-target': '#basicModal', 'data-toggle': 'modal', href: '#'}
+      .btn.btn-danger.btn-lg.btn-block{ 'data-target': '#basicModal', 'data-toggle': 'modal' }
         Create Post
     -else
-      .btn.btn-danger.btn-lg.btn-block.fill_container#show-login-message{ onclick: 'showLoginMessage()' }
+      .btn.btn-danger.btn-lg.btn-block{ onclick: 'showLoginMessage()' }
         Create Post
 
   .col-md-3
-    .btn.btn-danger.btn-lg.btn-block.fill_container
+    .btn.btn-danger.btn-lg.btn-block
       Create Poll
 
-.modal.fade#basicModal{'aria-hidden': 'true', 'aria-labelledby': 'basicModal', role: 'dialog', tabindex: '-1'}
+.modal.fade#basicModal{ 'aria-hidden': 'true', 'aria-labelledby': 'basicModal', role: 'dialog', tabindex: '-1' }
   .modal-dialog
     .modal-content
-      .modal-header.post_colour
-        %h4#myModalLabel.modal-title
+      .modal-header
+        %h4.modal-title
           Create a Post
-          %button.close.black_bg{'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button'}
-            %span{'aria-hidden': 'true'} &times;
+          %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }
+            = fa_icon 'times'
 
       .modal-body
         = simple_form_for(@post, remote: true, method: :post) do |f|
