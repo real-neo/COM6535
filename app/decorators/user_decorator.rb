@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# helper methods
+# Decorator for user class
 class UserDecorator < Draper::Decorator
   delegate_all
 

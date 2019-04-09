@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Decorator for reply class
 class ReplyDecorator < Draper::Decorator
   delegate_all
 
@@ -16,6 +19,5 @@ class ReplyDecorator < Draper::Decorator
     else
       h.render model
     end
-
   end
 end

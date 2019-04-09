@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Decorator for post class
 class PostDecorator < Draper::Decorator
   delegate_all
 
@@ -11,19 +14,15 @@ class PostDecorator < Draper::Decorator
   #   end
 
   def display_delete_link
-    if h.user_signed_in?
-      if model.user_id == h.current_user.id
-        h.link_to 'Delete',  model,  method: :delete, data: { confirm: 'Are you sure?' }, class: "glyphicon glyphicon-trash move_right"
-      end
+    if h.user_signed_in? && model.user_id == h.current_user.id
+      h.link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
     end
   end
 
   def display_reply_button
-    h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), remote: true, class: 'btn btn-danger btn-lg btn-block fill_container'
+    h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block'
   end
 end
-
-
 
 #
 # -if user_signed_in?

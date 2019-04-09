@@ -1,5 +1,7 @@
-class PostsController < ApplicationController
+# frozen_string_literal: true
 
+# Post controller class
+class PostsController < ApplicationController
   def index
     @post = Post.new
     @posts = Post.all.order(created_at: :desc)
@@ -14,9 +16,8 @@ class PostsController < ApplicationController
 
     @post = PostDecorator.find(params[:id]).decorate
     @replies = @post.replies
-    @replies = @replies.sort { |b,a| a.created_at <=> b.created_at }
+    @replies = @replies.sort { |b, a| a.created_at <=> b.created_at }
     @replies = ReplyDecorator.decorate(@replies)
-
   end
 
   def create
@@ -36,7 +37,6 @@ class PostsController < ApplicationController
   private
 
   def allowed_params
-    params.require(:post).permit(:title,:description).merge(:user_id => current_user.id)
+    params.require(:post).permit(:title, :description).merge(:user_id => current_user.id)
   end
-
 end
