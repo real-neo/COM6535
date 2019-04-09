@@ -1,10 +1,17 @@
 - content_for :title, 'Settings'
-%h2 Hi, #{ @user.firstname }
-%h3 Here you can change your information
 
 .row
+  .col-sm-1
+  .col-sm-2
+    = @user.display_avatar(100,100)
+  .col-sm-8
+    %h2 Manage Your Account
+
+
+.row
+  .col-sm-1
   .col-sm-3
-    %ul.nav.nav-pills.nav-stacked
+    %ul.nav.nav-tabs.nav-stacked
       %li.active
         %a{ href: '#details', 'data-toggle': 'tab' } Change of personal details
       %li
@@ -13,7 +20,7 @@
         %a{ href: '#image', 'data-toggle': 'tab' } Change of profile image
       %li
         %a{ href: '#email', 'data-toggle': 'tab' } Change of email
-  .col-sm-9
+  .col-sm-7
     .tab-content
       .tab-pane.active#details
         = simple_form_for @user do |f|
@@ -42,5 +49,3 @@
             = f.input :email, label: 'New email', required: true, autofocus: true
           .form-inputs
             = f.button :submit, 'Update email'
-
-= link_to 'Back', :back

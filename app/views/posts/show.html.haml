@@ -13,9 +13,10 @@
       .panel-body.reply-bg
         = @post.description
       .panel-footer
-        %h6.text-lightgrey.text-right
+        %h6.text-lightgrey
           = @post.time_posted
-          = @post.display_delete_link
+          .float-right
+            = @post.display_delete_link
 
 #modal_placeholder
 
