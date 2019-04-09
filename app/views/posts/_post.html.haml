@@ -1,14 +1,10 @@
 .panel.panel-default
   .panel-heading
-    .row
-      .col-sm-1
-        = post.user.decorate.display_avatar(40,40)
-      .col-sm-8
-        %h3{ style: 'display:table-cell;' }
-          = post.title
-      .col-sm-3
-        .text-lightgrey.text-right.float-right
-          = post.time_since_posted
+    %h4.no-margin
+      = post.user.decorate.display_avatar(40,40)
+      = post.title
+      .time-since-posted
+        = post.time_since_posted
   .panel-body
     .row
       .col-sm-9
