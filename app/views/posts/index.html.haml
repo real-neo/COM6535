@@ -1,20 +1,26 @@
 - content_for :title, 'Exercise Section'
 
 .row
-  .col-sm-3.thumbnail
+  .col-sm-2
+  .col-sm-2.thumbnail
     = image_tag '/images/exercise/img2.jpg'
-  .col-sm-3.thumbnail
+  .col-sm-2.thumbnail
     = image_tag '/images/exercise/img3.jpg'
-  .col-sm-3.thumbnail
+  .col-sm-2.thumbnail
     = image_tag '/images/exercise/img1.jpg'
-  .col-sm-3.thumbnail
+  .col-sm-2.thumbnail
     = image_tag '/images/exercise/img6.jpg'
-
-%h1
-  Exercise Community
+  .col-sm-2
 
 .row
-  .col-md-3
+  .col-sm-1
+  .col-sm-10
+    %h1
+      Exercise Community
+
+.row
+  .col-sm-1
+  .col-sm-3
     -if user_signed_in?
       .btn.btn-danger.btn-lg.btn-block{ 'data-target': '#basicModal', 'data-toggle': 'modal' }
         Create Post
@@ -22,7 +28,7 @@
       .btn.btn-danger.btn-lg.btn-block{ onclick: 'showLoginMessage()' }
         Create Post
 
-  .col-md-3
+  .col-sm-3
     .btn.btn-danger.btn-lg.btn-block
       Create Poll
 
@@ -44,6 +50,7 @@
             = f.button :submit, 'Submit', class: 'btn-primary center-block'
 
 .row
+  .col-sm-1
   .col-sm-8
     %br
     #posts_array

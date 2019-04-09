@@ -36,7 +36,7 @@
         = link_to 'FITNESS GUIDE', root_path, class: 'navbar-brand'
         = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'pull-right navbar-btn'
 
-    .container-fluid#main-container{ style: 'padding-top: 0;' }
+    .container#main-container{ style: 'padding-top: 0;' }
       .overlay#myNav
         %a.close-btn.pull-right{ href: 'javascript:void(0)', onclick: 'toggleNav()' } &times;
         .overlay-content

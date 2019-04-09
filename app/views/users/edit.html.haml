@@ -1,14 +1,14 @@
 - content_for :title, 'Settings'
 
 .row
-  .col-sm-2.hidden-xs
-  .col-sm-8.col-xs-12
+  .col-sm-1.hidden-xs
+  .col-sm-10.col-xs-12
     %h2
       = @user.display_avatar(100,100)
       Manage Your Account
 
 .row
-  .col-sm-2
+  .col-sm-1
   .col-sm-3
     %ul.nav.nav-tabs.nav-stacked
       %li.active
@@ -19,7 +19,7 @@
         %a{ href: '#image', 'data-toggle': 'tab' } Change of profile image
       %li
         %a{ href: '#email', 'data-toggle': 'tab' } Change of email
-  .col-sm-5
+  .col-sm-7
     .tab-content
       .tab-pane.active#details
         = simple_form_for @user do |f|
