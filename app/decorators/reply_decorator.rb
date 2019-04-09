@@ -10,4 +10,12 @@ class ReplyDecorator < Draper::Decorator
   #     end
   #   end
 
+  def display_replies
+    if model.blank?
+      h.no_record_tr(5)
+    else
+      h.render model
+    end
+
+  end
 end

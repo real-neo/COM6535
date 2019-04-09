@@ -8,15 +8,14 @@
     .panel.panel-default
       .panel-heading
         %h2.no-margin
-          = image_tag user_image(@post.user), height: 60, width: 60, class: 'img-circle'
+          = @post.user.decorate.display_avatar(70,70)
           = @post.title
       .panel-body.reply-bg
         = @post.description
       .panel-footer
         %h6.text-lightgrey.text-right
           = @post.time_posted
-          -if user_signed_in? && @post.user_id == current_user.id
-            = link_to fa_icon('trash', text: 'Delete'),  @post,  method: :delete, data: { confirm: 'Are you sure?' }
+          = @post.display_delete_link
 
 #modal_placeholder
 
@@ -24,7 +23,7 @@
   .col-sm-4
   .col-sm-4
     -if user_signed_in?
-      = link_to 'Reply', show_reply_modal_reply_path(@post.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block'
+      = @post.display_reply_button
     -else
       .btn.btn-danger.btn-lg.btn-block{ onclick: 'showLoginMessage()' }
         Reply
@@ -34,7 +33,4 @@
   .col-sm-8
     %br
     #replies_array
-      - if @replies.blank?
-        = no_record_tr(5)
-      - else
-        = render @replies
+      = @replies.display_replies

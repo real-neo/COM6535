@@ -11,9 +11,11 @@ class PostsController < ApplicationController
 
   def show
     @reply = Reply.new
-    @post = Post.find(params[:id])
+
+    @post = PostDecorator.find(params[:id]).decorate
     @replies = @post.replies
     @replies = @replies.sort { |b,a| a.created_at <=> b.created_at }
+    @replies = ReplyDecorator.decorate(@replies)
 
   end
 

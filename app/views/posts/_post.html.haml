@@ -2,7 +2,7 @@
   .panel-heading
     .row
       .col-sm-1
-        = image_tag user_image(post.user), height: 40, width: 40, class: 'img-circle'
+        = post.user.decorate.display_avatar(40,40)
       .col-sm-8
         %h3{ style: 'display:table-cell;' }
           = post.title

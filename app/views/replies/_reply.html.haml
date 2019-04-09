@@ -2,7 +2,7 @@
   .panel-heading
     .row
       .col-md-1
-        = image_tag user_image(reply.user), height: 40, width: 40, class: 'img-circle'
+        = reply.user.decorate.display_avatar(40,40)
       .col-md-7
         %h4
           = reply.fullname
