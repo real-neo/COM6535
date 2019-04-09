@@ -1,0 +1,19 @@
+let post = $('#post_<%= @post.id %>');
+let like_icon = post.find("#like_icon");
+let dislike_icon = post.find("#dislike_icon");
+
+<%- if @both_black %>
+like_icon.css('color', "#000");
+dislike_icon.css('color', "#000");
+$.flashAlert("Your vote has been removed!", 'notice')
+<%- elsif @liked %>
+like_icon.css('color', "#69a0dd");
+dislike_icon.css('color', "#000");
+$.flashAlert("Your vote has been submitted!", 'notice')
+<%- else %>
+like_icon.css('color', "#000");
+dislike_icon.css('color', "#ff0003");
+$.flashAlert("Your vote has been submitted!", 'notice')
+<%- end %>
+
+post.find('#likes_block').html('<%= @text %>')
