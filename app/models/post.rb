@@ -23,7 +23,10 @@ class Post < ApplicationRecord
   include ActionView::Helpers::DateHelper
   belongs_to :user
   has_many :replies
+  has_many :likes, dependent: :destroy
 
+
+  before_save :default_values
   before_destroy :destroy_replies
 
   validates :title, :description, presence: true
@@ -40,5 +43,10 @@ class Post < ApplicationRecord
 
   def destroy_replies
     replies.destroy_all
+  end
+
+  def default_values
+    self.likes ||= 0
+    self.dislikes ||= 0
   end
 end

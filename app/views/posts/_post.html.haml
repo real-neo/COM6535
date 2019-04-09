@@ -1,4 +1,4 @@
-.panel.panel-default
+.panel.panel-default{id: "post_#{post.id}"}
   .panel-heading
     %h4.no-margin
       = post.user.decorate.display_avatar(40,40)
@@ -7,13 +7,22 @@
         = post.time_since_posted
   .panel-body
     .row
-      .col-sm-9
-        %p
-          = post.description
-      .col-sm-3
-        %button.btn.btn-danger.float-right
-          #{ post.replies.count } comments
-    .row
-      .col-md-2
-        = link_to post_path(post) do
-          = fa_icon 'eye', class: 'text_lightgrey', text: 'View'
+      .col-md-1
+        = post.decorate.display_like
+        %br
+        = post.decorate.display_dislike
+      .col-md-10
+        .row
+          .col-sm-9
+            %p
+              = post.description
+          .col-sm-3
+            %h6.text-lightgrey#likes_block
+              = post.decorate.display_like_count
+
+            %button.btn.btn-danger.float-right
+              #{ post.replies.count } comments
+        .row
+          .col-md-2
+            = link_to post_path(post) do
+              = fa_icon 'eye', class: 'text_lightgrey', text: 'View'
