@@ -18,4 +18,10 @@
 class Like < ApplicationRecord
   belongs_to :post
   belongs_to :user
+
+  scope :like, -> { where(like: true) }
+  scope :dislike, -> { where(like: false) }
+
+  scope :count_likes, -> { where(like: true).count }
+  scope :count_dislikes, -> { where(like: false).count }
 end

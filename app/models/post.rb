@@ -1,13 +1,10 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: posts
 #
 #  id          :integer          not null, primary key
 #  description :string
-#  dislikes    :integer
-#  likes       :integer
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -25,8 +22,6 @@ class Post < ApplicationRecord
   has_many :replies
   has_many :likes, dependent: :destroy
 
-
-  before_save :default_values
   before_destroy :destroy_replies
 
   validates :title, :description, presence: true
@@ -45,8 +40,4 @@ class Post < ApplicationRecord
     replies.destroy_all
   end
 
-  def default_values
-    self.likes ||= 0
-    self.dislikes ||= 0
-  end
 end

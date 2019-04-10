@@ -1,20 +1,16 @@
 - content_for :title, "Home"
 
-.page-header
-  %h1 Joy!
+.page-header Trending Today
   
-%p.lead Your new app is working!
 
-%p This is a basic Bootstrap 3 template with minimal additional CSS, using FontAwesome for icons.
-
-%h2 Flash Examples
-.well
-  %button#show-flash.btn.btn-default{ type: :button }
-    Show flash message
-
-%h2 Form Examples
-
-- collection = %w(These Are Some Options)
+.row
+  .col-sm-8
+    %br
+      #posts_array
+      - if @most_voted_posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @most_voted_posts
 
 -#= simple_form_for :form_examples do |f|
 -#  = f.input :string, as: :string
