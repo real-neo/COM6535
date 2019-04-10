@@ -14,5 +14,5 @@ function toggleNav() {
 }
 
 function showLoginMessage() {
-    $.flashAlert('Log in to be able to post', 'alert');
+    $.flashAlert('Please log in to continue', 'alert');
 }

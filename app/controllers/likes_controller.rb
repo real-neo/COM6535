@@ -1,36 +1,40 @@
 # frozen_string_literal: true
 
+# Likes controller class
 class LikesController < ApplicationController
-
   def create
+    unless user_signed_in?
+      respond_to do |f|
+        f.js { render js: 'showLoginMessage()' }
+      end
+      return
+    end
+
     @liked = params[:liked] == 'true'
-    @post = Post.find(params[:post_id])
-    @both_black = false
+    post = Post.find(params[:post_id])
 
     if already_liked?
-      @like = Like.where(user_id: current_user.id, post_id: params[:post_id]).first
+      @like = @likes.first
       if @like.like == @liked
         @like.destroy
-        @both_black = true
+        @liked = nil
       else
         @like.update(like: @liked)
       end
     else
-      Like.create!(user_id: current_user.id, post_id: @post.id, like: @liked)
+      Like.create!(user_id: current_user.id, post_id: post.id, like: @liked)
     end
 
-    @text = @post.decorate.display_like_count
+    @post_id = post.id
+    @like_text = post.decorate.display_like_count
 
-    respond_to do |f|
-      f.html { redirect_to posts_url }
-      f.js
-    end
+    respond_to(&:js)
   end
 
   private
 
   def already_liked?
-    @like = Like.where(user_id: current_user.id, post_id:
-        params[:post_id]).exists?
+    @likes = Like.where(user_id: current_user.id, post_id: params[:post_id])
+    @likes.exists?
   end
 end
