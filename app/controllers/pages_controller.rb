@@ -1,5 +1,7 @@
-class PagesController < ApplicationController
+# frozen_string_literal: true
 
+# Pages controller class
+class PagesController < ApplicationController
   # before_action :authenticate_user!
 
   def home
@@ -7,6 +9,5 @@ class PagesController < ApplicationController
     # @most_voted_posts = @most_voted_posts.sort do |a, b|
     #   b.likes.count_likes <=> a.likes.count_likes
     # end.take(3)
-
   end
 end
