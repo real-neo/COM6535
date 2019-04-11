@@ -1,53 +1,27 @@
-- content_for :title, 'Exercise Section'
+- content_for :title, "#{session[:forum_type] == 'Exercise' ? 'Exercise section' : 'Diet section'}"
 
-.row
-  .col-sm-2
-  .col-sm-2.thumbnail
-    = image_tag '/images/exercise/img2.jpg'
-  .col-sm-2.thumbnail
-    = image_tag '/images/exercise/img3.jpg'
-  .col-sm-2.thumbnail
-    = image_tag '/images/exercise/img1.jpg'
-  .col-sm-2.thumbnail
-    = image_tag '/images/exercise/img6.jpg'
-  .col-sm-2
+= render 'forum_images', forum_type: session[:forum_type]
 
 .row
   .col-sm-1
   .col-sm-10
     %h1
-      Exercise Community
+      #{session[:forum_type] == 'Exercise' ? 'Exercise section' : 'Diet section'}
 
 .row
   .col-sm-1
   .col-sm-3
     -if user_signed_in?
-      .btn.btn-danger.btn-lg.btn-block{ 'data-target': '#basicModal', 'data-toggle': 'modal' }
+      .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}", 'data-target': '#basicModal', 'data-toggle': 'modal' }
         Create Post
     -else
-      .btn.btn-danger.btn-lg.btn-block{ onclick: 'showLoginMessage()' }
+      .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}", onclick: 'showLoginMessage()' }
         Create Post
-
   .col-sm-3
-    .btn.btn-danger.btn-lg.btn-block
+    .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
       Create Poll
 
-.modal.fade#basicModal{ 'aria-hidden': 'true', 'aria-labelledby': 'basicModal', role: 'dialog', tabindex: '-1' }
-  .modal-dialog
-    .modal-content
-      .modal-header
-        %h4.modal-title
-          Create a Post
-          %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }
-            = fa_icon 'times'
-
-      .modal-body
-        = simple_form_for(@post, remote: true, method: :post) do |f|
-          .form-group
-            = f.input :title, lable: 'Title', required: true
-            = f.input :description, label: 'Description', required: true, as: :text
-          .form-inputs
-            = f.button :submit, 'Submit', class: 'btn-primary center-block'
+= render 'post_modal_form', forum_type: session[:forum_type]
 
 .row
   .col-sm-1

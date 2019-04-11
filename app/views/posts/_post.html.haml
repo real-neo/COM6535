@@ -20,7 +20,7 @@
             %h6.text-lightgrey#likes_block
               = post.decorate.display_like_count
 
-            %button.btn.btn-danger.float-right
+            %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
               #{ post.replies.count } comments
         .row
           .col-md-2

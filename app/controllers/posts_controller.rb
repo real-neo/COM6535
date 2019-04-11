@@ -4,7 +4,14 @@
 class PostsController < ApplicationController
   def index
     @post = Post.new
-    @posts = Post.all.order(created_at: :desc)
+    #check the forum that the user picked and assign
+    session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
+    session[:forum_type] = 'Exercise' if session[:forum_type].nil?
+    if session[:forum_type] == 'Exercise'
+      @posts = Post.where(post_type: 'Exercise').order(created_at: :desc)
+    elsif session[:forum_type] == 'Diet'
+      @posts = Post.where(post_type: 'Diet').order(created_at: :desc)
+    end
   end
 
   def new
@@ -46,6 +53,6 @@ class PostsController < ApplicationController
   private
 
   def allowed_params
-    params.require(:post).permit(:title, :description).merge(user_id: current_user.id)
+    params.require(:post).permit(:post_type ,:title, :description).merge(user_id: current_user.id)
   end
 end

@@ -1,10 +1,12 @@
 # frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
 #
 #  id          :integer          not null, primary key
 #  description :string
+#  post_type   :integer
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -21,6 +23,8 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :replies
   has_many :likes, dependent: :destroy
+
+  enum post_type: %i[Exercise Diet]
 
   before_destroy :destroy_replies
 
@@ -39,5 +43,4 @@ class Post < ApplicationRecord
   def destroy_replies
     replies.destroy_all
   end
-
 end

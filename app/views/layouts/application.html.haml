@@ -52,8 +52,8 @@
             = link_to 'Login', new_user_session_path
             = link_to 'Register', new_user_registration_path
           %hr
-          = link_to 'Exercise', posts_path
-          %a{:href => "#"} Diet
+          = link_to 'Exercise', posts_path(forum_type: 'Exercise')
+          = link_to 'Diet', posts_path(forum_type: 'Diet')
           %a{:href => "#"} Find an App
           %a{:href => "#"} Find a Buddy
 

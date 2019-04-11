@@ -4,6 +4,7 @@
 #
 #  id          :integer          not null, primary key
 #  description :string
+#  post_type   :integer
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
@@ -18,8 +19,5 @@ FactoryBot.define do
   factory :post do
     title { "My Title" }
     description { "My Description" }
-    likes { 1 }
-    dislikes { 1 }
-    user { nil }
   end
 end
