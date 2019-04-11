@@ -11,14 +11,22 @@ Rails.application.routes.draw do
     collection do
     end
   end
+
+  resources :posts do
+    resources :likes
+
+    member do
+    end
+
+    collection do
+      get :search
+    end
+  end
+
   resources :replies do
     member do
       post :show_reply_modal
     end
-  end
-
-  resources :posts do
-    resources :likes
   end
 
   root to: 'pages#home'

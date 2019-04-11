@@ -1,0 +1,17 @@
+- content_for :title, 'Search'
+
+.row
+  .col-sm-1
+  .col-sm-10
+    %h1
+      Search Results
+
+.row
+  .col-sm-1
+  .col-sm-8
+    %br
+    #posts_array
+    - if @posts.blank?
+      = no_record_tr(5)
+    - else
+      = render @posts

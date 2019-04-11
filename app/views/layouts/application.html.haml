@@ -34,7 +34,9 @@
     %nav.navbar.navbar-default
       .container
         = link_to 'FITNESS GUIDE', root_path, class: 'navbar-brand'
-        = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'pull-right navbar-btn'
+        = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'float-right menu-btn'
+        = form_tag search_posts_path, method: :get, class: 'navbar-form float-right search-form' do
+          = text_field_tag :keyword, params[:keyword], placeholder: "Search", class: 'form-control'
 
     .container#main-container{ style: 'padding-top: 0;' }
       .overlay#myNav

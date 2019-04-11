@@ -34,6 +34,15 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def search
+    keyword = params[:keyword]
+    if !keyword.nil? && (!keyword.eql? '')
+      @posts = Post.where("title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", keyword, keyword)
+    else
+      @posts = nil
+    end
+  end
+
   private
 
   def allowed_params

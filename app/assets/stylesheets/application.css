@@ -73,6 +73,19 @@
     margin: 0;
 }
 
+.search-form {
+    border-color: rgba(255, 255, 255, .4) !important;
+    padding: 0 !important;
+    margin-right: 15px;
+    margin-top: 6px;
+    margin-bottom: 6px;
+}
+
+.menu-btn {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .time-since-posted {
     color: #A9A9A9;
     font-size: 13px;
