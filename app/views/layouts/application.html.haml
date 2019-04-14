@@ -35,8 +35,11 @@
       .container
         = link_to 'FITNESS GUIDE', root_path, class: 'navbar-brand'
         = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'float-right menu-btn'
-        = form_tag search_posts_path, method: :get, class: 'navbar-form float-right search-form' do
-          = text_field_tag :keyword, params[:keyword], placeholder: "Search", class: 'form-control'
+        .input-group.float-right
+          = form_tag search_posts_path, method: :get, class: 'navbar-form search-form' do
+            = text_field_tag :keyword, params[:keyword], placeholder: 'Search', class: 'form-control search-form-control'
+            %span.input-group-btn
+              = submit_tag '🔍', class: 'btn btn-default'
 
     .container#main-container{ style: 'padding-top: 0;' }
       .overlay#myNav

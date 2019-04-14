@@ -81,6 +81,12 @@
     margin-bottom: 6px;
 }
 
+.search-form-control {
+    width: 120px !important;
+    border-bottom-left-radius: 4px !important;
+    border-top-left-radius: 4px !important;
+}
+
 .menu-btn {
     margin-top: 10px;
     margin-bottom: 10px;
