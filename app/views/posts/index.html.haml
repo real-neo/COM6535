@@ -11,11 +11,11 @@
 .row
   .col-sm-1
   .col-sm-3
-    -if user_signed_in?
-      .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}", 'data-target': '#basicModal', 'data-toggle': 'modal' }
+    - if user_signed_in?
+      %a.btn.btn-lg.btn-block{class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success', 'data-target': '#basicModal', 'data-toggle': 'modal', href: '#' }
         Create Post
-    -else
-      .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}", onclick: 'showLoginMessage()' }
+    - else
+      %a.btn.btn-lg.btn-block{class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success', href: 'javascript: showLoginMessage()' }
         Create Post
   .col-sm-3
     .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}"}

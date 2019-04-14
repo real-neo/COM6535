@@ -38,7 +38,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to posts_path, notice: 'Thread content deleted successfully.'
   end
 
   def search
@@ -53,6 +53,6 @@ class PostsController < ApplicationController
   private
 
   def allowed_params
-    params.require(:post).permit(:post_type ,:title, :description).merge(user_id: current_user.id)
+    params.require(:post).permit(:post_type, :title, :description).merge(user_id: current_user.id)
   end
 end

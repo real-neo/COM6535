@@ -28,7 +28,7 @@ class Post < ApplicationRecord
 
   before_destroy :destroy_replies
 
-  validates :title, :description, presence: true
+  validates :title, :description, :post_type, presence: true
 
   def time_posted
     created_at.strftime('Posted at %H:%M %F')

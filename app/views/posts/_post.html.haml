@@ -19,10 +19,7 @@
           .col-sm-3
             %h6.text-lightgrey#likes_block
               = post.decorate.display_like_count
-
             %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
               #{ post.replies.count } comments
-        .row
           .col-md-2
-            = link_to post_path(post) do
-              = fa_icon 'eye', class: 'text_lightgrey', text: 'View'
+            = link_to 'View', post_path(post), class: 'fa fa-eye'

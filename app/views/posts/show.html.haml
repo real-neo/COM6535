@@ -1,4 +1,4 @@
-- content_for :title, 'Exercise Section'
+- content_for :title, @post.title
 -#picture, name
 -# button to reply
 -#replys
@@ -23,10 +23,10 @@
 .row
   .col-sm-4
   .col-sm-4
-    -if user_signed_in?
+    - if user_signed_in?
       = @post.display_reply_button
-    -else
-      .btn.btn-danger.btn-lg.btn-block{ onclick: 'showLoginMessage()' }
+    - else
+      %a.btn.btn-danger.btn-lg.btn-block{ href: 'javascript: showLoginMessage()' }
         Reply
 
 .row

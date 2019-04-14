@@ -6,10 +6,7 @@ class RepliesController < ApplicationController
     @post = Post.find(params.require(:reply).permit(:comment, :post_id, :original_id)[:post_id])
     @reply = @post.replies.create! allowed_params
     @replies = @post.replies.order(:created_at)
-    respond_to do |f|
-      f.html { redirect_to post_url }
-      f.js
-    end
+    respond_to(&:js)
   end
 
   def show_reply_modal
@@ -18,13 +15,9 @@ class RepliesController < ApplicationController
       @post_id = params[:id]
     else
       @is_post = 0
-      # original reply
       @reply = Reply.find(params[:id])
     end
-    respond_to do |f|
-      f.html { redirect_to post_url }
-      f.js
-    end
+    respond_to(&:js)
   end
 
   private

@@ -6,9 +6,9 @@
       .time-since-posted
         = reply.time_since_posted
   .panel-body
-    -if !reply.original.nil?
+    - if !reply.original.nil?
       = render 'replies/original_reply', reply: reply.original
     = reply.comment
-  -if user_signed_in?
+  - if user_signed_in?
     .panel-footer
       = link_to 'Reply', show_reply_modal_reply_path(reply.id, is_post: 0), method: :post, remote: true

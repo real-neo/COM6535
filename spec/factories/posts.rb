@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -17,7 +19,8 @@
 
 FactoryBot.define do
   factory :post do
-    title { "My Title" }
-    description { "My Description" }
+    title { 'My Title' }
+    description { 'My Description' }
+    post_type { 0 }
   end
 end

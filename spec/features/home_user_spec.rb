@@ -4,8 +4,8 @@ require 'rspec'
 require 'rails_helper'
 
 describe 'user home page', js: true do
-  let(:user) { FactoryBot.create(:user) }
-  let(:post) { FactoryBot.create(:post, user: user, title: 'Test post title', description: 'Just a test post.') }
+  let!(:user) { FactoryBot.create(:user) }
+  let!(:post) { FactoryBot.create(:post, user: user) }
 
   context 'when a user has not log in' do
     it 'should redirect to log in page' do
@@ -20,10 +20,10 @@ describe 'user home page', js: true do
       visit home_user_path(user.id)
     end
 
-    pending 'user can see his posts' do
+    it 'user can see his posts' do
       expect(page).to have_content 'Your Posts'
-      expect(page).to have_content 'Test post title'
-      expect(page).to have_content 'Just a test post.'
+      expect(page).to have_content 'My Title'
+      expect(page).to have_content 'My Description'
     end
   end
 end

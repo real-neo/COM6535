@@ -12,7 +12,7 @@
           .form-group
             = f.label 'Forum'
             = f.select :post_type, Post.post_types.keys, selected: session[:forum_type], required: true
-            = f.input :title, lable: 'Title', required: true
+            = f.input :title, label: 'Title', required: true
             = f.input :description, label: 'Description', required: true, as: :text
           .form-inputs
             = f.button :submit, 'Submit', class: 'btn-primary center-block'

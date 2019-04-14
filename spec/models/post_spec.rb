@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: posts
@@ -19,21 +21,24 @@ require 'rails_helper'
 
 RSpec.describe Post, type: :model do
   user = FactoryBot.create(:user)
-  let(:post) { FactoryBot.create(:post, user: user)}
+  let(:post) { FactoryBot.create(:post, user: user) }
 
-  it "is valid with valid attributes" do
+  it 'is valid with valid attributes' do
     expect(post).to be_valid
   end
 
-  it "is not valid without a title" do
-    subject.title = nil
-    expect(subject).to_not be_valid
+  it 'is not valid without a title' do
+    post.title = nil
+    expect(post).to_not be_valid
   end
 
-  it "is not valid without a description" do
-    subject.description = nil
-    expect(subject).to_not be_valid
+  it 'is not valid without a description' do
+    post.description = nil
+    expect(post).to_not be_valid
   end
 
-
+  it 'is not valid without a description' do
+    post.post_type = nil
+    expect(post).to_not be_valid
+  end
 end
