@@ -14,7 +14,7 @@
     - if @posts.blank?
       = no_record_tr(5)
     - else
-      = render @posts
+      = render 'post', collection: @posts
   .col-sm-2
     %h4
       Advanced Search

@@ -86,7 +86,7 @@ class PostsController < ApplicationController
     end
     @posts = post_e + post_d
 
-    render 'search'
+    render 'posts/search'
   end
 
   private
