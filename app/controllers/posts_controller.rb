@@ -48,6 +48,45 @@ class PostsController < ApplicationController
     else
       @posts = nil
     end
+    @exercise_is_checked = @diet_is_checked = true
+    @from_date = Date.current.last_month
+    @to_date = Date.current
+  end
+
+  def advanced_search
+    search
+
+    from = DateTime.new(2000, 1, 1)
+    to = DateTime.current
+    begin
+      unless params[:from].nil?
+        from = DateTime.parse(params[:from])
+      end
+      unless params[:to].nil?
+        to = DateTime.parse(params[:to]).end_of_day
+      end
+    rescue ArgumentError => e
+      redirect_to search_posts_path, alert: e.message
+      return
+    end
+    @from_date = from.to_date
+    @to_date = to.to_date
+
+    @posts = @posts.where('created_at > ? AND created_at < ?', from, to)
+
+    post_e = post_d = []
+    @exercise_is_checked = @diet_is_checked = false
+    if params[:exercise] == '✅'
+      post_e = @posts.where(post_type: 'Exercise')
+      @exercise_is_checked = true
+    end
+    if params[:diet] == '✅'
+      post_d = @posts.where(post_type: 'Diet')
+      @diet_is_checked = true
+    end
+    @posts = post_e + post_d
+
+    render 'search'
   end
 
   private

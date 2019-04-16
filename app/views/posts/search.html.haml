@@ -15,3 +15,25 @@
       = no_record_tr(5)
     - else
       = render @posts
+  .col-sm-2
+    %h4
+      Advanced Search
+    %hr
+    = form_tag advanced_search_posts_path, method: :get do
+      = text_field_tag :keyword, params[:keyword], placeholder: 'Advanced Search', class: 'form-control'
+      %hr
+      = label_tag do
+        = check_box_tag 'exercise', '✅', @exercise_is_checked
+        Exercise section
+      = label_tag do
+        = check_box_tag 'diet', '✅', @diet_is_checked
+        Diet section
+      %hr
+      = label_tag do
+        Search from:
+        = date_field_tag 'from', @from_date
+      = label_tag do
+        To:
+        = date_field_tag 'to', @to_date
+      %hr
+      = submit_tag 'Advanced Search', class: 'btn btn-default'
