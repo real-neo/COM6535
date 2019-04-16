@@ -8,6 +8,7 @@ source "https://gems.shefcompsci.org.uk" do
 end
 
 # added gems
+gem 'brakeman'
 
 
 gem 'rails', '5.2.1'

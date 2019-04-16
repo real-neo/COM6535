@@ -75,6 +75,7 @@ GEM
       sass (>= 3.3.4)
     bootstrap-will_paginate (1.0.0)
       will_paginate
+    brakeman (4.5.0)
     builder (3.2.3)
     byebug (10.0.2)
     cancancan (2.2.0)
@@ -370,6 +371,7 @@ DEPENDENCIES
   bootsnap
   bootstrap-sass
   bootstrap-will_paginate
+  brakeman
   byebug
   cancancan
   capistrano (~> 3.4)

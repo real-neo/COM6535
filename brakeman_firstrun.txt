@@ -1,0 +1,32 @@
+
+== Brakeman Report ==
+
+Application Path: /home/alexis/Desktop/PersonalFitness/project
+Rails Version: 5.2.1
+Brakeman Version: 4.5.0
+Scan Date: 2019-04-16 21:07:30 +0100
+Duration: 0.761760657 seconds
+Checks Run: BasicAuth, BasicAuthTimingAttack, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, SprocketsPathTraversal, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing
+
+== Overview ==
+
+Controllers: 7
+Models: 5
+Templates: 40
+Errors: 0
+Security Warnings: 1
+
+== Warning Types ==
+
+Dynamic Render Path: 1
+
+== Warnings ==
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => (([] or @posts.where("created_at > ? AND created_at < ?", (DateTime.new(2000, 1, 1) or DateTime.parse(params[:from])), (DateTime.current or DateTime.parse(params[:to]).end_of_day)).where(:post_type => "Exercise")) + ([] or @posts.where("created_at > ? AND created_at < ?", (DateTime.new(2000, 1, 1) or DateTime.parse(params[:from])), (DateTime.current or DateTime.parse(params[:to]).end_of_day)).where(:post_type => "Diet"))), {})
+File: app/views/posts/search.html.haml
+Line: 17
+
