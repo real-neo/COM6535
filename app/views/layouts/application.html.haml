@@ -47,15 +47,15 @@
           - if user_signed_in?
             = link_to home_user_path(current_user) do
               = current_user.decorate.display_avatar(100,100)
-            = link_to 'Home', home_user_path(current_user)
-            = link_to 'Settings', edit_user_path(current_user)
+            = link_to 'Profile', home_user_path(current_user)
+            = link_to 'Profile settings', edit_user_path(current_user)
             = link_to 'Logout', destroy_user_session_path, method: :delete
           - else
             = link_to 'Login', new_user_session_path
             = link_to 'Register', new_user_registration_path
           %hr
-          = link_to 'Exercise', posts_path(forum_type: 'Exercise')
-          = link_to 'Diet', posts_path(forum_type: 'Diet')
+          = link_to 'Exercise Forum', posts_path(forum_type: 'Exercise')
+          = link_to 'Diet Forum', posts_path(forum_type: 'Diet')
           %a{ href: '#'} Find an App
           %a{ href: '#'} Find a Buddy
 

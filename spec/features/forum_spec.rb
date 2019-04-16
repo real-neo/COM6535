@@ -100,8 +100,42 @@ describe 'Forum' do
       visit post_path(post)
       click_link 'Reply'
       within('#modal_placeholder') do
-        expect(page).to have_content 'Submit'
+        expect(page).to have_content 'Comment'
       end
+    end
+
+    it 'when I press the like button on a post I should see a notification confirming it and increase the like count' do
+      visit '/posts'
+      expect(page).to have_content '0 Likes'
+      click_link 'like_icon'
+      expect(page).to have_content 'Your vote has been submitted!'
+      expect(page).to have_content '1 Like'
+    end
+
+    it 'when I press the like button on a post that I liked my vote should be removed' do
+      FactoryBot.create(:like, user: user, post: post)
+      visit '/posts'
+      expect(page).to have_content '1 Like'
+      click_link 'like_icon'
+      expect(page).to have_content 'Your vote has been removed!'
+      expect(page).to have_content '0 Likes'
+    end
+
+    it 'when I press the dislike button on a post I should see a notification confirming it and increase the dislike count' do
+      visit '/posts'
+      expect(page).to have_content '0 Dislikes'
+      click_link 'dislike_icon'
+      expect(page).to have_content 'Your vote has been submitted!'
+      expect(page).to have_content '1 Dislike'
+    end
+
+    it 'when I press the like button on a post that disliked my vote should be removed' do
+      FactoryBot.create(:like, user: user, post: post, like: false)
+      visit '/posts'
+      expect(page).to have_content '1 Dislike'
+      click_link 'dislike_icon'
+      expect(page).to have_content 'Your vote has been removed!'
+      expect(page).to have_content '0 Dislikes'
     end
 
     context 'When I am at a thread that I posted' do

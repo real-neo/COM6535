@@ -34,8 +34,8 @@ describe 'use sidebar menu', js: true do
 
     it 'user can click settings link' do
       page.find(:css, 'i[class="fa fa-bars fa-2x float-right menu-btn"]').click
-      expect(page).to have_content 'Settings'
-      click_link 'Settings'
+      expect(page).to have_content 'Profile settings'
+      click_link 'Profile settings'
       expect(current_path).to eql(edit_user_path(user.id))
     end
 
