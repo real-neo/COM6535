@@ -14,7 +14,7 @@
     - if @posts.blank?
       = no_record_tr(5)
     - else
-      = render 'post', collection: @posts
+      = render partial: 'posts/post', collection: @posts
   .col-sm-2
     %h4
       Advanced Search
