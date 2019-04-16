@@ -28,3 +28,7 @@ end
 post1 = Post.first
 
 Like.create(user: user1, post: post1, like: true)
+
+User.all.each do |user|
+  user.avatar.purge
+end
