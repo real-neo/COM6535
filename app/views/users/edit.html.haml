@@ -19,6 +19,8 @@
         %a{ href: '#image', 'data-toggle': 'tab' } Change of profile image
       %li
         %a{ href: '#email', 'data-toggle': 'tab' } Change of email
+      %li
+        %a{ href: '#delete_account', 'data-toggle': 'tab' } Delete Account
   .col-sm-7
     .tab-content
       .tab-pane.active#details
@@ -48,3 +50,5 @@
             = f.input :email, label: 'New email', required: true, autofocus: true
           .form-inputs
             = f.button :submit, 'Update email'
+      .tab-pane#delete_account
+        = link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' }, style: 'text-decoration: none; color: white;', class: ' btn btn-danger btn-lg btn-block'

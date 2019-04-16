@@ -68,5 +68,11 @@ describe 'edit user information' do
       click_button 'Update email'
       expect(page).to have_content 'Operation failed!'
     end
+
+    it 'user can delete account' do
+      click_link 'Delete Account'
+      click_link 'Delete'
+      expect(page).to have_content 'Account deleted successfully.'
+    end
   end
 end

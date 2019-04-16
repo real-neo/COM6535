@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :posts
   has_many :likes, dependent: :destroy
 
+  before_destroy :destroy_dependencies
+
   validates :firstname, :lastname, :location, :city, :username, presence: true
   validates :firstname, :lastname, :city, :username, length: { minimum: 2, maximum: 25 }
   validates :location, length: { minimum: 2, maximum: 55 }
@@ -38,4 +40,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
+
+  private
+  def destroy_dependencies
+    posts.destroy_all
+  end
 end

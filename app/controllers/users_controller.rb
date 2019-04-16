@@ -25,6 +25,13 @@ class UsersController < ApplicationController
     @posts = Post.where(user_id: @user.id)
   end
 
+  def destroy
+    @user = User.find(params[:id])
+    @user.destroy
+    session.clear
+    redirect_to posts_path, notice: 'Account deleted successfully.'
+  end
+
   private
 
   def user_params
