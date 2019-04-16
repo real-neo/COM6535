@@ -10,7 +10,7 @@
     = favicon_link_tag '/favicon.ico'
     = csrf_meta_tags
 
-  %body.environment_notice_body_class
+  %body{ class: environment_notice_body_class }
     = render 'layouts/environment_notice'
     .flash-messages
       - flash.each do |name, msg|
