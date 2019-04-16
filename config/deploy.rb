@@ -1,7 +1,7 @@
 ## Application configuration
-set :application,             'fitness-for-students'
 set :branch,                  -> { fetch(:stage) }
-set :repo_url,                'git@git.shefcompsci.org.uk:group-name/project-name.git'
+set :repo_url,    'git@git.shefcompsci.org.uk:com6535-2018-19/team12/project.git'
+set :application, 'project'
 set :linked_files,            fetch(:linked_files,  fetch(:env_links, [])).push('config/database.yml', 'config/secrets.yml')
 set :linked_dirs,             fetch(:linked_dirs, []).push('log', 'tmp/pids', 'uploads')
 # set the locations to look for changed assets to determine whether to precompile
