@@ -77,6 +77,9 @@ GEM
       will_paginate
     brakeman (4.5.0)
     builder (3.2.3)
+    bullet (5.9.0)
+      activesupport (>= 3.0.0)
+      uniform_notifier (~> 1.11)
     byebug (10.0.2)
     cancancan (2.2.0)
     capistrano (3.11.0)
@@ -345,6 +348,7 @@ GEM
       thread_safe (~> 0.1)
     uglifier (4.1.19)
       execjs (>= 0.3.0, < 3)
+    uniform_notifier (1.12.1)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.7.0)
@@ -372,6 +376,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap-will_paginate
   brakeman
+  bullet
   byebug
   cancancan
   capistrano (~> 3.4)

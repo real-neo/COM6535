@@ -8,9 +8,9 @@ class PostsController < ApplicationController
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
     session[:forum_type] = 'Exercise' if session[:forum_type].nil?
     if session[:forum_type] == 'Exercise'
-      @posts = Post.where(post_type: 'Exercise').order(created_at: :desc)
+      @posts = Post.includes(:user).where(post_type: 'Exercise').order(created_at: :desc)
     elsif session[:forum_type] == 'Diet'
-      @posts = Post.where(post_type: 'Diet').order(created_at: :desc)
+      @posts = Post.includes(:user).where(post_type: 'Diet').order(created_at: :desc)
     end
   end
 

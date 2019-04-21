@@ -9,7 +9,7 @@ end
 
 # added gems
 gem 'brakeman'
-
+gem 'bullet', group: :development
 
 gem 'rails', '5.2.1'
 gem 'bootsnap'
