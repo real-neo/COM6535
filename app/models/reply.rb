@@ -27,6 +27,7 @@ class Reply < ApplicationRecord
 
   belongs_to :original, class_name: 'Reply', optional: true
 
+  before_destroy :delete_originals
   def fullname
     user.firstname + ' ' + user.lastname
   end
@@ -37,5 +38,10 @@ class Reply < ApplicationRecord
 
   def time_since_posted
     time_ago_in_words(self[:created_at]) + ' ago'
+  end
+
+  private
+  def delete_originals
+    Reply.where(original_id: self.id).delete_all
   end
 end

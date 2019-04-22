@@ -1,7 +1,8 @@
 class ReportsController < ApplicationController
 
   def index
-    @reports = Report.all
+    @reports = Report.includes(:user, :post).all
+    @reported_users = User.blocked
   end
 
   def create

@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def home
     @user = current_user.decorate
     @posts = PostDecorator.decorate_collection(Post.includes(:user).where(user_id: @user.id).paginate(page: params[:page]))
+    @replies = ReplyDecorator.decorate_collection(Reply.where(user_id: @user.id))
   end
 
   def ban_user
@@ -32,6 +33,16 @@ class UsersController < ApplicationController
     if @user.update_attributes(blocked: true)
       UserMailer.block_user_mailer(@user).deliver
       redirect_to reports_path, notice: 'Blocked user'
+    else
+      redirect_to reports_path, notice: 'Operation failed!'
+    end
+  end
+
+  def unblock_user
+    @user = User.find(params[:id])
+    if @user.update_attributes(blocked: false)
+      # UserMailer.block_user_mailer(@user).deliver
+      redirect_to reports_path, notice: 'Unblocked user'
     else
       redirect_to reports_path, notice: 'Operation failed!'
     end

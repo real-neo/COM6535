@@ -7,3 +7,27 @@
       = no_record_tr(5)
     - else
       = render @reports
+
+%hr
+
+.row
+  .col-sm-1
+  .col-sm-8
+    %h1 Blocked Users
+    #reported_users_array
+      - if @reports.blank?
+        = no_record_tr(5)
+      - else
+        %table{:border => 1}
+          %tbody
+            %tr
+              %td Username
+              %td Email
+              %td
+          - @reported_users.each do |object|
+            %tr
+              %td= object.username
+              %td= object.email
+              %td= link_to 'Unblock', unblock_user_user_path(object), method: :post
+
+        -#= render @reported_users

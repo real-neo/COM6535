@@ -20,9 +20,17 @@ class RepliesController < ApplicationController
     respond_to(&:js)
   end
 
+  def destroy
+    @reply = Reply.find(params[:id])
+    @post = @reply.post
+    @reply.destroy
+    redirect_to post_path(@post), notice: 'Reply deleted successfully.'
+  end
+
   private
 
   def allowed_params
     params.require(:reply).permit(:comment, :original_id, :post_id).merge(user_id: current_user.id)
   end
+
 end

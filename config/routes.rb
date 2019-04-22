@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     member do
       get :home
       post :ban_user
+      post :unblock_user
     end
     collection do
     end

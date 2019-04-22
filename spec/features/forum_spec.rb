@@ -4,7 +4,7 @@ require 'rspec'
 require 'rails_helper'
 
 describe 'Forum' do
-  context 'When I am at the Exercise page' do
+  context 'When I am at the Exercise page', js: true do
     let!(:user) { FactoryBot.create(:user) }
     let!(:post) { FactoryBot.create(:post, user: user) }
 
@@ -29,7 +29,6 @@ describe 'Forum' do
     end
 
     it 'when I press the view link I should redirect to a page with the post and its comments' do
-      expect(page).to_not have_content 'Reply'
       click_link 'View'
       expect(page).to have_content 'My Title'
       expect(page).to have_content 'My Description'
@@ -81,7 +80,7 @@ describe 'Forum' do
       fill_in 'Comment', with: 'My reply'
       click_button 'Submit'
       expect(page).to have_content 'Your comment has been submitted!'
-      expect(page).to have_content 'MyString'
+      expect(page).to have_content 'A reply comment'
     end
 
     it 'when I press the reply button on a reply to a comment I should see a pop up that allows me to reply to it' do
@@ -93,7 +92,7 @@ describe 'Forum' do
       fill_in 'Comment', with: 'My reply'
       click_button 'Submit'
       expect(page).to have_content 'Your comment has been submitted!'
-      expect(page).to have_content 'MyString'
+      expect(page).to have_content 'A reply comment'
     end
 
     it 'when I press the reply button I should see a pop up that allows me to submit my comment' do
@@ -176,6 +175,14 @@ describe 'Forum' do
       expect(page).to have_content 'Your account has been blocked due to inappropriate behaviour'
     end
 
+    pending 'when I go to the report page I should see blocked users and be able to unblock them as an admin' do
+      user.admin = true
+      user.blocked = true
+      visit 'reports'
+      click_link 'Unblock'
+      expect(page).to have_content 'Unblocked user'
+    end
+
     context 'When I am at a thread that I posted' do
       before(:each) do
         visit post_path(post)
@@ -194,6 +201,18 @@ describe 'Forum' do
         expect(page).to have_content 'Thread content deleted successfully.'
       end
     end
+
+    context 'When I am at a reply that I posted' do
+      it 'I should be able to delete it' do
+        FactoryBot.create(:reply, user: user, post: post)
+        visit 'posts/1'
+        within '#replies_array' do
+          click_link 'Delete'
+        end
+        expect(page).to have_content 'Reply deleted successfully.'
+      end
+    end
+
   end
 
   context 'As a not logged in user', js: true do

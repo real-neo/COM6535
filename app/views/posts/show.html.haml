@@ -24,7 +24,7 @@
     - if user_signed_in?
       = @post.display_reply_button
     - else
-      %a.btn.btn-danger.btn-lg.btn-block{ href: 'javascript: showLoginMessage()' }
+      %a.btn.btn-danger.btn-lg.btn-block{ href: 'javascript: showLoginMessage()', class: 'fa fa-comment' }
         Reply
 
 .row
