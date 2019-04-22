@@ -2,6 +2,8 @@
 
 # Post controller class
 class PostsController < ApplicationController
+  require 'will_paginate/array'
+
   def index
     @post = Post.new.decorate
     # check the forum that the user picked and assign
