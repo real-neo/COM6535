@@ -13,6 +13,12 @@ class ReplyDecorator < Draper::Decorator
   #     end
   #   end
 
+  def display_delete_link
+    if h.user_signed_in? && (model.user_id == h.current_user.id || h.current_user.admin?)
+      h.link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
+    end
+  end
+
   def display_reply_button
     if h.user_signed_in? && !h.current_user.blocked?
       h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 0), method: :post, remote: true

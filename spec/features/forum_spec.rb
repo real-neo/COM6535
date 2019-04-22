@@ -202,6 +202,18 @@ describe 'Forum' do
         expect(page).to have_content 'Thread content deleted successfully.'
       end
     end
+
+    context 'When I am at a reply that I posted' do
+      it 'I should be able to delete it' do
+        FactoryBot.create(:reply, user: user, post: post)
+        visit 'posts/1'
+        within '#replies_array' do
+          click_link 'Delete'
+        end
+        expect(page).to have_content 'Reply deleted successfully.'
+      end
+    end
+
   end
 
   context 'As a not logged in user', js: true do
