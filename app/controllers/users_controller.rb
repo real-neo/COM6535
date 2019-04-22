@@ -30,6 +30,7 @@ class UsersController < ApplicationController
   def ban_user
     @user = User.find(params[:id])
     if @user.update_attributes(blocked: true)
+      UserMailer.block_user_mailer(@user).deliver
       redirect_to reports_path, notice: 'Blocked user'
     else
       redirect_to reports_path, notice: 'Operation failed!'
