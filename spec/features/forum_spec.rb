@@ -176,6 +176,14 @@ describe 'Forum' do
       expect(page).to have_content 'Your account has been blocked due to inappropriate behaviour'
     end
 
+    pending 'when I go to the report page I should see blocked users and be able to unblock them as an admin' do
+      user.admin = true
+      user.blocked = true
+      visit 'reports'
+      click_link 'Unblock'
+      expect(page).to have_content 'Unblocked user'
+    end
+
     context 'When I am at a thread that I posted' do
       before(:each) do
         visit post_path(post)

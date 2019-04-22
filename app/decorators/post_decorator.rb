@@ -39,9 +39,9 @@ class PostDecorator < Draper::Decorator
 
   def display_report_button
     if h.user_signed_in?
-      h.link_to 'Report', h.show_report_modal_report_path(model), class: 'fa fa-ban', method: :post, remote: true
+      h.link_to 'Report', h.show_report_modal_report_path(model), class: 'fa fa-flag', method: :post, remote: true
     else
-      h.link_to 'Report', 'javascript: showLoginMessage()', class: 'fa fa-ban'
+      h.link_to 'Report', 'javascript: showLoginMessage()', class: 'fa fa-flag'
     end
   end
 

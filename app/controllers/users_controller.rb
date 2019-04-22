@@ -37,6 +37,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def unblock_user
+    @user = User.find(params[:id])
+    if @user.update_attributes(blocked: false)
+      # UserMailer.block_user_mailer(@user).deliver
+      redirect_to reports_path, notice: 'Unblocked user'
+    else
+      redirect_to reports_path, notice: 'Operation failed!'
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

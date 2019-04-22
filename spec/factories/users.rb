@@ -41,6 +41,7 @@ FactoryBot.define do
     password {'qweqweqwe'}
     confirmed_at { Time.now }
     admin { true }
+    blocked { false }
     # encrypted_password {'qweqweqwe'}
   end
 end
