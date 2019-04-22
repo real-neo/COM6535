@@ -7,12 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-user_list = [ ['Alexis', 'Ioannou', 'Cyprus', 'Limassol', 'ioannou.alexis95@gmail.com', 'acp18ai', 'qweqweqwe']]
+user_list = [ ['Alexis', 'Ioannou', 'Cyprus', 'Limassol', 'ioannou.alexis95@gmail.com', 'acp18ai', 'qweqweqwe', true]]
 
 
 
-user_list.each do |firstname, lastname, country, city, email, username, password|
-  User.create( firstname: firstname, lastname: lastname, location: country, city: city, email: email, username: username, password: password)
+user_list.each do |firstname, lastname, country, city, email, username, password, admin|
+  User.create( firstname: firstname, lastname: lastname, location: country, city: city, email: email, username: username, password: password, admin: admin, confirmed_at: Time.now)
 end
 
 user1 = User.first

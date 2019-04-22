@@ -1,0 +1,9 @@
+.row
+  .col-sm-1
+  .col-sm-8
+    %br
+    #reports_array
+    - if @reports.blank?
+      = no_record_tr(5)
+    - else
+      = render @reports

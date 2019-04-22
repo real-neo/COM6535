@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  city                   :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
@@ -47,7 +48,10 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  scope :admin, -> { where(admin: true) }
+
   private
+
   def destroy_dependencies
     posts.destroy_all
   end

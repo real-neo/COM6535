@@ -31,6 +31,10 @@ class Reply < ApplicationRecord
     user.firstname + ' ' + user.lastname
   end
 
+  def username
+    user.username
+  end
+
   def time_since_posted
     time_ago_in_words(self[:created_at]) + ' ago'
   end

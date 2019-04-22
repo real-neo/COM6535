@@ -17,7 +17,7 @@
 
 FactoryBot.define do
   factory :report do
-    reason { "MyString" }
+    reason { "Reporting reason" }
     user { nil }
     post { nil }
   end

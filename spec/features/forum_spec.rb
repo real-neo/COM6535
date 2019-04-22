@@ -146,12 +146,27 @@ describe 'Forum' do
       expect(page).to have_content 'Your report has been submitted!'
     end
 
+    it 'when I go to the report page I should see reports' do
+      FactoryBot.create(:report, user: user, post: post)
+      user.admin = true
+      visit 'reports'
+      expect(page).to have_content 'Reporting reason'
+    end
+
+    it 'when I go to the report page I should see reports and be able to delete them as an admin' do
+      FactoryBot.create(:report, user: user, post: post)
+      user.admin = true
+      visit 'reports'
+      click_link 'Delete'
+      expect(page).to have_content 'Thread content deleted successfully.'
+    end
+
     context 'When I am at a thread that I posted' do
       before(:each) do
         visit post_path(post)
       end
 
-      pending 'I can see a report button for a post' do
+      it 'I can see a report button for a post' do
         expect(page).to have_content 'Report'
       end
 

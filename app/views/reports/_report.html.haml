@@ -1,0 +1,11 @@
+.panel.panel-default
+  .panel-heading
+    %h4.no-margin
+      = report.user.decorate.display_avatar(40,40)
+      = report.user.username
+      .time-since-posted
+        = report.time_since_posted
+  .panel-body
+    = render 'posts/post_reported', post: report.post
+
+    = report.reason

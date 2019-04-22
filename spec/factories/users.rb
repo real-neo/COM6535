@@ -3,6 +3,7 @@
 # Table name: users
 #
 #  id                     :integer          not null, primary key
+#  admin                  :boolean          default(FALSE)
 #  city                   :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
@@ -38,6 +39,7 @@ FactoryBot.define do
     username {'acp18ai'}
     password {'qweqweqwe'}
     confirmed_at { Time.now }
+    admin { true }
     # encrypted_password {'qweqweqwe'}
   end
 end

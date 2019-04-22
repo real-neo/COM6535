@@ -44,5 +44,6 @@ class Post < ApplicationRecord
 
   def destroy_replies
     replies.destroy_all
+    reports.destroy_all
   end
 end

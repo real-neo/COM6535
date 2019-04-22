@@ -1,5 +1,9 @@
 class ReportsController < ApplicationController
 
+  def index
+    @reports = Report.all
+  end
+
   def create
     @post = Post.find(params.require(:report).permit(:reason, :post_id)[:post_id])
     @post.reports.create! allowed_params

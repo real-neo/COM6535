@@ -16,6 +16,13 @@
 #
 
 class Report < ApplicationRecord
+  include ActionView::Helpers::DateHelper
+
   belongs_to :user
   belongs_to :post
+
+
+  def time_since_posted
+    time_ago_in_words(self[:created_at]) + ' ago'
+  end
 end

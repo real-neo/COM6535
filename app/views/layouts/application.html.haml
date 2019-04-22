@@ -56,6 +56,8 @@
           %hr
           = link_to 'Exercise Forum', posts_path(forum_type: 'Exercise')
           = link_to 'Diet Forum', posts_path(forum_type: 'Diet')
+          -if user_signed_in? && current_user.admin?
+            = link_to 'Reports', reports_path
           %a{ href: '#'} Find an App
           %a{ href: '#'} Find a Buddy
 

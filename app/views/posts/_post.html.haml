@@ -2,7 +2,7 @@
   .panel-heading
     %h4.no-margin
       = post.user.decorate.display_avatar(40,40)
-      = post.title
+      = post.user.username + ':  ' + post.title
       .time-since-posted
         = post.time_since_posted
   .panel-body

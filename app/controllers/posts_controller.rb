@@ -22,7 +22,7 @@ class PostsController < ApplicationController
     @reply = Reply.new
 
     @post = PostDecorator.find(params[:id]).decorate
-    @replies = @post.replies
+    @replies = @post.replies.includes(:user, :original)
     @replies = @replies.sort { |b, a| a.created_at <=> b.created_at }
     @replies = ReplyDecorator.decorate(@replies)
   end
