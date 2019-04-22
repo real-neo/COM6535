@@ -13,6 +13,10 @@ class PostDecorator < Draper::Decorator
   #     end
   #   end
 
+  def self.collection_decorator_class
+    PaginatingDecorator
+  end
+
   def display_delete_link
     if h.user_signed_in? && (model.user_id == h.current_user.id || h.current_user.admin?)
       h.link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'

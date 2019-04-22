@@ -4,8 +4,8 @@
 class RepliesController < ApplicationController
   def create
     @post = Post.find(params.require(:reply).permit(:comment, :post_id, :original_id)[:post_id])
-    @reply = @post.replies.create! allowed_params
-    @replies = @post.replies.order(:created_at)
+    @reply = (@post.replies.create! allowed_params).decorate
+    @replies = ReplyDecorator.decorate_collection(@post.replies.order(:created_at))
     respond_to(&:js)
   end
 

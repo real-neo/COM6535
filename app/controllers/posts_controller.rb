@@ -3,36 +3,31 @@
 # Post controller class
 class PostsController < ApplicationController
   def index
-    @post = Post.new
-    #check the forum that the user picked and assign
+    @post = Post.new.decorate
+    # check the forum that the user picked and assign
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
     session[:forum_type] = 'Exercise' if session[:forum_type].nil?
     if session[:forum_type] == 'Exercise'
-      @posts = Post.includes(:user).where(post_type: 'Exercise').order(created_at: :desc)
+      @posts = PostDecorator.decorate_collection(Post.includes(:user).where(post_type: 'Exercise').paginate(page: params[:page]).order(created_at: :desc))
     elsif session[:forum_type] == 'Diet'
-      @posts = Post.includes(:user).where(post_type: 'Diet').order(created_at: :desc)
+      @posts = PostDecorator.decorate_collection(Post.includes(:user).where(post_type: 'Diet').paginate(page: params[:page]).order(created_at: :desc))
     end
   end
 
   def new
-    @post = Post.new
+    @post = Post.new.decorate
   end
 
   def show
-    @reply = Reply.new
-
-    @post = PostDecorator.find(params[:id]).decorate
+    @post = Post.find(params[:id]).decorate
     @replies = @post.replies.includes(:user, :original)
     @replies = @replies.sort { |b, a| a.created_at <=> b.created_at }
-    @replies = ReplyDecorator.decorate(@replies)
+    @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
   end
 
   def create
-    @post = Post.create!(allowed_params)
-    respond_to do |f|
-      f.html { redirect_to posts_url }
-      f.js
-    end
+    @post = Post.create!(allowed_params).decorate
+    respond_to(&:js)
   end
 
   def destroy
@@ -43,18 +38,19 @@ class PostsController < ApplicationController
 
   def search
     keyword = params[:keyword]
-    if !keyword.nil? && (!keyword.eql? '')
-      @posts = Post.where("title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", keyword, keyword)
-    else
-      @posts = nil
-    end
     @exercise_is_checked = @diet_is_checked = true
     @from_date = Date.current.last_month
     @to_date = Date.current
+    if !keyword.nil? && (!keyword.eql? '')
+      got_posts = Post.includes(:user).where("title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", keyword, keyword)
+      @posts = PostDecorator.decorate_collection(got_posts.paginate(page: params[:page]))
+    else
+      @posts = nil
+    end
   end
 
   def advanced_search
-    search
+    keyword = params[:keyword]
 
     from = DateTime.new(2000, 1, 1)
     to = DateTime.current
@@ -72,19 +68,23 @@ class PostsController < ApplicationController
     @from_date = from.to_date
     @to_date = to.to_date
 
-    @posts = @posts.where('created_at > ? AND created_at < ?', from, to)
-
-    post_e = post_d = []
     @exercise_is_checked = @diet_is_checked = false
-    if params[:exercise] == '✅'
-      post_e = @posts.where(post_type: 'Exercise')
-      @exercise_is_checked = true
+
+    if !keyword.nil? && (!keyword.eql? '') && (params[:exercise] == '✅' || params[:diet] == '✅')
+      if params[:exercise] == '✅' && params[:diet] == '✅'
+        got_posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%')", from, to, keyword, keyword)
+        @exercise_is_checked = @diet_is_checked = true
+      elsif params[:exercise] == '✅'
+        got_posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, '0')
+        @exercise_is_checked = true
+      else
+        got_posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, '1')
+        @diet_is_checked = true
+      end
+      @posts = PostDecorator.decorate_collection(got_posts.paginate(page: params[:page]))
+    else
+      @posts = nil
     end
-    if params[:diet] == '✅'
-      post_d = @posts.where(post_type: 'Diet')
-      @diet_is_checked = true
-    end
-    @posts = post_e + post_d
 
     render 'posts/search'
   end

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).decorate
   end
 
   def edit
@@ -24,7 +24,7 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user.decorate
-    @posts = Post.where(user_id: @user.id)
+    @posts = PostDecorator.decorate_collection(Post.includes(:user).where(user_id: @user.id).paginate(page: params[:page]))
   end
 
   def ban_user

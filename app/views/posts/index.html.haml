@@ -26,6 +26,7 @@
 .row
   .col-sm-1
   .col-sm-8
+    = will_paginate @posts
     %br
     #posts_array
     - if @posts.blank?

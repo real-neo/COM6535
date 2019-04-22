@@ -9,12 +9,13 @@
 .row
   .col-sm-1
   .col-sm-8
+    = will_paginate @posts
     %br
     #posts_array
     - if @posts.blank?
       = no_record_tr(5)
     - else
-      = render partial: 'posts/post', collection: @posts
+      = render @posts
   .col-sm-2
     %h4
       Advanced Search

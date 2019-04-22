@@ -13,6 +13,10 @@ class ReplyDecorator < Draper::Decorator
   #     end
   #   end
 
+  def self.collection_decorator_class
+    PaginatingDecorator
+  end
+
   def display_reply_button
     if h.user_signed_in? && !h.current_user.blocked?
       h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 0), method: :post, remote: true
