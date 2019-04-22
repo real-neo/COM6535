@@ -2,16 +2,17 @@
   .panel-heading
     %h4.no-margin
       = post.user.decorate.display_avatar(40,40)
-      = post.user.username + ':  ' + post.title
+      = post.user.username + ':  '
+      = link_to post.title, post_path(post), style: 'color: inherit;'
       .time-since-posted
         = post.time_since_posted
   .panel-body
     .row
-      .col-md-1
+      .col-sm-1
         = post.display_like
         %br
         = post.display_dislike
-      .col-md-10
+      .col-sm-10
         .row
           .col-sm-9
             %p
@@ -22,7 +23,7 @@
             %a{href: post_path(post)}
               %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
                 #{ post.replies.count } comments
-          .col-md-2
+          .col-sm-12
             = link_to 'View', post_path(post), class: 'fa fa-eye'
-          .col-md-2
+            &nbsp;&nbsp;&nbsp;
             = post.display_report_button

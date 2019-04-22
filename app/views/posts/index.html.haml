@@ -6,19 +6,19 @@
   .col-sm-1
   .col-sm-10
     %h1
-      #{session[:forum_type] == 'Exercise' ? 'Exercise section' : 'Diet section'}
+      = session[:forum_type] == 'Exercise' ? 'Exercise section' : 'Diet section'
 
 .row
   .col-sm-1
   .col-sm-3
     - if user_signed_in?
-      %a.btn.btn-lg.btn-block{class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success', 'data-target': '#basicModal', 'data-toggle': 'modal', href: '#' }
+      %a.btn.btn-lg.btn-block{ class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success', 'data-target': '#basicModal', 'data-toggle': 'modal', href: '#' }
         Create Post
     - else
-      %a.btn.btn-lg.btn-block{class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success', href: 'javascript: showLoginMessage()' }
+      %a.btn.btn-lg.btn-block{ class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success', href: 'javascript: showLoginMessage()' }
         Create Post
   .col-sm-3
-    .btn.btn-lg.btn-block{class: "#{session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
+    .btn.btn-lg.btn-block{ class: session[:forum_type] == 'Exercise' ? 'btn-danger' : 'btn-success' }
       Create Poll
 
 = render 'post_modal_form', forum_type: session[:forum_type]

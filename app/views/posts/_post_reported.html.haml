@@ -3,7 +3,8 @@
   .panel-heading.original-reply
     %h5.no-margin
       = post.user.decorate.display_avatar(40,40)
-      = post.user.username + ':  ' + post.title
+      = post.user.username + ':  '
+      = link_to post.title, post_path(post), style: 'color: inherit;'
       .time-since-posted
         = post.time_since_posted
   .panel-body.original-reply
@@ -17,7 +18,9 @@
         %a{href: post_path(post)}
           %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
             #{ post.replies.count } comments
-      .col-md-4
+      .col-sm-12
         = link_to 'View', post_path(post), class: 'fa fa-eye'
+        &nbsp;&nbsp;&nbsp;
         = post.decorate.display_block_link
+        &nbsp;&nbsp;&nbsp;
         = post.decorate.display_delete_link
