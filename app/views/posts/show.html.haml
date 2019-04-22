@@ -32,4 +32,7 @@
   .col-sm-8
     %br
     #replies_array
-      = @replies.display_replies
+      - if @replies.blank?
+        = no_record_tr(5)
+      - else
+        = render @replies
