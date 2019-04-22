@@ -19,4 +19,5 @@
             #{ post.replies.count } comments
       .col-md-4
         = link_to 'View', post_path(post), class: 'fa fa-eye'
+        = post.decorate.display_block_link
         = post.decorate.display_delete_link

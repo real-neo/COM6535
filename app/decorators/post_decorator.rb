@@ -14,13 +14,33 @@ class PostDecorator < Draper::Decorator
   #   end
 
   def display_delete_link
-    if h.user_signed_in? && model.user_id == h.current_user.id
+    if h.user_signed_in? && (model.user_id == h.current_user.id || h.current_user.admin?)
       h.link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
     end
   end
 
+  def display_block_link
+    if h.user_signed_in? && h.current_user.admin?
+      h.link_to 'Block user', h.ban_user_user_path(model.user), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-ban'
+    else
+      h.link_to 'Block user', 'javascript: showLoginMessage()', class: 'fa fa-ban'
+    end
+  end
+
   def display_reply_button
-    h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block'
+    if h.user_signed_in?
+      h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block'
+    else
+      h.link_to 'Reply', 'javascript: showLoginMessage()'
+    end
+  end
+
+  def display_report_button
+    if h.user_signed_in?
+      h.link_to 'Report', h.show_report_modal_report_path(model), class: 'fa fa-ban', method: :post, remote: true
+    else
+      h.link_to 'Report', 'javascript: showLoginMessage()', class: 'fa fa-ban'
+    end
   end
 
   def display_like

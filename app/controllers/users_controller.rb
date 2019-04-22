@@ -27,6 +27,15 @@ class UsersController < ApplicationController
     @posts = Post.where(user_id: @user.id)
   end
 
+  def ban_user
+    @user = User.find(params[:id])
+    if @user.update_attributes(blocked: true)
+      redirect_to reports_path, notice: 'Blocked user'
+    else
+      redirect_to reports_path, notice: 'Operation failed!'
+    end
+  end
+
   def destroy
     @user = User.find(params[:id])
     @user.destroy

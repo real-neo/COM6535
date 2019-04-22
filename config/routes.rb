@@ -7,15 +7,14 @@ Rails.application.routes.draw do
   resources :users do
     member do
       get :home
+      post :ban_user
     end
-
     collection do
     end
   end
 
   resources :posts do
     resources :likes
-
     member do
     end
 

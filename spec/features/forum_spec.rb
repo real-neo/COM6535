@@ -161,6 +161,15 @@ describe 'Forum' do
       expect(page).to have_content 'Thread content deleted successfully.'
     end
 
+    it 'when I go to the report page I should see reports and be able to block the user as an admin' do
+      FactoryBot.create(:report, user: user, post: post)
+      user.admin = true
+      visit 'reports'
+      click_link 'Block'
+      expect(page).to have_content 'Blocked user'
+    end
+
+
     context 'When I am at a thread that I posted' do
       before(:each) do
         visit post_path(post)

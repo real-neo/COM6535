@@ -4,6 +4,7 @@
 #
 #  id                     :integer          not null, primary key
 #  admin                  :boolean          default(FALSE)
+#  blocked                :boolean          default(FALSE)
 #  city                   :string
 #  confirmation_sent_at   :datetime
 #  confirmation_token     :string
