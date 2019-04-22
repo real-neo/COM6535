@@ -26,6 +26,12 @@
 .row
   .col-sm-1
   .col-sm-8
+    %br
+    Sort by: (Not implemented)
+    = link_to 'Time ⬆️️', 'javascript: toggleSortButtonTime()', id: 'sort_time', class: 'btn btn-default'
+    = link_to 'Comments ⬆️️', 'javascript: toggleSortButtonComments()', id: 'sort_comments', class: 'btn btn-default'
+    = link_to 'Likes ⬆️️', 'javascript: toggleSortButtonLikes()', id: 'sort_likes', class: 'btn btn-default'
+    %br
     = will_paginate @posts
     #posts_array
     - if @posts.blank?

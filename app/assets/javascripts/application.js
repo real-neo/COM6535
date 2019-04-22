@@ -20,3 +20,33 @@ function showLoginMessage() {
 function showBlockedMessage() {
     $.flashAlert('Your account has been blocked due to inappropriate behaviour', 'alert');
 }
+
+function toggleSortButtonTime() {
+    let sortTime = $('#sort_time');
+    sortTime.toggleClass('down');
+    if (sortTime.hasClass('down')) {
+        sortTime.html('Time ⬇️');
+    } else {
+        sortTime.html('Time ⬆️');
+    }
+}
+
+function toggleSortButtonComments() {
+    let sortComments = $('#sort_comments');
+    sortComments.toggleClass('down');
+    if (sortComments.hasClass('down')) {
+        sortComments.html('Comments ⬇️');
+    } else {
+        sortComments.html('Comments ⬆️');
+    }
+}
+
+function toggleSortButtonLikes() {
+    let sortLikes = $('#sort_likes');
+    sortLikes.toggleClass('down');
+    if (sortLikes.hasClass('down')) {
+        sortLikes.html('Likes ⬇️');
+    } else {
+        sortLikes.html('Likes ⬆️');
+    }
+}
