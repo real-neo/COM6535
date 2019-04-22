@@ -8,19 +8,18 @@ Rails.application.configure do
   config.reload_classes_only_on_change = false
 
   # Preview email in the browser instead of sending it
-  # config.action_mailer.delivery_method = :letter_opener
-  # config.action_mailer.delivery_method = :smtp
+  config.action_mailer.delivery_method = :letter_opener
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-      address: "smtp.gmail.com",
-      domain: "gmail.com",
-      port: 587,
-      user_name: "team12Genesys@gmail.com",
-      password: "InJg@KLd32k3nfsKj",
-      authentication: 'plain',
-      enable_starttls_auto: true
-  }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #     address: "smtp.gmail.com",
+  #     domain: "gmail.com",
+  #     port: 587,
+  #     user_name: "team12Genesys@gmail.com",
+  #     password: "InJg@KLd32k3nfsKj",
+  #     authentication: 'plain',
+  #     enable_starttls_auto: true
+  # }
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
