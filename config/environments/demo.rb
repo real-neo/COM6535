@@ -1,12 +1,24 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.action_mailer.default_url_options = { host: "app_url" }
-  config.action_mailer.asset_host          = "https://app_url"
+  # config.action_mailer.default_url_options = { host: "app_url" }
+  # config.action_mailer.asset_host          = "https://app_url"
+  # config.action_mailer.smtp_settings = {
+  #   address: 'mailhost.shef.ac.uk',
+  #   port:    25,
+  #   domain:  'app_url',
+  #   enable_starttls_auto: false
+  # }
+  #
+
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'mailhost.shef.ac.uk',
-    port:    25,
-    domain:  'app_url',
-    enable_starttls_auto: false
+      address: "smtp.gmail.com",
+      domain: "gmail.com",
+      port: 587,
+      user_name: "team12Genesys@gmail.com",
+      password: "InJg@KLd32k3nfsKj",
+      authentication: 'plain',
+      enable_starttls_auto: true
   }
 
   # Code is not reloaded between requests.

@@ -1,0 +1,16 @@
+.modal.fade#report_modal{ 'aria-hidden': 'true', 'aria-labelledby': 'reply_modal', role: 'dialog', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title
+          Report
+          %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }
+            = fa_icon 'times'
+
+      .modal-body
+        = simple_form_for(Report.new, remote: true, method: :post) do |f|
+          .form-inputs
+            = f.input :reason, label: 'Reason', as: :text, placeholder: 'Add your reason ...', required: true
+            = f.hidden_field :post_id, value: post_id
+          .form-actions
+            = f.button :submit, 'Submit', class: 'btn-primary center-block'

@@ -22,6 +22,8 @@ class Post < ApplicationRecord
   include ActionView::Helpers::DateHelper
   belongs_to :user
   has_many :replies
+  has_many :reports
+
   has_many :likes, dependent: :destroy
 
   enum post_type: %i[Exercise Diet]

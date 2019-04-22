@@ -37,6 +37,7 @@ FactoryBot.define do
     email {'aioannou2@gmail.com'}
     username {'acp18ai'}
     password {'qweqweqwe'}
+    confirmed_at { Time.now }
     # encrypted_password {'qweqweqwe'}
   end
 end

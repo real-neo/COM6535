@@ -138,6 +138,14 @@ describe 'Forum' do
       expect(page).to have_content '0 Dislikes'
     end
 
+    it 'when I press the report button I should see a pop up that allows me to submit my report' do
+      visit 'posts'
+      click_link 'Report'
+      fill_in 'Reason', with: 'My reason'
+      click_button 'Submit'
+      expect(page).to have_content 'Your report has been submitted!'
+    end
+
     context 'When I am at a thread that I posted' do
       before(:each) do
         visit post_path(post)

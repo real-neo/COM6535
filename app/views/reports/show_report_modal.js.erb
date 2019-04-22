@@ -1,0 +1,7 @@
+let modalPlaceholder = $('#modal_placeholder');
+
+modalPlaceholder.html('');
+
+modalPlaceholder.html('<%=  j render 'report_modal', post_id: @post_id %>');
+
+$('#report_modal').modal('show');

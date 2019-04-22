@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_165037) do
+ActiveRecord::Schema.define(version: 2019_04_21_232803) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -78,6 +78,16 @@ ActiveRecord::Schema.define(version: 2019_04_11_165037) do
     t.index ["original_id"], name: "index_replies_on_original_id"
     t.index ["post_id"], name: "index_replies_on_post_id"
     t.index ["user_id"], name: "index_replies_on_user_id"
+  end
+
+  create_table "reports", force: :cascade do |t|
+    t.string "reason"
+    t.integer "user_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_reports_on_post_id"
+    t.index ["user_id"], name: "index_reports_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  get 'reports/show_report_modal'
   devise_for :users
 
   resources :users do
@@ -27,6 +28,12 @@ Rails.application.routes.draw do
   resources :replies do
     member do
       post :show_reply_modal
+    end
+  end
+
+  resources :reports do
+    member do
+      post :show_report_modal
     end
   end
 

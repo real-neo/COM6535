@@ -19,7 +19,10 @@
           .col-sm-3
             %h6.text-lightgrey#likes_block
               = post.decorate.display_like_count
-            %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
-              #{ post.replies.count } comments
+            %a{href: post_path(post)}
+              %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
+                #{ post.replies.count } comments
           .col-md-2
             = link_to 'View', post_path(post), class: 'fa fa-eye'
+          .col-md-2
+            = link_to 'Report', show_report_modal_report_path(post), class: 'fa fa-flag', method: :post, remote: true

@@ -14,27 +14,13 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "Welcome! You have signed up successfully."
+      expect(page).to have_content "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
     end
 
     it 'A user cannot register a new account without filling in the information' do
       visit '/users/sign_up'
       click_button 'Join Now!'
       expect(page).to have_content "Please review the problems below:"
-    end
-
-    it 'they can register a new account' do
-      visit '/users/sign_up'
-      fill_in('Firstname', with: 'Alexander')
-      fill_in('Lastname', with: 'Arnaouzoglou')
-      fill_in('Country', with: 'UK')
-      fill_in('City', with: 'Sheffield')
-      fill_in('Email', with: 'ioannou.alexis95@gmail.com')
-      fill_in('Username', with: 'acp18ai')
-      fill_in('Password', with: 'qweqweqwe')
-      fill_in('Password confirmation', with: 'qweqweqwe')
-      click_button 'Join Now!'
-      expect(page).to have_content "Welcome! You have signed up successfully."
     end
 
     it 'they cannot register an new account with less than 2 character for firstname' do
