@@ -25,6 +25,7 @@ class UsersController < ApplicationController
   def home
     @user = current_user.decorate
     @posts = Post.where(user_id: @user.id)
+    @replies = Reply.where(user_id: @user.id)
   end
 
   def ban_user

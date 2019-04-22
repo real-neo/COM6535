@@ -6,6 +6,7 @@ require 'rails_helper'
 describe 'user home page', js: true do
   let!(:user) { FactoryBot.create(:user) }
   let!(:post) { FactoryBot.create(:post, user: user) }
+  let!(:reply) { FactoryBot.create(:reply, user: user, post: post) }
 
   context 'when a user has not log in' do
     it 'should redirect to log in page' do
@@ -24,6 +25,10 @@ describe 'user home page', js: true do
       expect(page).to have_content 'Your Posts'
       expect(page).to have_content 'My Title'
       expect(page).to have_content 'My Description'
+    end
+
+    it 'user can see his posts' do
+      expect(page).to have_content 'A reply comment'
     end
   end
 end

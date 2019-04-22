@@ -19,7 +19,7 @@
 
 FactoryBot.define do
   factory :reply do
-    comment { "MyString" }
+    comment { "A reply comment" }
     user { nil }
     post { nil }
     original { nil }
