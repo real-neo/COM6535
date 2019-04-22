@@ -16,3 +16,7 @@ function toggleNav() {
 function showLoginMessage() {
     $.flashAlert('Please log in to continue', 'alert');
 }
+
+function showBlockedMessage() {
+    $.flashAlert('Your account has been blocked due to inappropriate behaviour', 'alert');
+}

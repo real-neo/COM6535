@@ -28,9 +28,11 @@ class PostDecorator < Draper::Decorator
   end
 
   def display_reply_button
-    if h.user_signed_in?
+    if h.user_signed_in? && !h.current_user.blocked?
       h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block'
-    else
+    elsif h.user_signed_in? && h.current_user.blocked?
+      h.link_to 'Reply', 'javascript: showBlockedMessage()', class: 'btn btn-danger btn-lg btn-block'
+     else
       h.link_to 'Reply', 'javascript: showLoginMessage()'
     end
   end

@@ -169,6 +169,12 @@ describe 'Forum' do
       expect(page).to have_content 'Blocked user'
     end
 
+    it 'when I am blocked and try to reply to reply to a post or comment I should see a flash message saying I am blocked' do
+      user.update(blocked: true)
+      visit 'posts/1'
+      click_link 'Reply'
+      expect(page).to have_content 'Your account has been blocked due to inappropriate behaviour'
+    end
 
     context 'When I am at a thread that I posted' do
       before(:each) do

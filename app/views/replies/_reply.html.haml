@@ -11,4 +11,4 @@
     = reply.comment
   - if user_signed_in?
     .panel-footer
-      = link_to 'Reply', show_reply_modal_reply_path(reply.id, is_post: 0), method: :post, remote: true
+      = reply.decorate.display_reply_button

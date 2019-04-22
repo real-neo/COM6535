@@ -50,6 +50,7 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   scope :admin, -> { where(admin: true) }
+  scope :blocked, -> { where(blocked: true) }
 
   private
 
