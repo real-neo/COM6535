@@ -34,7 +34,7 @@
     %br
     = will_paginate @posts
     #posts_array
-    - if @posts.blank?
-      = no_record_tr(5)
-    - else
-      = render @posts
+      - if @posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @posts

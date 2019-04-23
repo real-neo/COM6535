@@ -11,7 +11,7 @@
   .col-sm-8
     %br
     #posts_array
-    - if @most_voted_posts.blank?
-      = no_record_tr(5)
-    - else
-      = render @most_voted_posts
+      - if @most_voted_posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @most_voted_posts

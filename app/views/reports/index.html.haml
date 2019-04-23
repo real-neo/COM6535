@@ -3,10 +3,10 @@
   .col-sm-8
     %br
     #reports_array
-    - if @reports.blank?
-      = no_record_tr(5)
-    - else
-      = render @reports
+      - if @reports.blank?
+        = no_record_tr(5)
+      - else
+        = render @reports
 
 %hr
 

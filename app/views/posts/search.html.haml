@@ -12,10 +12,10 @@
     = will_paginate @posts
     %br
     #posts_array
-    - if @posts.blank?
-      = no_record_tr(5)
-    - else
-      = render @posts
+      - if @posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @posts
   .col-sm-2
     %h4
       Advanced Search
