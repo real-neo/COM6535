@@ -30,8 +30,8 @@
 .row
   .col-sm-1
   .col-sm-8
-    = will_paginate @replies
     %br
+    = will_paginate @replies
     #replies_array
       - if @replies.blank?
         = no_record_tr(5)

@@ -11,6 +11,7 @@
   .col-sm-1
   .col-sm-10
     %h3 Your Posts
+    %br
     = will_paginate @posts
     = render @posts
 
@@ -18,5 +19,6 @@
   .col-sm-1
   .col-sm-10
     %h3 Your Replies
+    %br
     = will_paginate @replies
     = render @replies
