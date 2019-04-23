@@ -12,15 +12,15 @@
   .col-sm-10
     %h3 Your Posts
     %br
-    = will_paginate @posts
+    = will_paginate @posts, param_name: 'post_page'
     = render @posts
-    = will_paginate @posts
+    = will_paginate @posts, param_name: 'post_page'
 
 .row
   .col-sm-1
   .col-sm-10
     %h3 Your Replies
     %br
-    = will_paginate @replies
+    = will_paginate @replies, param_name: 'reply_page'
     = render @replies
-    = will_paginate @replies
+    = will_paginate @replies, param_name: 'reply_page'
