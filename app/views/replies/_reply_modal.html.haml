@@ -2,7 +2,8 @@
   .modal-dialog
     .modal-content
       .modal-header
-        %h4.modal-title{class: 'fa fa-comment'}
+        %h4.modal-title
+          = fa_icon 'comment'
           Reply
           %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button'}
             = fa_icon 'times'
