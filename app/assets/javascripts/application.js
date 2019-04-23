@@ -22,7 +22,7 @@ function showBlockedMessage() {
 }
 
 function toggleSortButtonTime() {
-    var sortTime = $('#sort_time');
+    const sortTime = $('#sort_time');
     sortTime.toggleClass('down');
     if (sortTime.hasClass('down')) {
         sortTime.html('Time ⬇️');
@@ -32,7 +32,7 @@ function toggleSortButtonTime() {
 }
 
 function toggleSortButtonComments() {
-    var sortComments = $('#sort_comments');
+    const sortComments = $('#sort_comments');
     sortComments.toggleClass('down');
     if (sortComments.hasClass('down')) {
         sortComments.html('Comments ⬇️');
@@ -42,7 +42,7 @@ function toggleSortButtonComments() {
 }
 
 function toggleSortButtonLikes() {
-    var sortLikes = $('#sort_likes');
+    const sortLikes = $('#sort_likes');
     sortLikes.toggleClass('down');
     if (sortLikes.hasClass('down')) {
         sortLikes.html('Likes ⬇️');
