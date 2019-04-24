@@ -21,7 +21,7 @@ post_list = [['This is a post about fitness', 'Describing something about fitnes
              ['This is a post about diet', 'You should eat healthy to be healthy and fit', 1]]
 
 post_list.each do |title, description, type|
-  (1..3_00).each { |_i| Post.create(user: user1, title: title, description: description, post_type: type) }
+  User.all.each { |user| (1..30).each { |_i| Post.create(user: user, title: title, description: description, post_type: type) } }
 end
 
 post1 = Post.first
