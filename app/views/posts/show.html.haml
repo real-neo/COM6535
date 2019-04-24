@@ -30,6 +30,7 @@
 .row
   .col-sm-1
   .col-sm-8
+    = render 'sort_buttons', for_replies: true
     %br
     = will_paginate @replies
     #replies_array

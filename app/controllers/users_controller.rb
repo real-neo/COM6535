@@ -24,8 +24,12 @@ class UsersController < ApplicationController
 
   def home
     @user = current_user.decorate
-    @posts = PostDecorator.decorate_collection(Post.includes(:user).where(user_id: @user.id).paginate(page: params[:post_page], per_page: 10))
-    @replies = ReplyDecorator.decorate_collection(Reply.includes(:user, :original).where(user_id: @user.id).paginate(page: params[:reply_page], per_page: 10))
+
+    @posts = Post.includes(:user).where(user_id: @user.id).order(created_at: :desc)
+    @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:post_page], per_page: 10))
+
+    @replies = Reply.includes(:user, :original).where(user_id: @user.id).order(created_at: :desc)
+    @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:reply_page], per_page: 10))
   end
 
   def ban_user

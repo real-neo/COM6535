@@ -26,24 +26,7 @@
 .row
   .col-sm-1
   .col-sm-8
-    %br
-    Sort by
-    &nbsp;
-    - if @sort == 'Time⬆️'
-      = link_to 'Time ⬆️', request.params.merge(sort: 'Time⬇️'), class: 'btn btn-default'
-    - else
-      = link_to 'Time ⬇️', request.params.merge(sort: 'Time⬆️'), class: 'btn btn-default'
-    &nbsp;
-    - if @sort == 'Comments⬆️'
-      = link_to 'Comments ⬆️️', request.params.merge(sort: 'Comments⬇️'), class: 'btn btn-default'
-    - else
-      = link_to 'Comments ⬇️', request.params.merge(sort: 'Comments⬆️'), class: 'btn btn-default'
-    &nbsp;
-    - if @sort == 'Likes⬆️'
-      = link_to 'Likes ⬆️️', request.params.merge(sort: 'Likes⬇️'), class: 'btn btn-default'
-    - else
-      = link_to 'Likes ⬇️', request.params.merge(sort: 'Likes⬆️'), class: 'btn btn-default'
-    %br
+    = render 'sort_buttons'
     %br
     = will_paginate @posts
     #posts_array

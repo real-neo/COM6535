@@ -1,0 +1,19 @@
+%br
+Sort by
+&nbsp;
+- if @sort == 'Time⬆️'
+  = link_to 'Time ⬆️', request.params.merge(sort: 'Time', order: '⬇️'), class: 'btn btn-default'
+- else
+  = link_to 'Time ⬇️', request.params.merge(sort: 'Time', order: '⬆️'), class: 'btn btn-default'
+- unless defined?(for_replies) && for_replies
+  &nbsp;
+  - if @sort == 'Comments⬆️'
+    = link_to 'Comments ⬆️️', request.params.merge(sort: 'Comments', order: '⬇️'), class: 'btn btn-default'
+  - else
+    = link_to 'Comments ⬇️', request.params.merge(sort: 'Comments', order: '⬆️'), class: 'btn btn-default'
+  &nbsp;
+  - if @sort == 'Likes⬆️'
+    = link_to 'Likes ⬆️️', request.params.merge(sort: 'Likes', order: '⬇️'), class: 'btn btn-default'
+  - else
+    = link_to 'Likes ⬇️', request.params.merge(sort: 'Likes', order: '⬆️'), class: 'btn btn-default'
+%br
