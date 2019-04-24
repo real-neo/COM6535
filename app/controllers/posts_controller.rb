@@ -9,10 +9,32 @@ class PostsController < ApplicationController
     # check the forum that the user picked and assign
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
     session[:forum_type] = 'Exercise' if session[:forum_type].nil?
+    @sort = ''
+    @posts = if params[:sort] == 'Time⬇️'
+               @sort = 'Time⬇️'
+               Post.includes(:user).order(created_at: :desc)
+             elsif params[:sort] == 'Time⬆️'
+               @sort = 'Time⬆️'
+               Post.includes(:user).order(created_at: :asc)
+             elsif params[:sort] == 'Comments⬇️'
+               @sort = 'Comments⬇️'
+               Post.includes(:user).left_outer_joins(:replies).select('posts.*, COUNT(replies.id) as replies_count').group('posts.id').order('replies_count desc')
+             elsif params[:sort] == 'Comments⬆️'
+               @sort = 'Comments⬆️'
+               Post.includes(:user).left_outer_joins(:replies).select('posts.*, COUNT(replies.id) as replies_count').group('posts.id').order('replies_count asc')
+             elsif params[:sort] == 'Likes⬇️'
+               @sort = 'Likes⬇️'
+               Post.includes(:user).left_outer_joins(:likes).select('posts.*, COUNT(likes.id) as likes_count').where(likes: { like: true }).group('posts.id').order('likes_count desc')
+             elsif params[:sort] == 'Likes⬆️'
+               @sort = 'Likes⬆️'
+               Post.includes(:user).left_outer_joins(:likes).select('posts.*, COUNT(likes.id) as likes_count').where(likes: { like: true }).group('posts.id').order('likes_count asc')
+             else
+               Post.includes(:user).order(created_at: :desc)
+             end
     if session[:forum_type] == 'Exercise'
-      @posts = PostDecorator.decorate_collection(Post.includes(:user).where(post_type: 'Exercise').paginate(page: params[:page]).order(created_at: :desc))
+      @posts = PostDecorator.decorate_collection(@posts.where(post_type: 'Exercise').paginate(page: params[:page]))
     elsif session[:forum_type] == 'Diet'
-      @posts = PostDecorator.decorate_collection(Post.includes(:user).where(post_type: 'Diet').paginate(page: params[:page]).order(created_at: :desc))
+      @posts = PostDecorator.decorate_collection(@posts.where(post_type: 'Diet').paginate(page: params[:page]))
     end
   end
 

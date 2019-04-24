@@ -77,9 +77,3 @@ class PostDecorator < Draper::Decorator
     like_amount.to_s + ' ' + (like_amount == 1 ? 'Like' : 'Likes') + ' ' + dislike_amount.to_s + ' ' + (dislike_amount == 1 ? 'Dislike' : 'Dislikes')
   end
 end
-#
-# -if user_signed_in?
-#    = link_to 'Reply', show_reply_modal_reply_path(@post.id, is_post: 1), remote: true, class: 'btn btn-danger btn-lg btn-block fill_container'
-#    -else
-#       %a#show-login-message.btn.btn-danger.btn-lg.btn-block.fill_container{href: "#"}
-#       Reply
