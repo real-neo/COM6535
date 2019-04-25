@@ -24,6 +24,7 @@ describe 'edit user information' do
       fill_in 'Details', with: 'My new details'
       click_button 'Update details'
       expect(page).to have_content 'Update successfully!'
+      # expect(Devise.mailer.deliveries.count).to eq 1
     end
 
     it 'user can change his password' do
@@ -32,6 +33,9 @@ describe 'edit user information' do
       fill_in 'Confirm new password', with: 'JustNewPassword'
       click_button 'Update password'
       expect(page).to have_content 'Update successfully!'
+      # expect(Devise.mailer.deliveries.count).to eq 1
+      # Devise.mailer.deliveries.first.subject.should == 'Confirmation instructions'
+      # Devise.mailer.deliveries.first.from.should == ['team12Genesys@gmail.com']
     end
 
     it 'user can not change his password with two different new password' do

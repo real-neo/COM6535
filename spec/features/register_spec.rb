@@ -14,13 +14,19 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "A message with a confirmation link has been sent to your email address. Please follow the link to activate your account."
+      expect(page).to have_content 'A message with a confirmation link has been sent to your email address. Please follow the link to activate your account.'
+      expect(Devise.mailer.deliveries.count).to eq 1
+      Devise.mailer.deliveries.first.subject.should == 'Confirmation instructions'
+      Devise.mailer.deliveries.first.from.should == ['team12Genesys@gmail.com']
+
     end
+
+
 
     it 'A user cannot register a new account without filling in the information' do
       visit '/users/sign_up'
       click_button 'Join Now!'
-      expect(page).to have_content "Please review the problems below:"
+      expect(page).to have_content 'Please review the problems below:'
     end
 
     it 'they cannot register an new account with less than 2 character for firstname' do
@@ -34,7 +40,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too short (minimum is 2 characters)"
+      expect(page).to have_content 'is too short (minimum is 2 characters)'
     end
 
     it 'they cannot register an new account with less than 2 character for lastname' do
@@ -48,7 +54,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too short (minimum is 2 characters)"
+      expect(page).to have_content 'is too short (minimum is 2 characters)'
     end
 
     it 'they cannot register an new account with less than 2 character for country' do
@@ -62,7 +68,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too short (minimum is 2 characters)"
+      expect(page).to have_content 'is too short (minimum is 2 characters)'
     end
 
     it 'they cannot register an new account with less than 2 character for city' do
@@ -76,7 +82,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too short (minimum is 2 characters)"
+      expect(page).to have_content 'is too short (minimum is 2 characters)'
     end
 
     it 'they cannot register an new account with less than 2 character for username' do
@@ -90,7 +96,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too short (minimum is 2 characters)"
+      expect(page).to have_content 'is too short (minimum is 2 characters)'
     end
 
     it 'they cannot register an new account with more than 25 character for firstname' do
@@ -104,7 +110,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too long (maximum is 25 characters)"
+      expect(page).to have_content 'is too long (maximum is 25 characters)'
     end
 
     it 'they cannot register an new account with more than 25 character for lastname' do
@@ -118,7 +124,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too long (maximum is 25 characters)"
+      expect(page).to have_content 'is too long (maximum is 25 characters)'
     end
 
     it 'they cannot register an new account with more than 55 character for country' do
@@ -132,7 +138,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too long (maximum is 55 characters)"
+      expect(page).to have_content 'is too long (maximum is 55 characters)'
     end
 
     it 'they cannot register an new account with more than 25 character for city' do
@@ -146,7 +152,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too long (maximum is 25 characters)"
+      expect(page).to have_content 'is too long (maximum is 25 characters)'
     end
 
     it 'they cannot register an new account with more than 25 character for username' do
@@ -160,7 +166,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "is too long (maximum is 25 characters)"
+      expect(page).to have_content 'is too long (maximum is 25 characters)'
     end
   end
 
@@ -177,7 +183,7 @@ describe 'registration', js: true do
       fill_in('Password', with: 'qweqweqwe')
       fill_in('Password confirmation', with: 'qweqweqwe')
       click_button 'Join Now!'
-      expect(page).to have_content "has already been taken"
+      expect(page).to have_content 'has already been taken'
     end
   end
 
