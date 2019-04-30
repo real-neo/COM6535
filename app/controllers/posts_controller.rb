@@ -19,6 +19,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    @post = Post.find(params[:id]).decorate
     @replies, @sort = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
   end
