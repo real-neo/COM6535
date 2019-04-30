@@ -28,6 +28,10 @@ class UsersController < ApplicationController
     @posts = Post.includes(:user).where(user_id: @user.id).order(created_at: :desc)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:post_page], per_page: 10))
 
+    @replies_to_me = Reply.includes(:user, :original, :post).where(posts: { user_id: @user.id })
+                          .or(Reply.includes(:user, :original, :post).where(originals_replies: { user_id: @user.id })).order(created_at: :desc)
+    @replies_to_me = ReplyDecorator.decorate_collection(@replies_to_me.paginate(page: params[:reply_to_me_page], per_page: 10))
+
     @replies = Reply.includes(:user, :original).where(user_id: @user.id).order(created_at: :desc)
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:reply_page], per_page: 10))
   end

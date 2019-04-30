@@ -3,6 +3,12 @@
     %h4.no-margin
       = reply.user.decorate.display_avatar(40,40)
       = reply.username
+      - if defined?(replies_to_me)
+        replied you at :
+        = link_to reply.post.title, post_path(reply.post), style: 'color: inherit;'
+      - elsif defined?(your_replies)
+        at :
+        = link_to reply.post.title, post_path(reply.post), style: 'color: inherit;'
       .time-since-posted
         = reply.time_since_posted
   .panel-body
