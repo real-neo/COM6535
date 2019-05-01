@@ -12,13 +12,13 @@
         = post.display_like
         %br
         = post.display_dislike
-      .col-sm-10
+      .col-sm-11
         .row
           .col-sm-9
             %p
               = post.description
           .col-sm-3
-            %h6.text-lightgrey#likes_block
+            %h6.text-lightgrey.text-right#likes_block
               = post.display_like_count
             %a{href: post_path(post)}
               %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
