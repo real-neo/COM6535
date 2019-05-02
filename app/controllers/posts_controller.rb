@@ -42,11 +42,10 @@ class PostsController < ApplicationController
     @to_date = Date.current
     if !keyword.nil? && (!keyword.eql? '')
       @posts = Post.includes(:user).where("title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", keyword, keyword)
+      @posts, @sort = sorting_posts(@posts)
     else
       @posts = []
     end
-
-    @posts, @sort = sorting_posts(@posts)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:page]))
   end
 
@@ -82,13 +81,11 @@ class PostsController < ApplicationController
         @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, '1')
         @diet_is_checked = true
       end
+      @posts, @sort = sorting_posts(@posts)
     else
-      @posts = nil
+      @posts = []
     end
-
-    @posts, @sort = sorting_posts(@posts)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:page]))
-
     render 'posts/search'
   end
 
