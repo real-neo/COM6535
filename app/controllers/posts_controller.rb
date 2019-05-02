@@ -43,7 +43,7 @@ class PostsController < ApplicationController
     if !keyword.nil? && (!keyword.eql? '')
       @posts = Post.includes(:user).where("title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", keyword, keyword)
     else
-      @posts = nil
+      @posts = []
     end
 
     @posts, @sort = sorting_posts(@posts)
