@@ -25,8 +25,14 @@ class PostsController < ApplicationController
   end
 
   def create
-    @post = Post.create!(allowed_params).decorate
-    respond_to(&:js)
+    @post = Post.create(allowed_params).decorate
+    if @post.valid?
+      respond_to(&:js)
+    else
+      respond_to do |f|
+        f.js { render 'create_fail.js.erb' }
+      end
+    end
   end
 
   def destroy
