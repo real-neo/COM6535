@@ -21,7 +21,7 @@
             %h6.text-lightgrey.text-right#likes_block
               = post.display_like_count
             %a{href: post_path(post)}
-              %button.btn.float-right{class: "#{post.post_type == 'Exercise' ? 'btn-danger' : 'btn-success'}"}
+              %button.btn.float-right{ class: btn_class(post.post_type) }
                 #{ post.replies.count } comments
           .col-sm-12
             = link_to 'View', post_path(post), class: 'fa fa-eye'

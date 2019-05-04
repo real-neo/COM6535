@@ -2,6 +2,7 @@
 
 # Decorator for post class
 class PostDecorator < Draper::Decorator
+  include PostsHelper
   delegate_all
 
   # Define presentation-specific methods here. Helpers are accessed through
@@ -33,10 +34,10 @@ class PostDecorator < Draper::Decorator
 
   def display_reply_button
     if h.user_signed_in? && !h.current_user.blocked?
-      h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: 'btn btn-danger btn-lg btn-block fa fa-comment'
+      h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
     elsif h.user_signed_in? && h.current_user.blocked?
-      h.link_to 'Reply', 'javascript: showBlockedMessage()', class: 'btn btn-danger btn-lg btn-block fa fa-comment'
-     else
+      h.link_to 'Reply', 'javascript: showBlockedMessage()', class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
+    else
       h.link_to 'Reply', 'javascript: showLoginMessage()', class: 'fa fa-comment'
     end
   end
