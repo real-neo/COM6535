@@ -12,7 +12,7 @@
         = simple_form_for(@post, remote: true, method: :post) do |f|
           .form-group
             = f.label 'Forum'
-            = f.select :post_type, Post.post_types.keys, selected: session[:forum_type], required: true
+            = f.select :post_type, Post.post_types.keys, selected: forum_type, required: true
             = f.input :title, label: 'Title', required: true
             = f.input :description, label: 'Description', required: true, as: :text
           .form-inputs
