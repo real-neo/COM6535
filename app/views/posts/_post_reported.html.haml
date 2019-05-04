@@ -12,7 +12,7 @@
         %p
           = post.description
       .col-sm-3
-        %h6.text-lightgrey#likes_block
+        %h6.text-lightgrey.text-right#likes_block
           = post.decorate.display_like_count
         %a{href: post_path(post)}
           %button.btn.float-right{ class: btn_class(post.post_type) }
