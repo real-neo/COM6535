@@ -1,5 +1,5 @@
 - if forum_type == 'Exercise'
-  .row
+  .row.hidden-xs
     .col-sm-2
     .col-sm-2.thumbnail
       = image_tag '/images/exercise/img2.jpg'
@@ -10,8 +10,8 @@
     .col-sm-2.thumbnail
       = image_tag '/images/exercise/img6.jpg'
     .col-sm-2
-- else
-  .row
+- elsif forum_type == 'Diet'
+  .row.hidden-xs
     .col-sm-2
     .col-sm-2.thumbnail
       = image_tag '/images/diet/diet1.jpg'
