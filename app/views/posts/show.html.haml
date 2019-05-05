@@ -11,7 +11,7 @@
           = @post.user.decorate.display_avatar(70,70)
           = @post.title
       .panel-body
-        = @post.description
+        = simple_format @post.description
       .panel-footer
         %h6.text-lightgrey
           = @post.time_posted

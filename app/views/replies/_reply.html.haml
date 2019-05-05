@@ -14,7 +14,7 @@
   .panel-body
     - if !reply.original.nil?
       = render 'replies/original_reply', reply: reply.original
-    = reply.comment
+    = simple_format reply.comment
   - if user_signed_in?
     .panel-footer
       = reply.display_reply_button

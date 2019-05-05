@@ -10,7 +10,7 @@
     .row
       .col-sm-9
         %p
-          = post.description
+          = simple_format post.description
       .col-sm-3
         %h6.text-lightgrey.text-right#likes_block
           = post.decorate.display_like_count
