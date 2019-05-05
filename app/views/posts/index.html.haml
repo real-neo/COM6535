@@ -13,15 +13,25 @@
   .col-sm-3
     - if user_signed_in?
       %a.btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]), 'data-target': '#basicModal', 'data-toggle': 'modal', href: '#' }
-        Create Post
+        - if session[:forum_type] == 'App'
+          Request an App
+        - else
+          Create Post
     - else
       %a.btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]), href: 'javascript: showLoginMessage()' }
-        Create Post
-  .col-sm-3
-    .btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]) }
-      Create Poll
+        - if session[:forum_type] == 'App'
+          Request an App
+        - else
+          Create Post
+  - if session[:forum_type] != 'App'
+    .col-sm-3
+      .btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]) }
+        Create Poll
 
-= render 'post_modal_form', forum_type: session[:forum_type]
+- if session[:forum_type] == 'App'
+  = render 'app_request_modal'
+- else
+  = render 'post_modal_form', forum_type: session[:forum_type]
 
 .row
   .col-sm-1

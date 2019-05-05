@@ -27,7 +27,14 @@ class PostsController < ApplicationController
   def create
     @post = Post.create(allowed_params).decorate
     if @post.valid?
-      respond_to(&:js)
+      if @post.post_type == 'App' && !current_user.admin?
+        @post.destroy
+        respond_to do |f|
+          f.js { render 'create_fail.js.erb' }
+        end
+      else
+        respond_to(&:js)
+      end
     else
       respond_to do |f|
         f.js { render 'create_fail.js.erb' }

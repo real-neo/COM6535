@@ -4,16 +4,13 @@
       .modal-header
         %h4.modal-title
           = fa_icon 'pencil'
-          Create a Post
+          Request an App
           %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }
             = fa_icon 'times'
 
       .modal-body
-        = simple_form_for(@post, remote: true, method: :post) do |f|
+        = simple_form_for(AppRequest.new, remote: true, method: :post) do |f|
           .form-group
-            = f.label 'Forum'
-            = f.select :post_type, Post.post_types.keys - ['App'], selected: forum_type, required: true
-            = f.input :title, label: 'Title', required: true
-            = f.input :description, label: 'Description', required: true, as: :text
+            = f.input :url, label: 'Google Play URL', required: true
           .form-inputs
             = f.button :submit, 'Submit', class: 'btn-primary center-block'

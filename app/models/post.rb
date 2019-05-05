@@ -26,7 +26,7 @@ class Post < ApplicationRecord
 
   has_many :likes, dependent: :destroy
 
-  enum post_type: %i[Exercise Diet]
+  enum post_type: %i[Exercise Diet App]
 
   before_destroy :destroy_replies
 

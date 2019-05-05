@@ -1,0 +1,20 @@
+- content_for :title, 'App Requests'
+
+= render 'post_modal'
+
+.row
+  .col-sm-2
+  .col-sm-8
+    %h3 App Requests
+    %br
+    = will_paginate @app_requests, param_name: 'open_page'
+    = render @app_requests
+    = will_paginate @app_requests, param_name: 'open_page'
+
+    %hr
+
+    %h3 Closed Requests
+    %br
+    = will_paginate @closed_app_requests, param_name: 'close_page'
+    = render @closed_app_requests
+    = will_paginate @closed_app_requests, param_name: 'close_page'

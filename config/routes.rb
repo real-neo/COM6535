@@ -37,6 +37,16 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :app_requests do
+    member do
+      post :done
+      post :new_app_post
+    end
+
+    collection do
+    end
+  end
+
   root to: 'pages#home'
 
   match '/403', to: 'errors#error_403', via: :all

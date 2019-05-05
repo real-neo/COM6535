@@ -35,6 +35,7 @@
         = link_to 'FITNESS GUIDE', root_path, class: 'navbar-brand'
         = link_to 'Exercise', posts_path(forum_type: 'Exercise'), class: 'navbar-brand'
         = link_to 'Diet', posts_path(forum_type: 'Diet'), class: 'navbar-brand'
+        = link_to 'App', posts_path(forum_type: 'App'), class: 'navbar-brand'
         = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'float-right menu-btn'
         .input-group.float-right
           = form_tag search_posts_path, method: :get, class: 'navbar-form search-form' do
@@ -58,9 +59,10 @@
           %hr
           = link_to 'Exercise Forum', posts_path(forum_type: 'Exercise')
           = link_to 'Diet Forum', posts_path(forum_type: 'Diet')
+          = link_to 'Find an App', posts_path(forum_type: 'App')
           -if user_signed_in? && current_user.admin?
+            = link_to 'App Requests', app_requests_path
             = link_to 'Reports', reports_path
-          %a{ href: '#'} Find an App
           -#%a{ href: '#'} Find a Buddy
 
       #modal_placeholder
