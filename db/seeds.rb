@@ -8,7 +8,10 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user_list = [['Alexis', 'Ioannou', 'Cyprus', 'Limassol', 'ioannou.alexis95@gmail.com', 'acp18ai', 'qweqweqwe', true]]
+user_list = [
+    ['Bowen', 'Yu', 'UK', 'Sheffield', 'questionyugood@gmail.com', 'Neo', '12345678', true],
+    ['Alexis', 'Ioannou', 'Cyprus', 'Limassol', 'ioannou.alexis95@gmail.com', 'acp18ai', 'qweqweqwe', true]
+]
 
 user_list.each do |firstname, lastname, country, city, email, username, password, admin|
   User.create(firstname: firstname, lastname: lastname, location: country, city: city, email: email, username: username, password: password, admin: admin, confirmed_at: Time.now)
