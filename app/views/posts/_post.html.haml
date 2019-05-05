@@ -8,21 +8,23 @@
         = post.time_since_posted
   .panel-body
     .row
-      .col-sm-1
-        = post.display_like
-        %br
-        = post.display_dislike
-      .col-sm-11
+      - if post.post_type != 'App'
+        .col-sm-1
+          = post.display_like
+          %br
+          = post.display_dislike
+      %div{ class: post.post_type == 'App' ? 'col-sm-12' : 'col-sm-11' }
         .row
-          .col-sm-9
+          %div{ class: post.post_type == 'App' ? 'col-sm-12' : 'col-sm-9' }
             %p
               = simple_format post.description
-          .col-sm-3
-            %h6.text-lightgrey.text-right#likes_block
-              = post.display_like_count
-            %a{href: post_path(post)}
-              %button.btn.float-right{ class: btn_class(post.post_type) }
-                #{ post.replies.count } comments
+          - if post.post_type != 'App'
+            .col-sm-3
+              %h6.text-lightgrey.text-right#likes_block
+                = post.display_like_count
+              %a{href: post_path(post)}
+                %button.btn.float-right{ class: btn_class(post.post_type) }
+                  #{ post.replies.count } comments
           .col-sm-12
             = link_to 'View', post_path(post), class: 'fa fa-eye'
             &nbsp;&nbsp;&nbsp;
