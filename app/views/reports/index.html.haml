@@ -1,6 +1,9 @@
+- content_for :title, 'Reports'
+
 .row
   .col-sm-2
   .col-sm-8
+    %h3 Reports
     %br
     #reports_array
       - if @reports.blank?
@@ -8,12 +11,10 @@
       - else
         = render @reports
 
-%hr
+    %hr
 
-.row
-  .col-sm-2
-  .col-sm-8
-    %h1 Blocked Users
+    %h3 Blocked Users
+    %br
     #reported_users_array
       - if @reports.blank?
         = no_record_tr(5)
