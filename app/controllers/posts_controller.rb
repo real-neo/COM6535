@@ -32,6 +32,8 @@ class PostsController < ApplicationController
         respond_to do |f|
           f.js { render 'create_fail.js.erb' }
         end
+      elsif @post.post_type == 'App'
+        redirect_to @post, notice: 'Your post has been submitted!'
       else
         respond_to(&:js)
       end
@@ -139,6 +141,6 @@ class PostsController < ApplicationController
   end
 
   def allowed_params
-    params.require(:post).permit(:post_type, :title, :description).merge(user_id: current_user.id)
+    params.require(:post).permit(:post_type, :title, :description, :app_icon).merge(user_id: current_user.id)
   end
 end

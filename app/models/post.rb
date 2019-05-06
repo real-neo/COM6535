@@ -26,11 +26,15 @@ class Post < ApplicationRecord
 
   has_many :likes, dependent: :destroy
 
+  has_one_attached :app_icon
+
   enum post_type: %i[Exercise Diet App]
 
   before_destroy :destroy_replies
 
   validates :title, :description, :post_type, presence: true
+
+  validate :check_app_post_icon
 
   def time_posted
     created_at.strftime('Posted at %H:%M %F')
@@ -45,5 +49,9 @@ class Post < ApplicationRecord
   def destroy_replies
     replies.destroy_all
     reports.destroy_all
+  end
+
+  def check_app_post_icon
+    errors.add(:post, 'have icon only for app type.') if (post_type == 'App') != (app_icon.attached?)
   end
 end

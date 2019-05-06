@@ -18,6 +18,14 @@ class PostDecorator < Draper::Decorator
     PaginatingDecorator
   end
 
+  def app_icon_link
+    if model.app_icon.attached?
+      model.app_icon
+    else
+      '/images/default-app-icon.png'
+    end
+  end
+
   def display_delete_link
     if h.user_signed_in? && (model.user_id == h.current_user.id || h.current_user.admin?)
       h.link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'

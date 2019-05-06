@@ -1,8 +1,11 @@
 .panel.panel-default{id: "post_#{post.id}"}
   .panel-heading
     %h4.no-margin
-      = post.user.decorate.display_avatar(40,40)
-      = post.user.username + ':  '
+      - if post.post_type == 'App'
+        = image_tag post.app_icon_link, height: 40, width: 40, class: 'img-circle'
+      - else
+        = post.user.decorate.display_avatar(40,40)
+        = post.user.username + ':  '
       = link_to post.title, post_path(post), style: 'color: inherit;'
       .time-since-posted
         = post.time_since_posted

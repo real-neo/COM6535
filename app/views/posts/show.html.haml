@@ -8,7 +8,10 @@
     .panel.panel-default
       .panel-heading
         %h2.no-margin
-          = @post.user.decorate.display_avatar(70,70)
+          - if @post.post_type == 'App'
+            = image_tag @post.app_icon_link, height: 70, width: 70, class: 'img-circle'
+          - else
+            = @post.user.decorate.display_avatar(70,70)
           = @post.title
       .panel-body
         = simple_format @post.description
