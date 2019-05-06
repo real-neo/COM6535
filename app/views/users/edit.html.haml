@@ -41,7 +41,7 @@
         = simple_form_for @user do |f|
           .form-inputs
             = @user.display_avatar(100,100)
-            = f.file_field :avatar
+            = f.input :avatar, label: 'New profile image', as: :file
           .form-inputs
             = f.button :submit, 'Update image'
       .tab-pane#email
