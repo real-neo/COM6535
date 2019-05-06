@@ -16,5 +16,5 @@
     %h3 Closed Requests
     %br
     = will_paginate @closed_app_requests, param_name: 'close_page'
-    = render @closed_app_requests
+    = render @closed_app_requests, closed: true
     = will_paginate @closed_app_requests, param_name: 'close_page'

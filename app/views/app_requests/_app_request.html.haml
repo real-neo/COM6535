@@ -11,8 +11,9 @@
         = link_to app_request.url, app_request.url, target: '_blank'
       .col-sm-12
         %br
-        = link_to 'New App', '#', 'data-target': '#basicModal', 'data-toggle': 'modal', class: 'fa fa-pencil'
-        &nbsp;&nbsp;&nbsp;
-        = link_to 'Mark as done', done_app_request_path(app_request), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-check'
-        &nbsp;&nbsp;&nbsp;
+        - unless defined?(closed)
+          = link_to 'New App', '#', 'data-target': '#basicModal', 'data-toggle': 'modal', class: 'fa fa-pencil'
+          &nbsp;&nbsp;&nbsp;
+          = link_to 'Mark as done', done_app_request_path(app_request), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-check'
+          &nbsp;&nbsp;&nbsp;
         = link_to 'Delete', app_request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
