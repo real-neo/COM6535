@@ -23,6 +23,7 @@ class Post < ApplicationRecord
   belongs_to :user
   has_many :replies
   has_many :reports
+  has_many :ratings
 
   has_many :likes, dependent: :destroy
 
@@ -49,6 +50,7 @@ class Post < ApplicationRecord
   def destroy_replies
     replies.destroy_all
     reports.destroy_all
+    ratings.destroy_all
   end
 
   def check_app_post_icon

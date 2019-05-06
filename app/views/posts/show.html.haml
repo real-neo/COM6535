@@ -15,6 +15,12 @@
           = @post.title
       .panel-body
         = simple_format @post.description
+        - if @post.post_type == 'App'
+          %br
+          %div{ style: 'text-align: center;' }
+            %h4
+              Rate this app
+            = raw @post.display_rating
       .panel-footer
         %h6.text-lightgrey
           = @post.time_posted

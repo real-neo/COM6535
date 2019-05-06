@@ -152,3 +152,11 @@
     margin-top: 0 !important;
     margin-bottom: 10px !important;
 }
+
+.rating-star:hover {
+    color: orange;
+}
+
+.checked-star {
+    color: orange;
+}

@@ -1,0 +1,32 @@
+<%- if @rating.valid? %>
+  <% if @rating.star >= 1 %>
+    $('#star-1').find('.rating-star').addClass('checked-star');
+  <%- end %>
+  <% if @rating.star >= 2 %>
+    $('#star-2').find('.rating-star').addClass('checked-star');
+  <%- end %>
+  <% if @rating.star >= 3 %>
+    $('#star-3').find('.rating-star').addClass('checked-star');
+  <%- end %>
+  <% if @rating.star >= 4 %>
+    $('#star-4').find('.rating-star').addClass('checked-star');
+  <%- end %>
+  <% if @rating.star >= 5 %>
+    $('#star-5').find('.rating-star').addClass('checked-star');
+  <% end %>
+  <% if @rating.star < 5 %>
+    $('#star-5').find('.rating-star').removeClass('checked-star');
+  <%- end %>
+  <% if @rating.star < 4 %>
+    $('#star-4').find('.rating-star').removeClass('checked-star');
+  <%- end %>
+  <% if @rating.star < 3 %>
+    $('#star-3').find('.rating-star').removeClass('checked-star');
+  <%- end %>
+  <% if @rating.star < 2 %>
+    $('#star-2').find('.rating-star').removeClass('checked-star');
+  <%- end %>
+  $.flashAlert('Your rating has been submitted!', 'notice')
+<%- else %>
+  $.flashAlert('Illegal rating!', 'alert')
+<%- end %>

@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 # Decorator for post class
 class PostDecorator < Draper::Decorator
@@ -82,5 +82,44 @@ class PostDecorator < Draper::Decorator
     like_amount = model.likes.where(like: true).count
     dislike_amount = model.likes.where(like: false).count
     like_amount.to_s + ' ' + (like_amount == 1 ? 'Like' : 'Likes') + ' ' + dislike_amount.to_s + ' ' + (dislike_amount == 1 ? 'Dislike' : 'Dislikes')
+  end
+
+  def calc_ratings
+    ratings = model.ratings
+    if ratings.exists?
+      'Ratings: ' + (ratings.inject(0.0) { |sum, rating| sum + rating.star } / ratings.size).to_s
+    end
+  end
+
+  def display_rating
+    content = ''
+    star_no = 0
+    if h.user_signed_in?
+      ratings = Rating.where(user_id: h.current_user.id, post_id: model.id)
+      if ratings.exists?
+        rating = ratings.first
+        rating.star.times do
+          star_no += 1
+          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star checked-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}")
+        end
+        (5 - rating.star).times do
+          star_no += 1
+          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}")
+        end
+        content
+      else
+        5.times do
+          star_no += 1
+          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}")
+        end
+        content
+      end
+    else
+      5.times do
+        star_no += 1
+        content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), 'javascript: showLoginMessage()', style: 'color: inherit;', id: "star-#{star_no}")
+      end
+      content
+    end
   end
 end
