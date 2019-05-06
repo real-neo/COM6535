@@ -10,7 +10,8 @@ class PostsController < ApplicationController
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
     session[:forum_type] = 'Exercise' if session[:forum_type].nil?
 
-    @posts, @sort = sorting_posts(Post.includes(:user).where(post_type: session[:forum_type]))
+    posts = (session[:forum_type] == 'App' ? Post.includes(:ratings, :app_icon_attachment) : Post.includes(user: :avatar_attachment)).where(post_type: session[:forum_type])
+    @posts, @sort = sorting_posts(posts)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:page]))
   end
 
