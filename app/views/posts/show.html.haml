@@ -34,7 +34,7 @@
       = @post.display_reply_button
     - else
       %a.btn.btn-lg.btn-block{ href: 'javascript: showLoginMessage()', class: "fa fa-comment #{btn_class(@post.post_type)}" }
-        Reply
+        = @post.post_type == 'App' ? 'Review' : 'Reply'
 
 .row
   .col-sm-1

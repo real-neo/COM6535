@@ -34,6 +34,6 @@
           .col-sm-12
             = link_to 'View', post_path(post), class: 'fa fa-eye'
             &nbsp;&nbsp;&nbsp;
-            = link_to 'Reply', post_path(post), class: 'fa fa-comment'
+            = link_to post.post_type == 'App' ? 'Review' : 'Reply', post_path(post), class: 'fa fa-comment'
             &nbsp;&nbsp;&nbsp;
             = post.display_report_button

@@ -42,9 +42,9 @@ class PostDecorator < Draper::Decorator
 
   def display_reply_button
     if h.user_signed_in? && !h.current_user.blocked?
-      h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
+      h.link_to model.post_type == 'App' ? 'Review' : 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
     elsif h.user_signed_in? && h.current_user.blocked?
-      h.link_to 'Reply', 'javascript: showBlockedMessage()', class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
+      h.link_to model.post_type == 'App' ? 'Review' : 'Reply', 'javascript: showBlockedMessage()', class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
     end
   end
 
@@ -86,9 +86,7 @@ class PostDecorator < Draper::Decorator
 
   def calc_ratings
     ratings = model.ratings
-    if ratings.exists?
-      'Ratings: ' + (ratings.inject(0.0) { |sum, rating| sum + rating.star } / ratings.size).to_s
-    end
+    'Ratings: ' + (ratings.inject(0.0) { |sum, rating| sum + rating.star } / ratings.size).to_s if ratings.exists?
   end
 
   def display_rating

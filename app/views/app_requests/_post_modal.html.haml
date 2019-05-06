@@ -11,9 +11,8 @@
       .modal-body
         = simple_form_for(Post.new, remote: true, method: :post) do |f|
           .form-group
-            = f.label 'Forum'
-            = f.file_field :app_icon
-            = f.select :post_type, ['App'], required: true
+            = f.input :app_icon, label: 'App Icon', as: :file
+            = f.hidden_field :post_type, value: 'App'
             = f.input :title, label: 'Title', required: true
             = f.input :description, label: 'Description', required: true, as: :text
             = hidden_field_tag :authenticity_token, form_authenticity_token
