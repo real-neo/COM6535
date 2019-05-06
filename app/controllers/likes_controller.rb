@@ -22,7 +22,7 @@ class LikesController < ApplicationController
         @like.update(like: @liked)
       end
     else
-      Like.create!(user_id: current_user.id, post_id: post.id, like: @liked)
+      @like = Like.create(user_id: current_user.id, post_id: post.id, like: @liked)
     end
 
     @post_id = post.id
