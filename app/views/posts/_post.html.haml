@@ -21,7 +21,7 @@
           %div{ class: post.post_type == 'App' ? 'col-sm-12' : 'col-sm-9' }
             - if post.post_type == 'App'
               %h4.no-margin
-                = post.calc_ratings
+                = post.show_ratings
             %p
               = simple_format post.description
           - if post.post_type != 'App'

@@ -7,6 +7,7 @@
 #  id          :integer          not null, primary key
 #  description :string
 #  post_type   :integer
+#  rating      :float
 #  title       :string
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null

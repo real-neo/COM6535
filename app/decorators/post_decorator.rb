@@ -84,9 +84,8 @@ class PostDecorator < Draper::Decorator
     like_amount.to_s + ' ' + (like_amount == 1 ? 'Like' : 'Likes') + ' ' + dislike_amount.to_s + ' ' + (dislike_amount == 1 ? 'Dislike' : 'Dislikes')
   end
 
-  def calc_ratings
-    ratings = model.ratings
-    'Ratings: ' + (ratings.inject(0.0) { |sum, rating| sum + rating.star } / ratings.size).to_s if ratings.exists?
+  def show_ratings
+    'Ratings: ' + model.rating.to_s unless model.rating.nil?
   end
 
   def display_rating

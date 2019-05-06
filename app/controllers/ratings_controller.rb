@@ -21,9 +21,15 @@ class RatingsController < ApplicationController
     end
 
     respond_to(&:js)
+
+    update_post_rating(post)
   end
 
   private
+
+  def update_post_rating(post)
+    post.update(rating: post.ratings.inject(0.0) { |sum, rating| sum + rating.star } / post.ratings.size)
+  end
 
   def already_rated?
     @ratings = Rating.where(user_id: current_user.id, post_id: params[:post_id])
