@@ -160,3 +160,11 @@
 .checked-star {
     color: orange;
 }
+
+.temp-checked-star {
+    color: orange;
+}
+
+.temp-unchecked-star {
+    color: inherit;
+}
