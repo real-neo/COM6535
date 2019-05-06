@@ -104,20 +104,18 @@ class PostDecorator < Draper::Decorator
           star_no += 1
           content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
         end
-        content
       else
         5.times do
           star_no += 1
           content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
         end
-        content
       end
     else
       5.times do
         star_no += 1
         content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), 'javascript: showLoginMessage()', style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
       end
-      content
     end
+    content
   end
 end
