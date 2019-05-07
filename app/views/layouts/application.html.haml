@@ -37,6 +37,8 @@
         = link_to 'Diet', posts_path(forum_type: 'Diet'), class: 'navbar-brand hidden-xs'
         = link_to 'App', posts_path(forum_type: 'App'), class: 'navbar-brand hidden-xs'
         = fa_icon 'bars 2x', style: 'cursor: pointer;', onclick: 'toggleNav()', class: 'float-right menu-btn'
+        - if !user_signed_in?
+          = link_to 'Login', new_user_session_path, class: 'float-right navbar-brand hidden-xs'
         .input-group.float-right.hidden-xs
           = form_tag search_posts_path, method: :get, class: 'navbar-form search-form' do
             = text_field_tag :keyword, params[:keyword], placeholder: 'Search', class: 'form-control search-form-control'
