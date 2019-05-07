@@ -1,4 +1,4 @@
-- content_for :title, session[:forum_type] + ' section'
+- content_for :title, session[:forum_type] + ' Section'
 
 = render 'forum_images', forum_type: session[:forum_type]
 
@@ -6,7 +6,7 @@
   .col-sm-1
   .col-sm-10
     %h1
-      = session[:forum_type] + ' section'
+      = session[:forum_type] + ' Section'
 
 .row
   .col-sm-1
