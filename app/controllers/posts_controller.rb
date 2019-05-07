@@ -124,6 +124,9 @@ class PostsController < ApplicationController
            elsif params[:sort] == 'Likes'
              posts = posts.left_outer_joins(:likes).select('posts.*, COUNT(likes.id) as likes_count').where(likes: { like: true }).group('posts.id').order("likes_count #{order}")
              'Likes'
+           elsif params[:sort] == 'Ratings'
+             posts = posts.order("rating #{order}")
+             'Ratings'
            else
              posts = posts.order("created_at #{order}")
              'Time'

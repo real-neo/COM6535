@@ -8,12 +8,19 @@ Sort by
 - unless defined?(for_replies) && for_replies
   &nbsp;
   - if @sort == 'Comments⬆️'
-    = link_to 'Comments ⬆️️', request.params.merge(sort: 'Comments', order: '⬇️'), class: 'btn btn-default'
+    = link_to session[:forum_type] == 'App' ? 'Reviews ⬆️️' : 'Comments ⬆️️', request.params.merge(sort: 'Comments', order: '⬇️'), class: 'btn btn-default'
   - else
-    = link_to 'Comments ⬇️', request.params.merge(sort: 'Comments', order: '⬆️'), class: 'btn btn-default'
-  &nbsp;
-  - if @sort == 'Likes⬆️'
-    = link_to 'Likes ⬆️️', request.params.merge(sort: 'Likes', order: '⬇️'), class: 'btn btn-default'
+    = link_to session[:forum_type] == 'App' ? 'Reviews ⬇️' : 'Comments ⬇️', request.params.merge(sort: 'Comments', order: '⬆️'), class: 'btn btn-default'
+  - if session[:forum_type] == 'App'
+    &nbsp;
+    - if @sort == 'Ratings⬆️'
+      = link_to 'Ratings ⬆️️', request.params.merge(sort: 'Ratings', order: '⬇️'), class: 'btn btn-default'
+    - else
+      = link_to 'Ratings ⬇️', request.params.merge(sort: 'Ratings', order: '⬆️'), class: 'btn btn-default'
   - else
-    = link_to 'Likes ⬇️', request.params.merge(sort: 'Likes', order: '⬆️'), class: 'btn btn-default'
+    &nbsp;
+    - if @sort == 'Likes⬆️'
+      = link_to 'Likes ⬆️️', request.params.merge(sort: 'Likes', order: '⬇️'), class: 'btn btn-default'
+    - else
+      = link_to 'Likes ⬇️', request.params.merge(sort: 'Likes', order: '⬆️'), class: 'btn btn-default'
 %br
