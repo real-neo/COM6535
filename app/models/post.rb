@@ -21,18 +21,17 @@
 # Post class
 class Post < ApplicationRecord
   include ActionView::Helpers::DateHelper
-  belongs_to :user
-  has_many :replies
-  has_many :reports
-  has_many :ratings
 
+  belongs_to :user
+
+  has_many :replies, dependent: :destroy
+  has_many :reports, dependent: :destroy
+  has_many :ratings, dependent: :destroy
   has_many :likes, dependent: :destroy
 
   has_one_attached :app_icon
 
   enum post_type: %i[Exercise Diet App]
-
-  before_destroy :destroy_replies
 
   validates :title, :description, :post_type, presence: true
 
@@ -47,12 +46,6 @@ class Post < ApplicationRecord
   end
 
   private
-
-  def destroy_replies
-    replies.destroy_all
-    reports.destroy_all
-    ratings.destroy_all
-  end
 
   def check_app_post_icon
     errors.add(:post, 'have icon only for app type.') if (post_type == 'App') != (app_icon.attached?)

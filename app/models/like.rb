@@ -28,9 +28,11 @@ class Like < ApplicationRecord
   scope :count_likes, -> { where(like: true).count }
   scope :count_dislikes, -> { where(like: false).count }
 
-  validate :remove_app_likes
+  validate :check_app_likes
 
-  def remove_app_likes
+  private
+
+  def check_app_likes
     errors.add(:post, 'can not be App post.') if post.post_type == 'App'
   end
 end

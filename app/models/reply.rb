@@ -22,12 +22,14 @@
 # Reply class
 class Reply < ApplicationRecord
   include ActionView::Helpers::DateHelper
+
   belongs_to :user
   belongs_to :post
 
   belongs_to :original, class_name: 'Reply', optional: true
 
   before_destroy :delete_originals
+
   def fullname
     user.firstname + ' ' + user.lastname
   end
@@ -41,6 +43,7 @@ class Reply < ApplicationRecord
   end
 
   private
+
   def delete_originals
     Reply.where(original_id: self.id).delete_all
   end

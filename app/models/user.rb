@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -30,16 +32,14 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
+# User class
 class User < ApplicationRecord
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
-
-  before_destroy :destroy_dependencies
 
   validates :firstname, :lastname, :location, :city, :username, presence: true
   validates :firstname, :lastname, :city, :username, length: { minimum: 2, maximum: 25 }
   validates :location, length: { minimum: 2, maximum: 55 }
-
 
   # Include default devise modules. Others available are:
   # :lockable, :timeoutable, :trackable and :omniauthable
@@ -51,10 +51,4 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(admin: true) }
   scope :blocked, -> { where(blocked: true) }
-
-  private
-
-  def destroy_dependencies
-    posts.destroy_all
-  end
 end

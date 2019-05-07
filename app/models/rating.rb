@@ -25,9 +25,11 @@ class Rating < ApplicationRecord
   validates :star, presence: true
   validates :star, numericality: { only_integer: true, greater_than: 0, less_than: 6 }
 
-  validate :remove_non_app_ratings
+  validate :check_non_app_ratings
 
-  def remove_non_app_ratings
+  private
+
+  def check_non_app_ratings
     errors.add(:post, 'can not be non-App post.') if post.post_type != 'App'
   end
 end
