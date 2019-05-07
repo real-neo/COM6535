@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
 
   def index
-    @reports = Report.includes(:user, :post).all
+    @reports = Report.includes(user: :avatar_attachment, post: { user: :avatar_attachment }).all
     @reported_users = User.blocked
   end
 
