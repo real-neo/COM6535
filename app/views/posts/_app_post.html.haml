@@ -1,0 +1,7 @@
+.panel.panel-default
+  .panel-heading
+    %h4.no-margin
+      = link_to app_post.title, post_path(app_post), style: 'color: inherit;'
+  .panel-body
+    %h4.no-margin
+      = app_post.show_ratings

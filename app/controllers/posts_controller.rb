@@ -13,6 +13,11 @@ class PostsController < ApplicationController
     posts = (session[:forum_type] == 'App' ? Post.includes(app_icon_attachment: :blob) : Post.includes(user: :avatar_attachment)).where(post_type: session[:forum_type])
     @posts, @sort = sorting_posts(posts)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:page]))
+
+    if session[:forum_type] == 'App'
+      @top_rated_posts = Post.where(post_type: 'App').order(rating: :desc).limit(5)
+      @top_rated_posts = PostDecorator.decorate_collection(@top_rated_posts)
+    end
   end
 
   def new
