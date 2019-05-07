@@ -28,10 +28,6 @@ class Reply < ApplicationRecord
 
   belongs_to :original, class_name: 'Reply', optional: true
 
-  def fullname
-    user.firstname + ' ' + user.lastname
-  end
-
   def username
     user.username
   end
