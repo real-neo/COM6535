@@ -1,0 +1,13 @@
+.panel.panel-default
+  .panel-heading
+    %h4.no-margin
+      = blocked_user.decorate.display_avatar(40,40)
+      = blocked_user.username
+  .panel-body
+    = 'Full name: ' + blocked_user.fullname
+    %br
+    %br
+    = 'Email: ' + blocked_user.email
+    %br
+    %br
+    = link_to 'Unblock', unblock_user_user_path(blocked_user), method: :post

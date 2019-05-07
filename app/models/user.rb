@@ -52,4 +52,8 @@ class User < ApplicationRecord
 
   scope :admin, -> { where(admin: true) }
   scope :blocked, -> { where(blocked: true) }
+
+  def fullname
+    firstname + ' ' + lastname
+  end
 end

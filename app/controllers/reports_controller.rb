@@ -1,8 +1,12 @@
-class ReportsController < ApplicationController
+# frozen_string_literal: true
 
+# Reports controller
+class ReportsController < ApplicationController
   def index
     @reports = Report.includes(user: :avatar_attachment, post: { user: :avatar_attachment }).all
-    @reported_users = User.blocked
+    @reports = @reports.paginate(page: params[:report_page])
+    @blocked_users = User.blocked
+    @blocked_users = @blocked_users.paginate(page: params[:user_page])
   end
 
   def create
@@ -21,5 +25,4 @@ class ReportsController < ApplicationController
   def allowed_params
     params.require(:report).permit(:reason, :post_id).merge(user_id: current_user.id)
   end
-
 end
