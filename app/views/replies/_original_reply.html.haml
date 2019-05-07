@@ -1,9 +1,16 @@
-.panel.panel-default
-  .panel-heading.original-reply
-    %h5.no-margin
-      = reply.user.decorate.display_avatar(35, 35)
-      = reply.username
-      .time-since-posted
-        = reply.time_since_posted
-  .panel-body.original-reply
-    = simple_format reply.comment
+- if reply.nil?
+  .panel.panel-default
+    .panel-heading.original-reply
+      %h5.no-margin
+        = image_tag '/images/default-avatar.png', height: 35, width: 35, class: 'img-circle'
+        Original reply has been delete.
+- else
+  .panel.panel-default
+    .panel-heading.original-reply
+      %h5.no-margin
+        = reply.user.decorate.display_avatar(35, 35)
+        = reply.username
+        .time-since-posted
+          = reply.time_since_posted
+    .panel-body.original-reply
+      = simple_format reply.comment

@@ -12,7 +12,7 @@
       .time-since-posted
         = reply.time_since_posted
   .panel-body
-    - if !reply.original.nil?
+    - if !reply.original_id.nil?
       = render 'replies/original_reply', reply: reply.original
     = simple_format reply.comment
   - if user_signed_in?
