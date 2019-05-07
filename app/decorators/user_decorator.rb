@@ -15,7 +15,7 @@ class UserDecorator < Draper::Decorator
 
   def display_avatar(height, width)
     # height, width = image_size(size)
-    h.image_tag user_image, height: height, width: width, class: 'img-circle'
+    h.link_to((h.image_tag(user_image, height: height, width: width, class: 'img-circle')), h.user_path(model))
   end
 
   private

@@ -1,3 +1,17 @@
 - content_for :title, "#{ @user.firstname }'s Home Page"
 
-%h2 #{ @user.firstname }
+.row
+  .col-sm-1.hidden-xs
+  .col-sm-10.col-xs-12
+    %h2
+      = @user.display_avatar(100,100)
+      #{ @user.firstname }'s Home
+
+.row
+  .col-sm-1
+  .col-sm-10
+    %h3 #{ @user.firstname }'s Posts
+    %br
+    = will_paginate @posts, param_name: 'post_page'
+    = render @posts
+    = will_paginate @posts, param_name: 'post_page'

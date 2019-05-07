@@ -2,10 +2,13 @@
 
 # Control web behavior about users
 class UsersController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: :show
 
   def show
     @user = User.find(params[:id]).decorate
+
+    @posts = Post.includes(:user, :poll_options).where.not(post_type: 'App').where(user_id: @user.id).order(created_at: :desc)
+    @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:post_page], per_page: 10))
   end
 
   def edit
