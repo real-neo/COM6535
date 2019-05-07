@@ -11,29 +11,29 @@
         = post.time_since_posted
   .panel-body
     .row
-      - if post.post_type != 'App'
-        .col-sm-1
-          = post.display_like
-          %br
-          = post.display_dislike
-      %div{ class: post.post_type == 'App' ? 'col-sm-12' : 'col-sm-11' }
+      .col-sm-9.col-xs-12
+        - if post.post_type == 'App'
+          %h4.no-margin
+            = post.show_ratings
+        %p
+          = simple_format truncate(post.description, length: 500)
+      .col-sm-3.col-xs-12{ style: 'text-align: center;margin-bottom: 10px;' }
         .row
-          %div{ class: post.post_type == 'App' ? 'col-sm-12' : 'col-sm-9' }
-            - if post.post_type == 'App'
-              %h4.no-margin
-                = post.show_ratings
-            %p
-              = simple_format truncate(post.description, length: 500)
           - if post.post_type != 'App'
             .col-sm-3
-              %h6.text-lightgrey.text-right#likes_block
+              = post.display_like
+              %br
+              = post.display_dislike
+          %div{ class: post.post_type == 'App' ? 'col-sm-12' : 'col-sm-9' }
+            - if post.post_type != 'App'
+              %h6.text-lightgrey#likes_block
                 = post.display_like_count
-              %a{href: post_path(post)}
-                %button.btn.float-right{ class: btn_class(post.post_type) }
-                  #{ post.replies.count } comments
-          .col-sm-12
-            = link_to 'View', post_path(post), class: 'fa fa-eye'
-            &nbsp;&nbsp;&nbsp;
-            = link_to post.post_type == 'App' ? 'Review' : 'Reply', post_path(post), class: 'fa fa-comment'
-            &nbsp;&nbsp;&nbsp;
-            = post.display_report_button
+            = link_to post_path(post) do
+              %button.btn{ class: btn_class(post.post_type) }
+                = "#{ post.replies.count } " + (post.post_type == 'App' ? 'reviews' : 'comments')
+      .col-sm-12.col-xs-12
+        = link_to 'View', post_path(post), class: 'fa fa-eye'
+        &nbsp;&nbsp;&nbsp;
+        = link_to post.post_type == 'App' ? 'Review' : 'Reply', post_path(post), class: 'fa fa-comment'
+        &nbsp;&nbsp;&nbsp;
+        = post.display_report_button
