@@ -28,6 +28,8 @@ class Post < ApplicationRecord
   has_many :reports, dependent: :destroy
   has_many :ratings, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :poll_options, dependent: :destroy
+  has_many :poll_option_records, through: :poll_options
 
   has_one_attached :app_icon
 

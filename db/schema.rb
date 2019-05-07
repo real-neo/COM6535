@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_06_224810) do
+ActiveRecord::Schema.define(version: 2019_05_07_210512) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +42,11 @@ ActiveRecord::Schema.define(version: 2019_05_06_224810) do
     t.index ["user_id"], name: "index_app_requests_on_user_id"
   end
 
+  create_table "create_polls", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer "priority", default: 0, null: false
     t.integer "attempts", default: 0, null: false
@@ -65,6 +70,25 @@ ActiveRecord::Schema.define(version: 2019_05_06_224810) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "poll_option_records", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "poll_option_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["poll_option_id"], name: "index_poll_option_records_on_poll_option_id"
+    t.index ["post_id"], name: "index_poll_option_records_on_post_id"
+    t.index ["user_id"], name: "index_poll_option_records_on_user_id"
+  end
+
+  create_table "poll_options", force: :cascade do |t|
+    t.string "title"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_poll_options_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|

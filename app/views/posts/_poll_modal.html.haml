@@ -1,0 +1,25 @@
+.modal.fade#poll-modal{ 'aria-hidden': 'true', 'aria-labelledby': 'poll-modal', role: 'dialog', tabindex: '-1' }
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %h4.modal-title
+          = fa_icon 'pencil'
+          Create a Poll
+          %button.close{ 'aria-label': 'Close', 'data-dismiss': 'modal', type: 'button' }
+            = fa_icon 'times'
+
+      .modal-body
+        = simple_form_for(CreatePoll.new, remote: true, method: :post) do |f|
+          .form-group
+            = f.label 'Forum'
+            = f.select :post_type, Post.post_types.keys - ['App'], selected: forum_type, required: true
+            = f.input :title, label: 'Title', required: true
+            = f.input :description, label: 'Description', required: true, as: :text
+            = f.label 'Options'
+            = f.input :option1
+            = f.input :option2
+            = f.input :option3
+            = f.input :option4
+            = f.input :option5
+          .form-inputs
+            = f.button :submit, 'Submit', class: 'btn-primary center-block'

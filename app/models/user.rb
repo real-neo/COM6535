@@ -36,6 +36,7 @@
 class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :poll_option_records, dependent: :destroy
 
   validates :firstname, :lastname, :location, :city, :username, presence: true
   validates :firstname, :lastname, :city, :username, length: { minimum: 2, maximum: 25 }

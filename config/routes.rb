@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   resources :posts do
     resources :likes
     resources :ratings
+    resources :poll_options do
+      resources :poll_option_records
+    end
 
     member do
     end
@@ -26,6 +29,8 @@ Rails.application.routes.draw do
       get :advanced_search
     end
   end
+
+  resources :create_polls
 
   resources :replies do
     member do

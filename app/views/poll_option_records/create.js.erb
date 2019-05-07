@@ -1,0 +1,8 @@
+let post = $('#post_<%= @post_id %>');
+post.find('#poll_btn').html('<%= raw @poll_buttons %>')
+
+<%- if @poll_option_record.nil? %>
+  $.flashAlert('Your vote has been removed!', 'notice')
+<%- else %>
+  $.flashAlert('Your vote has been submitted!', 'notice')
+<%- end %>

@@ -117,4 +117,21 @@ class PostDecorator < Draper::Decorator
     end
     content
   end
+
+  def display_poll
+    content = ''
+    poll_btn_class = %w[success info warning danger primary]
+
+    if model.poll_options.exists?
+      count = -1
+      model.poll_options.each do |option|
+        if h.user_signed_in?
+          content.concat h.link_to(option.title + " - #{option.poll_option_records.count}", h.post_poll_option_poll_option_records_path(model, option), method: :post, remote: true, class: "btn btn-#{poll_btn_class[count += 1]}", style: "width: #{ 1.0 / model.poll_options.count * 100 }%")
+        else
+          content.concat h.link_to(option.title + " - #{option.poll_option_records.count}", 'javascript: showLoginMessage()', class: "btn btn-#{poll_btn_class[count += 1]}", style: "width: #{ 1.0 / model.poll_options.count * 100 }%")
+        end
+      end
+    end
+    content
+  end
 end
