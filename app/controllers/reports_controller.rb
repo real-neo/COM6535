@@ -4,6 +4,7 @@
 class ReportsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin?, except: %i[create show_report_modal]
+  before_action :blocked?
 
   def index
     @reports = Report.includes(user: :avatar_attachment, post: { user: :avatar_attachment }).all

@@ -15,8 +15,7 @@
     - if !reply.original_id.nil?
       = render 'replies/original_reply', reply: reply.original
     = simple_format reply.comment
-  - if user_signed_in?
-    .panel-footer
-      = reply.display_reply_button
-      &nbsp;&nbsp;&nbsp;
-      = reply.display_delete_link
+  .panel-footer
+    = reply.display_reply_button
+    &nbsp;&nbsp;&nbsp;
+    = reply.display_delete_link

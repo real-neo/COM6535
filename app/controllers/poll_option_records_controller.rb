@@ -3,6 +3,7 @@
 # Poll Option Records controller
 class PollOptionRecordsController < ApplicationController
   before_action :authenticate_user!
+  before_action :blocked?
 
   def create
     post = Post.find(params[:post_id])

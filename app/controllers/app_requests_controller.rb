@@ -4,6 +4,7 @@
 class AppRequestsController < ApplicationController
   before_action :authenticate_user!
   before_action :admin?, except: :create
+  before_action :blocked?
 
   def index
     @app_requests = AppRequest.open.includes(:user).all.order(created_at: :desc)

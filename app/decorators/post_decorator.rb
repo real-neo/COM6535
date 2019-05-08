@@ -33,27 +33,15 @@ class PostDecorator < Draper::Decorator
   end
 
   def display_block_link
-    if h.user_signed_in? && h.current_user.admin?
-      h.link_to 'Block user', h.ban_user_user_path(model.user), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-ban'
-    else
-      h.link_to 'Block user', 'javascript: showLoginMessage()', class: 'fa fa-ban'
-    end
+    h.link_to 'Block user', h.ban_user_user_path(model.user), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-ban'
   end
 
   def display_reply_button
-    if h.user_signed_in? && !h.current_user.blocked?
-      h.link_to model.post_type == 'App' ? 'Review' : 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
-    elsif h.user_signed_in? && h.current_user.blocked?
-      h.link_to model.post_type == 'App' ? 'Review' : 'Reply', 'javascript: showBlockedMessage()', class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
-    end
+    h.link_to model.post_type == 'App' ? 'Review' : 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 1), method: :post, remote: true, class: "btn #{btn_class(model.post_type)} btn-lg btn-block fa fa-comment"
   end
 
   def display_report_button
-    if h.user_signed_in?
-      h.link_to 'Report', h.show_report_modal_report_path(model), class: 'fa fa-flag', method: :post, remote: true
-    else
-      h.link_to 'Report', 'javascript: showLoginMessage()', class: 'fa fa-flag'
-    end
+    h.link_to 'Report', h.show_report_modal_report_path(model), class: 'fa fa-flag', method: :post, remote: true
   end
 
   def display_like
@@ -125,11 +113,7 @@ class PostDecorator < Draper::Decorator
     if model.poll_options.exists?
       count = -1
       model.poll_options.each do |option|
-        if h.user_signed_in?
-          content.concat h.link_to(option.title + " - #{option.poll_option_records.count}", h.post_poll_option_poll_option_records_path(model, option), method: :post, remote: true, class: "btn btn-#{poll_btn_class[count += 1]}", style: "width: #{ 1.0 / model.poll_options.count * 100 }%")
-        else
-          content.concat h.link_to(option.title + " - #{option.poll_option_records.count}", 'javascript: showLoginMessage()', class: "btn btn-#{poll_btn_class[count += 1]}", style: "width: #{ 1.0 / model.poll_options.count * 100 }%")
-        end
+        content.concat h.link_to(option.title + " - #{option.poll_option_records.count}", h.post_poll_option_poll_option_records_path(model, option), method: :post, remote: true, class: "btn btn-#{poll_btn_class[count += 1]}", style: "width: #{ 1.0 / model.poll_options.count * 100 }%")
       end
     end
     content

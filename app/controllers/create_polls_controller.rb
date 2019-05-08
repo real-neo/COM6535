@@ -3,6 +3,7 @@
 # Poll Options controller
 class CreatePollsController < ApplicationController
   before_action :authenticate_user!
+  before_action :blocked?
 
   def create
     @create_poll = CreatePoll.new

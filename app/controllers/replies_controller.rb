@@ -3,6 +3,7 @@
 # Reply controller class
 class RepliesController < ApplicationController
   before_action :authenticate_user!
+  before_action :blocked?
 
   def create
     @post = Post.find(params.require(:reply).permit(:comment, :post_id, :original_id)[:post_id])

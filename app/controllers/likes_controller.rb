@@ -3,6 +3,7 @@
 # Likes controller class
 class LikesController < ApplicationController
   before_action :authenticate_user!
+  before_action :blocked?
 
   def create
     @liked = params[:liked] == 'true'

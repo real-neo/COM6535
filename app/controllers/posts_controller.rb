@@ -2,12 +2,13 @@
 
 # Post controller class
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create destroy]
+  before_action :authenticate_user!, only: %i[new show_post_modal create destroy]
+  before_action :blocked?, only: %i[new show_post_modal create destroy]
 
   require 'will_paginate/array'
 
   def index
-    @post = Post.new.decorate
+    # @post =
     # check the forum that the user picked and assign
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
     session[:forum_type] = 'Exercise' if session[:forum_type].nil?
@@ -26,6 +27,10 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id]).decorate
     @replies, @sort = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
+  end
+
+  def show_post_modal
+    respond_to(&:js)
   end
 
   def create

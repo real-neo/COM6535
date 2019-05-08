@@ -9,7 +9,7 @@
             = fa_icon 'times'
 
       .modal-body
-        = simple_form_for(@post, remote: true, method: :post) do |f|
+        = simple_form_for(Post.new.decorate, remote: true, method: :post) do |f|
           .form-group
             = f.label 'Forum'
             = f.select :post_type, Post.post_types.keys - ['App'], selected: forum_type, required: true

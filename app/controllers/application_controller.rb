@@ -46,6 +46,14 @@ class ApplicationController < ActionController::Base
     render template: 'errors/error_403', status: 403, alert: 'You don\'t have permisson!' unless current_user.admin?
   end
 
+  def blocked?
+    render template: 'errors/error_403', status: 423, alert: 'Your account has been blocked!' if current_user.blocked?
+  end
+
+  rescue_from ActionView::MissingTemplate do |_e|
+    render template: 'errors/error_404', status: 404
+  end
+
   def update_headers_to_disable_caching
     response.headers['Cache-Control'] = 'no-cache, no-cache="set-cookie", no-store, private, proxy-revalidate'
     response.headers['Pragma'] = 'no-cache'

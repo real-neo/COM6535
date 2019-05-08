@@ -32,11 +32,7 @@
 .row
   .col-sm-4
   .col-sm-4
-    - if user_signed_in?
-      = @post.display_reply_button
-    - else
-      %a.btn.btn-lg.btn-block{ href: 'javascript: showLoginMessage()', class: "fa fa-comment #{btn_class(@post.post_type)}" }
-        = @post.post_type == 'App' ? 'Review' : 'Reply'
+    = @post.display_reply_button
 
 .row
   .col-sm-1

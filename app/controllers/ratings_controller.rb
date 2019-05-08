@@ -3,6 +3,7 @@
 # Ratings controller
 class RatingsController < ApplicationController
   before_action :authenticate_user!
+  before_action :blocked?
 
   def create
     star = params[:star]

@@ -4,6 +4,7 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :show
   before_action :admin?, only: %i[ban_user unblock_user]
+  before_action :blocked?, except: %i[show edit home]
 
   def show
     @user = User.find(params[:id]).decorate
