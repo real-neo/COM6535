@@ -39,6 +39,14 @@ class Post < ApplicationRecord
 
   validate :check_app_post_icon
 
+  def likes_count
+    likes.where(like: true).count
+  end
+
+  def dislikes_count
+    likes.where(like: false).count
+  end
+
   def time_posted
     created_at.strftime('Posted at %H:%M %F')
   end

@@ -67,9 +67,7 @@ class PostDecorator < Draper::Decorator
   end
 
   def display_like_count
-    like_amount = model.likes.where(like: true).count
-    dislike_amount = model.likes.where(like: false).count
-    like_amount.to_s + ' ' + (like_amount == 1 ? 'Like' : 'Likes') + ' ' + dislike_amount.to_s + ' ' + (dislike_amount == 1 ? 'Dislike' : 'Dislikes')
+    model.likes_count.to_s + ' ' + (model.likes_count == 1 ? 'Like' : 'Likes') + ' ' + model.dislikes_count.to_s + ' ' + (model.dislikes_count == 1 ? 'Dislike' : 'Dislikes')
   end
 
   def show_ratings
