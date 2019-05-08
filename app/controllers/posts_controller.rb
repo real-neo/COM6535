@@ -8,7 +8,6 @@ class PostsController < ApplicationController
   require 'will_paginate/array'
 
   def index
-    # @post =
     # check the forum that the user picked and assign
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
     session[:forum_type] = 'Exercise' if session[:forum_type].nil?
@@ -27,10 +26,6 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id]).decorate
     @replies, @sort = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
-  end
-
-  def show_post_modal
-    respond_to(&:js)
   end
 
   def create
