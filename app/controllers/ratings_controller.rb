@@ -2,14 +2,9 @@
 
 # Ratings controller
 class RatingsController < ApplicationController
-  def create
-    unless user_signed_in?
-      respond_to do |f|
-        f.js { render js: 'showLoginMessage()' }
-      end
-      return
-    end
+  before_action :authenticate_user!
 
+  def create
     star = params[:star]
     post = Post.find(params[:post_id])
 

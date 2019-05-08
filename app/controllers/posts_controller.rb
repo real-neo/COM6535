@@ -2,6 +2,8 @@
 
 # Post controller class
 class PostsController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create destroy]
+
   require 'will_paginate/array'
 
   def index

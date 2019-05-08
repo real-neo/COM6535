@@ -2,14 +2,9 @@
 
 # Poll Option Records controller
 class PollOptionRecordsController < ApplicationController
-  def create
-    unless user_signed_in?
-      respond_to do |f|
-        f.js { render js: 'showLoginMessage()' }
-      end
-      return
-    end
+  before_action :authenticate_user!
 
+  def create
     post = Post.find(params[:post_id])
     option = PollOption.find(params[:poll_option_id])
 

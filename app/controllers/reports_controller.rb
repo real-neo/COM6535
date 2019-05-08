@@ -2,6 +2,9 @@
 
 # Reports controller
 class ReportsController < ApplicationController
+  before_action :authenticate_user!
+  before_action :admin?, except: %i[create show_report_modal]
+
   def index
     @reports = Report.includes(user: :avatar_attachment, post: { user: :avatar_attachment }).all
     @reports = @reports.paginate(page: params[:report_page])

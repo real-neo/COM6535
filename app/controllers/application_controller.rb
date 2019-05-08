@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
 
   private
 
+  def admin?
+    render template: 'errors/error_403', status: 403, alert: 'You don\'t have permisson!' unless current_user.admin?
+  end
+
   def update_headers_to_disable_caching
     response.headers['Cache-Control'] = 'no-cache, no-cache="set-cookie", no-store, private, proxy-revalidate'
     response.headers['Pragma'] = 'no-cache'

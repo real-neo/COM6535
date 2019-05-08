@@ -3,6 +3,7 @@
 # Control web behavior about users
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: :show
+  before_action :admin?, only: %i[ban_user unblock_user]
 
   def show
     @user = User.find(params[:id]).decorate
@@ -35,7 +36,7 @@ class UsersController < ApplicationController
                           .or(Reply.includes(:user, :original, :post).where(originals_replies: { user_id: @user.id })).order(created_at: :desc)
     @replies_to_me = ReplyDecorator.decorate_collection(@replies_to_me.paginate(page: params[:reply_to_me_page], per_page: 4))
 
-    @replies = Reply.includes(:user, :original).where(user_id: @user.id).order(created_at: :desc)
+    @replies = Reply.includes(:user, :original, :post).where(user_id: @user.id).order(created_at: :desc)
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:reply_page], per_page: 4))
   end
 
@@ -60,7 +61,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    @user = User.find(params[:id])
+    @user = current_user
     @user.destroy
     session.clear
     redirect_to posts_path, notice: 'Account deleted successfully.'

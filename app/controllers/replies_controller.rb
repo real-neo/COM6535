@@ -2,6 +2,8 @@
 
 # Reply controller class
 class RepliesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @post = Post.find(params.require(:reply).permit(:comment, :post_id, :original_id)[:post_id])
     @reply = (@post.replies.create! allowed_params).decorate

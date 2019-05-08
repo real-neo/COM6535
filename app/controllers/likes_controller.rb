@@ -2,6 +2,8 @@
 
 # Likes controller class
 class LikesController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     unless user_signed_in?
       respond_to do |f|

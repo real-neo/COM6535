@@ -2,6 +2,8 @@
 
 # Poll Options controller
 class CreatePollsController < ApplicationController
+  before_action :authenticate_user!
+
   def create
     @create_poll = CreatePoll.new
 
