@@ -1,4 +1,4 @@
-- if forum_type == 'Exercise'
+- if session[:forum_type] == 'Exercise'
   .row.hidden-xs
     .col-sm-2
     .col-sm-2.thumbnail
@@ -10,7 +10,7 @@
     .col-sm-2.thumbnail
       = image_tag '/images/exercise/img6.jpg'
     .col-sm-2
-- elsif forum_type == 'Diet'
+- elsif session[:forum_type] == 'Diet'
   .row.hidden-xs
     .col-sm-2
     .col-sm-2.thumbnail

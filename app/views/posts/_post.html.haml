@@ -6,7 +6,7 @@
       - else
         = post.user.decorate.display_avatar(40,40)
         = post.user.username + ':  '
-      = link_to post.title, post_path(post), style: 'color: inherit;'
+      = link_to post.title, post_path(post), class: 'inherit-color'
       .time-since-posted
         = post.time_since_posted
   .panel-body
@@ -19,7 +19,7 @@
           = simple_format truncate(post.description, length: 500)
         #poll_btn
           = raw post.display_poll
-      .col-sm-3.col-xs-12{ style: 'text-align: center;margin-bottom: 10px;' }
+      .col-sm-3.col-xs-12.text-center{ style: 'margin-bottom: 10px;' }
         .row
           - if post.post_type != 'App'
             .col-sm-3

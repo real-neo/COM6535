@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     end
   end
 
-  root to: 'pages#home'
+  root to: 'posts#home'
 
   match '/403', to: 'errors#error_403', via: :all
   match '/404', to: 'errors#error_404', via: :all

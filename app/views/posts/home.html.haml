@@ -1,0 +1,26 @@
+- content_for :title, 'Home'
+
+%h1
+  Most Voted Posts
+
+.row
+  .col-sm-9
+    %br
+    #posts_array
+      - if @most_voted_posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @most_voted_posts
+  .col-sm-3.hidden-xs
+    %h3
+      Top Exercise Posts
+    %br
+    = render partial: 'top_post', collection: @top_exercise
+    %h3
+      Top Diet Posts
+    %br
+    = render partial: 'top_post', collection: @top_diet
+    %h3
+      Top Rated Apps
+    %br
+    = render partial: 'top_post', collection: @top_apps

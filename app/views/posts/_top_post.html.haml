@@ -1,0 +1,14 @@
+.panel.panel-default
+  .panel-heading
+    %h4.no-margin
+      = link_to top_post.title, post_path(top_post), class: 'inherit-color'
+  .panel-body
+    - if top_post.post_type == 'App'
+      %h4.no-margin
+        = top_post.show_ratings
+    - else
+      %h6.text-lightgrey#likes_block
+        = top_post.display_like_count
+        = link_to post_path(top_post) do
+          %button.btn{ class: btn_class(top_post.post_type) }
+            = "#{ top_post.replies.count } " + 'comments'

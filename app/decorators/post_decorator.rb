@@ -91,22 +91,22 @@ class PostDecorator < Draper::Decorator
         rating = ratings.first
         rating.star.times do
           star_no += 1
-          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star checked-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
+          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star checked-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, class: 'inherit-color', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
         end
         (5 - rating.star).times do
           star_no += 1
-          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
+          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, class: 'inherit-color', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
         end
       else
         5.times do
           star_no += 1
-          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
+          content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), h.post_ratings_path(model, star: star_no), method: :post, remote: true, class: 'inherit-color', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
         end
       end
     else
       5.times do
         star_no += 1
-        content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), 'javascript: showLoginMessage()', style: 'color: inherit;', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
+        content.concat h.link_to(h.fa_icon('star 2x', class: 'rating-star'), 'javascript: showLoginMessage()', class: 'inherit-color', id: "star-#{star_no}", onmouseover: "changeStarColor(#{star_no})", onmouseout: 'resetStarColor()')
       end
     end
     content

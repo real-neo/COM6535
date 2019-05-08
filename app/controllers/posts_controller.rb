@@ -7,6 +7,26 @@ class PostsController < ApplicationController
 
   require 'will_paginate/array'
 
+  def home
+    @most_voted_posts = Post.includes(:likes, user: { avatar_attachment: :blob }).where(likes: { like: true }).group(:id).order('COUNT(likes.id) desc').limit(5)
+    @most_voted_posts = PostDecorator.decorate_collection(@most_voted_posts)
+
+    top_voted_posts
+  end
+
+  def top_voted_posts
+    if session[:forum_type] != 'App'
+      @top_exercise = Post.includes(:likes).where(post_type: 'Exercise', likes: { like: true }).group(:id).order('COUNT(likes.id) desc').limit(5)
+      @top_exercise = PostDecorator.decorate_collection(@top_exercise)
+
+      @top_diet = Post.includes(:likes).where(post_type: 'Diet', likes: { like: true }).group(:id).order('COUNT(likes.id) desc').limit(5)
+      @top_diet = PostDecorator.decorate_collection(@top_diet)
+    end
+
+    @top_apps = Post.where(post_type: 'App').order(rating: :desc).limit(5)
+    @top_apps = PostDecorator.decorate_collection(@top_apps)
+  end
+
   def index
     # check the forum that the user picked and assign
     session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
@@ -16,10 +36,7 @@ class PostsController < ApplicationController
     @posts, @sort = sorting_posts(posts)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:page]))
 
-    if session[:forum_type] == 'App'
-      @top_rated_posts = Post.where(post_type: 'App').order(rating: :desc).limit(5)
-      @top_rated_posts = PostDecorator.decorate_collection(@top_rated_posts)
-    end
+    top_voted_posts
   end
 
   def show

@@ -3,7 +3,7 @@
     %h5.no-margin
       = post.user.decorate.display_avatar(40,40)
       = post.user.username + ':  '
-      = link_to post.title, post_path(post), style: 'color: inherit;'
+      = link_to post.title, post_path(post), class: 'inherit-color'
       .time-since-posted
         = post.time_since_posted
   .panel-body.original-reply

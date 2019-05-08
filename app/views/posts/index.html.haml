@@ -1,15 +1,11 @@
 - content_for :title, session[:forum_type] + ' Section'
 
-= render 'forum_images', forum_type: session[:forum_type]
+= render 'forum_images'
+
+%h1
+  = session[:forum_type] + ' Section'
 
 .row
-  .col-sm-1
-  .col-sm-10
-    %h1
-      = session[:forum_type] + ' Section'
-
-.row
-  .col-sm-1
   .col-sm-3
     - if user_signed_in?
       = link_to session[:forum_type] == 'App' ? 'Request an App' : 'Create Post', show_post_modal_posts_path(type: session[:forum_type] == 'App' ? 'app_request' : 'post'), method: :post, remote: true, class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
@@ -23,22 +19,27 @@
         = link_to 'Create Poll', 'javascript: showLoginMessage()', class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
 
 .row
-  .col-sm-1
-  .col-sm-10
-    .row
-      .col-sm-9
-        = render 'sort_buttons'
-        %br
-        = will_paginate @posts
-        #posts_array
-          - if @posts.blank?
-            = no_record_tr(5)
-          - else
-            = render @posts
-        = will_paginate @posts
-      - if session[:forum_type] == 'App'
-        .col-sm-3.hidden-xs
-          %h3
-            Top Rated Apps
-          %br
-          = render partial: 'app_post', collection: @top_rated_posts
+  .col-sm-9
+    = render 'sort_buttons'
+    %br
+    = will_paginate @posts
+    #posts_array
+      - if @posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @posts
+    = will_paginate @posts
+  .col-sm-3.hidden-xs
+    - if session[:forum_type] != 'App'
+      %h3
+        Top Exercise Posts
+      %br
+      = render partial: 'top_post', collection: @top_exercise
+      %h3
+        Top Diet Posts
+      %br
+      = render partial: 'top_post', collection: @top_diet
+    %h3
+      Top Rated Apps
+    %br
+    = render partial: 'top_post', collection: @top_apps
