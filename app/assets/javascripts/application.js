@@ -14,11 +14,11 @@ function toggleNav() {
 }
 
 function showLoginMessage() {
-    $.flashAlert('Please log in to continue', 'alert');
+    alert('Please log in to continue');
 }
 
 function showBlockedMessage() {
-    $.flashAlert('Your account has been blocked due to inappropriate behaviour', 'alert');
+    alert('Sorry, Your account has been blocked!');
 }
 
 function changeStarColor(star_no) {
