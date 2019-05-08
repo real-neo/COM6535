@@ -5,13 +5,6 @@ class LikesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    unless user_signed_in?
-      respond_to do |f|
-        f.js { render js: 'showLoginMessage()' }
-      end
-      return
-    end
-
     @liked = params[:liked] == 'true'
     post = Post.find(params[:post_id])
 
