@@ -1,0 +1,13 @@
+let modalPlaceholder = $('#modal_placeholder');
+
+modalPlaceholder.html('');
+
+<%- if @modal == 'post' %>
+modalPlaceholder.html('<%=  j render 'post_modal' %>');
+<%- elsif @modal == 'poll' %>
+modalPlaceholder.html('<%=  j render 'poll_modal' %>');
+<%- elsif @modal == 'app_request' %>
+modalPlaceholder.html('<%=  j render 'app_request_modal' %>');
+<% end %>
+
+$('#post-modal').modal('show');

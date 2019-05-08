@@ -1,4 +1,4 @@
-.modal.fade#poll-modal{ 'aria-hidden': 'true', 'aria-labelledby': 'poll-modal', role: 'dialog', tabindex: '-1' }
+.modal.fade#post-modal{ 'aria-hidden': 'true', 'aria-labelledby': 'post-modal', role: 'dialog', tabindex: '-1' }
   .modal-dialog
     .modal-content
       .modal-header
@@ -12,7 +12,7 @@
         = simple_form_for(CreatePoll.new, remote: true, method: :post) do |f|
           .form-group
             = f.label 'Forum'
-            = f.select :post_type, Post.post_types.keys - ['App'], selected: forum_type, required: true
+            = f.select :post_type, Post.post_types.keys - ['App'], selected: session[:forum_type], required: true
             = f.input :title, label: 'Title', required: true
             = f.input :description, label: 'Description', required: true, as: :text
             = f.label 'Options'

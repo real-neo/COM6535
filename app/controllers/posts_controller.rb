@@ -28,6 +28,11 @@ class PostsController < ApplicationController
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
   end
 
+  def show_post_modal
+    @modal = params[:type] || ''
+    respond_to(&:js)
+  end
+
   def create
     @post = Post.create(allowed_params).decorate
     if @post.valid?

@@ -1,10 +1,7 @@
-$('#basicModal').modal('hide');
-$('#poll-modal').modal('hide');
+$('#post-modal').modal('hide');
 
 $('#posts_array').prepend('<%= j render @post if @post.post_type == session[:forum_type] %>');
 $.flashAlert('Your post has been submitted!', 'notice')
 
-$('#basicModal').find('#post_title').val('');
-$('#basicModal').find('#post_description').val('');
-$('#poll-modal').find('#post_title').val('');
-$('#poll-modal').find('#post_description').val('');
+$('#post_title').val('');
+$('#post_description').val('');

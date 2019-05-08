@@ -9,23 +9,21 @@ Rails.application.routes.draw do
       post :ban_user
       post :unblock_user
     end
-    collection do
-    end
   end
 
   resources :posts do
     resources :likes
+
     resources :ratings
+
     resources :poll_options do
       resources :poll_option_records
-    end
-
-    member do
     end
 
     collection do
       get :search
       get :advanced_search
+      post :show_post_modal
     end
   end
 
@@ -47,9 +45,6 @@ Rails.application.routes.draw do
     member do
       post :done
       post :new_app_post
-    end
-
-    collection do
     end
   end
 

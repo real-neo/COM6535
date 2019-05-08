@@ -1,11 +1,8 @@
-$('#basicModal').modal('hide');
-$('#poll-modal').modal('hide');
+$('#post-modal').modal('hide');
 
 $('#posts_array').prepend('<%= j render @post if @post.post_type == session[:forum_type] %>');
 $.flashAlert('Your post has been submitted!', 'notice')
 
-$('#post_title').val('');
-$('#post_description').val('');
 $('#create_poll_title').val('');
 $('#create_poll_description').val('');
 

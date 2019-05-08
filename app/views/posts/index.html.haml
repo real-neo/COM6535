@@ -12,31 +12,15 @@
   .col-sm-1
   .col-sm-3
     - if user_signed_in?
-      %a.btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]), 'data-target': '#basicModal', 'data-toggle': 'modal', href: '#' }
-        - if session[:forum_type] == 'App'
-          Request an App
-        - else
-          Create Post
+      = link_to session[:forum_type] == 'App' ? 'Request an App' : 'Create Post', show_post_modal_posts_path(type: session[:forum_type] == 'App' ? 'app_request' : 'post'), method: :post, remote: true, class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
     - else
-      %a.btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]), href: 'javascript: showLoginMessage()' }
-        - if session[:forum_type] == 'App'
-          Request an App
-        - else
-          Create Post
+      = link_to session[:forum_type] == 'App' ? 'Request an App' : 'Create Post', 'javascript: showLoginMessage()', class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
   - if session[:forum_type] != 'App'
     .col-sm-3
       - if user_signed_in?
-        %a.btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]), 'data-target': '#poll-modal', 'data-toggle': 'modal', href: '#' }
-          Create Poll
+        = link_to 'Create Poll', show_post_modal_posts_path(type: 'poll'), method: :post, remote: true, class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
       - else
-        %a.btn.btn-lg.btn-block{ class: btn_class(session[:forum_type]), href: 'javascript: showLoginMessage()' }
-          Create Poll
-
-- if session[:forum_type] == 'App'
-  = render 'app_request_modal'
-- else
-  = render 'post_modal', forum_type: session[:forum_type]
-  = render 'poll_modal', forum_type: session[:forum_type]
+        = link_to 'Create Poll', 'javascript: showLoginMessage()', class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
 
 .row
   .col-sm-1
