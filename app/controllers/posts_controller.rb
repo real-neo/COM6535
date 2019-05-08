@@ -22,10 +22,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def new
-    @post = Post.new.decorate
-  end
-
   def show
     @post = Post.find(params[:id]).decorate
     @replies, @sort = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
