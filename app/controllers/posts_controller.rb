@@ -15,13 +15,11 @@ class PostsController < ApplicationController
   end
 
   def top_voted_posts
-    if session[:forum_type] != 'App'
-      @top_exercise = Post.where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(5)
-      @top_exercise = PostDecorator.decorate_collection(@top_exercise)
+    @top_exercise = Post.where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(5)
+    @top_exercise = PostDecorator.decorate_collection(@top_exercise)
 
-      @top_diet = Post.where(post_type: 'Diet').order(likes_count: :desc).limit(5)
-      @top_diet = PostDecorator.decorate_collection(@top_diet)
-    end
+    @top_diet = Post.where(post_type: 'Diet').order(likes_count: :desc).limit(5)
+    @top_diet = PostDecorator.decorate_collection(@top_diet)
 
     @top_apps = Post.where(post_type: 'App').order(rating: :desc).limit(5)
     @top_apps = PostDecorator.decorate_collection(@top_apps)
