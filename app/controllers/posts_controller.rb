@@ -27,11 +27,10 @@ class PostsController < ApplicationController
 
   def index
     # check the forum that the user picked and assign
-    session[:forum_type] = params[:forum_type] unless params[:forum_type].nil?
-    session[:forum_type] = 'Exercise' if session[:forum_type].nil?
+    session[:forum_type] = params[:forum_type] || 'Exercise'
 
-    posts = (session[:forum_type] == 'App' ? Post.includes(app_icon_attachment: :blob) : Post.includes(:poll_options, user: :avatar_attachment)).where(post_type: session[:forum_type])
-    @posts, @sort = sorting_posts(posts)
+    posts = (session[:forum_type] == 'App' ? Post.includes(app_icon_attachment: :blob) : Post.includes(:poll_options, user: { avatar_attachment: :blob })).where(post_type: session[:forum_type])
+    @posts, @sort, @order = sorting_posts(posts)
     @posts = PostDecorator.decorate_collection(@posts.paginate(page: params[:page]))
 
     top_voted_posts
@@ -39,7 +38,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id]).decorate
-    @replies, @sort = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
+    @replies, @sort, @order = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
   end
 
@@ -80,8 +79,8 @@ class PostsController < ApplicationController
     @from_date = Date.current.last_month
     @to_date = Date.current
     if !keyword.nil? && (!keyword.eql? '')
-      @posts = Post.includes(:user).where("title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%'", keyword, keyword)
-      @posts, @sort = sorting_posts(@posts)
+      @posts = Post.includes(user: { avatar_attachment: :blob }).where("(title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type != ?", keyword, keyword, 'App')
+      @posts, @sort, @order = sorting_posts(@posts)
     else
       @posts = []
     end
@@ -111,16 +110,16 @@ class PostsController < ApplicationController
 
     if !keyword.nil? && (!keyword.eql? '') && (params[:exercise] == '✅' || params[:diet] == '✅')
       if params[:exercise] == '✅' && params[:diet] == '✅'
-        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%')", from, to, keyword, keyword)
+        @posts = Post.includes(user: :avatar_attachment).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type != ?", from, to, keyword, keyword, 'App')
         @exercise_is_checked = @diet_is_checked = true
       elsif params[:exercise] == '✅'
-        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, '0')
+        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, 'Exercise')
         @exercise_is_checked = true
       else
-        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, '1')
+        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, 'Diet')
         @diet_is_checked = true
       end
-      @posts, @sort = sorting_posts(@posts)
+      @posts, @sort, @order = sorting_posts(@posts)
     else
       @posts = []
     end
@@ -131,40 +130,37 @@ class PostsController < ApplicationController
   private
 
   def sorting_posts(posts)
-    order = if params[:order] == '⬆️'
-              'asc'
-            else
-              'desc'
-            end
-    sort = if params[:sort] == 'Comments'
+    order = (params[:order] == 'down' ? 'asc' : 'desc') # current down arrow means user wants up arrow which is asc order
+    sort = case params[:sort]
+           when 'Comments'
              posts = posts.order("replies_count #{order}")
              'Comments'
-           elsif params[:sort] == 'Likes'
+           when 'Likes'
              posts = posts.order("likes_count #{order}")
              'Likes'
-           elsif params[:sort] == 'Ratings'
+           when 'Ratings'
              posts = posts.order("rating #{order}")
              'Ratings'
            else
              posts = posts.order("created_at #{order}")
              'Time'
            end
-
-    sort += (order == 'asc' ? '⬆️' : '⬇️')
-    [posts, sort]
+    order = (order == 'asc' ? 'up' : 'down') # do a exchange here
+    [posts, sort, order]
   end
 
   def sorting_replies(replies)
-    order = if params[:order] == '⬆️'
-              'asc'
-            else
-              'desc'
-            end
-    replies = replies.order("created_at #{order}")
-    sort = 'Time'
-
-    sort += (order == 'asc' ? '⬆️' : '⬇️')
-    [replies, sort]
+    order = (params[:order] == 'down' ? 'asc' : 'desc')
+    sort = case params[:sort]
+           when 'Likes'
+             replies = replies.order("likes_count #{order}")
+             'Likes'
+           else
+             replies = replies.order("created_at #{order}")
+             'Time'
+           end
+    order = (order == 'asc' ? 'up' : 'down')
+    [replies, sort, order]
   end
 
   def allowed_params

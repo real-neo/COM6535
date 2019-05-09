@@ -20,7 +20,7 @@
 
 .row
   .col-md-9
-    = render 'sort_buttons'
+    = render 'sort_buttons', type: session[:forum_type]
     %br
     = will_paginate @posts
     #posts_array

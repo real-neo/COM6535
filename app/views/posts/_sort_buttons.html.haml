@@ -1,26 +1,25 @@
 %br
 Sort by
 &nbsp;
-- if @sort == 'Time⬆️'
-  = link_to 'Time ⬆️', request.params.merge(sort: 'Time', order: '⬇️'), class: 'btn btn-default'
+- if @sort == 'Time'
+  = link_to fa_icon("arrow-#{@order}", text: 'Time', right: true), request.params.merge(sort: 'Time', order: "#{@order}"), class: 'btn btn-info'
 - else
-  = link_to 'Time ⬇️', request.params.merge(sort: 'Time', order: '⬆️'), class: 'btn btn-default'
-- unless defined?(for_replies) && for_replies
+  = link_to fa_icon('arrow-down', text: 'Time', right: true), request.params.merge(sort: 'Time', order: 'down'), class: 'btn btn-default'
+&nbsp;
+- if session[:forum_type] != 'App'
+  - if @sort == 'Likes'
+    = link_to fa_icon("arrow-#{@order}", text: 'Likes', right: true), request.params.merge(sort: 'Likes', order: "#{@order}"), class: 'btn btn-info'
+  - else
+    = link_to fa_icon('arrow-down', text: 'Likes', right: true), request.params.merge(sort: 'Likes', order: 'down'), class: 'btn btn-default'
+- else
+  - if @sort == 'Ratings'
+    = link_to fa_icon("arrow-#{@order}", text: 'Ratings', right: true), request.params.merge(sort: 'Ratings', order: "#{@order}"), class: 'btn btn-info'
+  - else
+    = link_to fa_icon('arrow-down', text: 'Ratings', right: true), request.params.merge(sort: 'Ratings', order: 'down'), class: 'btn btn-default'
+- unless defined?(for_replies)
   &nbsp;
-  - if @sort == 'Comments⬆️'
-    = link_to session[:forum_type] == 'App' ? 'Reviews ⬆️️' : 'Comments ⬆️️', request.params.merge(sort: 'Comments', order: '⬇️'), class: 'btn btn-default'
+  - if @sort == 'Comments'
+    = link_to fa_icon("arrow-#{@order}", text: session[:forum_type] == 'App' ? 'Reviews' : 'Comments', right: true), request.params.merge(sort: 'Comments', order: "#{@order}"), class: 'btn btn-info'
   - else
-    = link_to session[:forum_type] == 'App' ? 'Reviews ⬇️' : 'Comments ⬇️', request.params.merge(sort: 'Comments', order: '⬆️'), class: 'btn btn-default'
-  - if session[:forum_type] == 'App'
-    &nbsp;
-    - if @sort == 'Ratings⬆️'
-      = link_to 'Ratings ⬆️️', request.params.merge(sort: 'Ratings', order: '⬇️'), class: 'btn btn-default'
-    - else
-      = link_to 'Ratings ⬇️', request.params.merge(sort: 'Ratings', order: '⬆️'), class: 'btn btn-default'
-  - else
-    &nbsp;
-    - if @sort == 'Likes⬆️'
-      = link_to 'Likes ⬆️️', request.params.merge(sort: 'Likes', order: '⬇️'), class: 'btn btn-default'
-    - else
-      = link_to 'Likes ⬇️', request.params.merge(sort: 'Likes', order: '⬆️'), class: 'btn btn-default'
+    = link_to fa_icon('arrow-down', text: session[:forum_type] == 'App' ? 'Reviews' : 'Comments', right: true), request.params.merge(sort: 'Comments', order: 'down'), class: 'btn btn-default'
 %br
