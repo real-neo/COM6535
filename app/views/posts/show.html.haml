@@ -10,19 +10,20 @@
       = @post.title
   .panel-body
     .row
-      .col-sm-9
+      %div{ class: @post.post_type == 'App' ? 'col-sm-12' : 'col-sm-9' }
         = simple_format @post.description
-      .col-sm-3.text-center
-        .row
-          .col-sm-3
-            = @post.display_like
-            %br
-            = @post.display_dislike
-          .col-sm-9
-            %h6.text-lightgrey#likes_block
-              = @post.display_like_count
-            %button.btn{ class: btn_class(@post.post_type) }
-              = "#{ @post.replies.count } " + (@post.post_type == 'App' ? 'reviews' : 'comments')
+      - if @post.post_type != 'App'
+        .col-sm-3.text-center
+          .row
+            .col-sm-3
+              = @post.display_like
+              %br
+              = @post.display_dislike
+            .col-sm-9
+              %h6.text-lightgrey#likes_block
+                = @post.display_like_count
+              %button.btn{ class: btn_class(@post.post_type) }
+                = "#{ @post.replies.count } " + 'comments'
     #poll_btn
       = raw @post.display_poll
     - if @post.post_type == 'App'
