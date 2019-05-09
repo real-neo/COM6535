@@ -1,35 +1,27 @@
 - content_for :title, 'Home Page'
 
-.row
-  .col-sm-1.hidden-xs
-  .col-sm-10.col-xs-12
-    %h2
-      = @user.display_avatar(100,100)
-      Hi, #{ @user.firstname }
+%h2
+  = @user.display_avatar(100,100)
+  Hi, #{ @user.firstname }
 
-.row
-  .col-sm-1
-  .col-sm-10
-    %h3 Recent Activities
-    %br
-    = will_paginate @replies_to_me, param_name: 'reply_to_me_page'
-    = render @replies_to_me, replies_to_me: true
-    = will_paginate @replies_to_me, param_name: 'reply_to_me_page'
+%h3 Recent Activities
+%br
+= will_paginate @replies_to_me, param_name: 'reply_to_me_page'
+= render @replies_to_me, replies_to_me: true
+= will_paginate @replies_to_me, param_name: 'reply_to_me_page'
 
-.row
-  .col-sm-1
-  .col-sm-10
-    %h3 Your Posts
-    %br
-    = will_paginate @posts, param_name: 'post_page'
-    = render @posts
-    = will_paginate @posts, param_name: 'post_page'
+%hr
 
-.row
-  .col-sm-1
-  .col-sm-10
-    %h3 Your Replies
-    %br
-    = will_paginate @replies, param_name: 'reply_page'
-    = render @replies, your_replies: true
-    = will_paginate @replies, param_name: 'reply_page'
+%h3 Your Posts
+%br
+= will_paginate @posts, param_name: 'post_page'
+= render @posts
+= will_paginate @posts, param_name: 'post_page'
+
+%hr
+
+%h3 Your Replies
+%br
+= will_paginate @replies, param_name: 'reply_page'
+= render @replies, your_replies: true
+= will_paginate @replies, param_name: 'reply_page'

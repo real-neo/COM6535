@@ -1,26 +1,23 @@
 - content_for :title, 'Reports'
 
-.row
-  .col-sm-2
-  .col-sm-8
-    %h3 Reports
-    %br
-    = will_paginate @reports, param_name: 'report_page'
-    #reports_array
-      - if @reports.blank?
-        = no_record_tr(5)
-      - else
-        = render @reports
-    = will_paginate @reports, param_name: 'report_page'
+%h3 Reports
+%br
+= will_paginate @reports, param_name: 'report_page'
+#reports_array
+  - if @reports.blank?
+    = no_record_tr(5)
+  - else
+    = render @reports
+= will_paginate @reports, param_name: 'report_page'
 
-    %hr
+%hr
 
-    %h3 Blocked Users
-    %br
-    = will_paginate @blocked_users, param_name: 'user_page'
-    #reported_users_array
-      - if @blocked_users.blank?
-        = no_record_tr(5)
-      - else
-        = render partial: 'blocked_user', collection: @blocked_users
-    = will_paginate @blocked_users, param_name: 'user_page'
+%h3 Blocked Users
+%br
+= will_paginate @blocked_users, param_name: 'user_page'
+#reported_users_array
+  - if @blocked_users.blank?
+    = no_record_tr(5)
+  - else
+    = render partial: 'blocked_user', collection: @blocked_users
+= will_paginate @blocked_users, param_name: 'user_page'

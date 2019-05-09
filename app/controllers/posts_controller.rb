@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   require 'will_paginate/array'
 
   def home
-    @most_voted_posts = Post.includes(:likes, user: { avatar_attachment: :blob }).where(likes: { like: true }).group(:id).order('COUNT(likes.id) desc').limit(5)
+    @most_voted_posts = Post.includes(:likes, user: { avatar_attachment: :blob }).order(likes_count: :desc).limit(10)
     @most_voted_posts = PostDecorator.decorate_collection(@most_voted_posts)
 
     top_voted_posts
@@ -16,10 +16,10 @@ class PostsController < ApplicationController
 
   def top_voted_posts
     if session[:forum_type] != 'App'
-      @top_exercise = Post.includes(:likes).where(post_type: 'Exercise', likes: { like: true }).group(:id).order('COUNT(likes.id) desc').limit(5)
+      @top_exercise = Post.includes(:likes).where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(5)
       @top_exercise = PostDecorator.decorate_collection(@top_exercise)
 
-      @top_diet = Post.includes(:likes).where(post_type: 'Diet', likes: { like: true }).group(:id).order('COUNT(likes.id) desc').limit(5)
+      @top_diet = Post.includes(:likes).where(post_type: 'Diet').order(likes_count: :desc).limit(5)
       @top_diet = PostDecorator.decorate_collection(@top_diet)
     end
 
@@ -139,10 +139,10 @@ class PostsController < ApplicationController
               'desc'
             end
     sort = if params[:sort] == 'Comments'
-             posts = posts.left_outer_joins(:replies).select('posts.*, COUNT(replies.id) as replies_count').group('posts.id').order("replies_count #{order}")
+             posts = posts.order("replies_count #{order}")
              'Comments'
            elsif params[:sort] == 'Likes'
-             posts = posts.left_outer_joins(:likes).select('posts.*, COUNT(likes.id) as likes_count').where(likes: { like: true }).group('posts.id').order("likes_count #{order}")
+             posts = posts.order("likes_count #{order}")
              'Likes'
            elsif params[:sort] == 'Ratings'
              posts = posts.order("rating #{order}")

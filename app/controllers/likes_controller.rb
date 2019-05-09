@@ -21,6 +21,8 @@ class LikesController < ApplicationController
       @like = Like.create(user_id: current_user.id, post_id: post.id, like: @liked)
     end
 
+    update_post_like_dislike(post)
+
     @post_id = post.id
     @like_text = post.decorate.display_like_count
 
@@ -28,6 +30,11 @@ class LikesController < ApplicationController
   end
 
   private
+
+  def update_post_like_dislike(post)
+    post.update(likes_count: post.likes.where(like: true).count)
+    post.update(dislikes_count: post.likes.where(like: false).count)
+  end
 
   def already_liked?
     @likes = Like.where(user_id: current_user.id, post_id: params[:post_id])

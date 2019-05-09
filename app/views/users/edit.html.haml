@@ -1,15 +1,11 @@
 - content_for :title, 'Settings'
 
-.row
-  .col-sm-1.hidden-xs
-  .col-sm-10.col-xs-12
-    %h2
-      = @user.display_avatar(100,100)
-      Manage Your Account
+%h2
+  = @user.display_avatar(100,100)
+  Manage Your Account
 
 .row
-  .col-sm-1
-  .col-sm-3
+  .col-sm-4
     %ul.nav.nav-tabs.nav-stacked
       %li.active
         %a{ href: '#details', 'data-toggle': 'tab' } Change of personal details
@@ -21,7 +17,7 @@
         %a{ href: '#email', 'data-toggle': 'tab' } Change of email
       %li
         %a{ href: '#delete_account', 'data-toggle': 'tab' } Delete Account
-  .col-sm-7
+  .col-sm-8
     .tab-content
       .tab-pane.active#details
         = simple_form_for @user do |f|

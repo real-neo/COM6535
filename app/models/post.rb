@@ -1,17 +1,19 @@
 # frozen_string_literal: true
-
 # == Schema Information
 #
 # Table name: posts
 #
-#  id          :integer          not null, primary key
-#  description :string
-#  post_type   :integer
-#  rating      :float
-#  title       :string
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  user_id     :integer
+#  id             :integer          not null, primary key
+#  description    :string
+#  dislikes_count :integer          default(0)
+#  likes_count    :integer          default(0)
+#  post_type      :integer
+#  rating         :float
+#  replies_count  :integer          default(0)
+#  title          :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  user_id        :integer
 #
 # Indexes
 #
@@ -38,14 +40,6 @@ class Post < ApplicationRecord
   validates :title, :description, :post_type, presence: true
 
   validate :check_app_post_icon
-
-  def likes_count
-    likes.where(like: true).count
-  end
-
-  def dislikes_count
-    likes.where(like: false).count
-  end
 
   def time_posted
     created_at.strftime('Posted at %H:%M %F')

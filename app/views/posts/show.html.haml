@@ -1,48 +1,41 @@
 - content_for :title, @post.title
--#picture, name
--# button to reply
--#replys
-.row
-  .col-sm-1
-  .col-sm-10
-    .panel.panel-default
-      .panel-heading
-        %h2.no-margin
-          - if @post.post_type == 'App'
-            = image_tag @post.app_icon_link, height: 70, width: 70, class: 'img-circle'
-          - else
-            = @post.user.decorate.display_avatar(70,70)
-          = @post.title
-      .panel-body
-        = simple_format @post.description
-        #poll_btn
-          = raw @post.display_poll
-        - if @post.post_type == 'App'
-          %br
-          %div{ style: 'text-align: center;' }
-            %h4
-              Rate this app
-            = raw @post.display_rating
-      .panel-footer
-        %h6.text-lightgrey
-          = @post.time_posted
-          .float-right
-            = @post.display_delete_link
 
-.row
-  .col-sm-4
-  .col-sm-4
-    = @post.display_reply_button
-
-.row
-  .col-sm-1
-  .col-sm-8
-    = render 'sort_buttons', for_replies: true
-    %br
-    = will_paginate @replies
-    #replies_array
-      - if @replies.blank?
-        = no_record_tr(5)
+.panel.panel-default
+  .panel-heading
+    %h2.no-margin
+      - if @post.post_type == 'App'
+        = image_tag @post.app_icon_link, height: 70, width: 70, class: 'img-circle'
       - else
-        = render @replies
-    = will_paginate @replies
+        = @post.user.decorate.display_avatar(70,70)
+      = @post.title
+  .panel-body
+    = simple_format @post.description
+    #poll_btn
+      = raw @post.display_poll
+    - if @post.post_type == 'App'
+      %br
+      %div{ style: 'text-align: center;' }
+        %h4
+          Rate this app
+        = raw @post.display_rating
+  .panel-footer
+    %h6.text-lightgrey
+      = @post.time_posted
+      .float-right
+        = @post.display_delete_link
+
+.row
+  .col-sm-3
+  .col-sm-6
+    = @post.display_reply_button
+  .col-sm-3
+
+= render 'sort_buttons', for_replies: true
+%br
+= will_paginate @replies
+#replies_array
+  - if @replies.blank?
+    = no_record_tr(5)
+  - else
+    = render @replies
+= will_paginate @replies

@@ -10,6 +10,7 @@ class RepliesController < ApplicationController
     @reply = (@post.replies.create! allowed_params).decorate
     @replies = ReplyDecorator.decorate_collection(@post.replies.order(:created_at))
     respond_to(&:js)
+    update_post_reply(@post)
   end
 
   def show_reply_modal
@@ -27,13 +28,17 @@ class RepliesController < ApplicationController
     @reply = Reply.find(params[:id])
     @post = @reply.post
     @reply.destroy
+    update_post_reply(@post)
     redirect_to post_path(@post), notice: 'Reply deleted successfully.'
   end
 
   private
 
+  def update_post_reply(post)
+    post.update(replies_count: post.replies.count)
+  end
+
   def allowed_params
     params.require(:reply).permit(:comment, :original_id, :post_id).merge(user_id: current_user.id)
   end
-
 end

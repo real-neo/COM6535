@@ -1,14 +1,10 @@
 - content_for :title, 'Search'
 
-.row
-  .col-sm-1
-  .col-sm-10
-    %h1
-      Search Results
+%h1
+  Search Results
 
 .row
-  .col-sm-1
-  .col-sm-8
+  .col-sm-9
     = render 'sort_buttons'
     %br
     = will_paginate @posts
@@ -18,7 +14,7 @@
       - else
         = render @posts
     = will_paginate @posts
-  .col-sm-2
+  .col-sm-3
     %h4
       Advanced Search
     %hr
