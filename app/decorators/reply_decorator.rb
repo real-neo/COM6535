@@ -19,7 +19,7 @@ class ReplyDecorator < Draper::Decorator
 
   def display_like
     if h.user_signed_in?
-      is_liked = Like.where(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'reply').exists? && Like.find_by(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'reply').like
+      is_liked = Like.where(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'Reply').exists? && Like.find_by(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'Reply').like
       color = is_liked ? '#4169e1' : 'black'
 
       h.link_to h.fa_icon('thumbs-up 2x'), h.reply_likes_path(model, liked: true, type: 'reply'), method: :post, remote: true, id: 'like_icon', style: "color: #{color};"
@@ -30,7 +30,7 @@ class ReplyDecorator < Draper::Decorator
 
   def display_dislike
     if h.user_signed_in?
-      is_disliked = Like.where(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'reply').exists? && !Like.find_by(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'reply').like
+      is_disliked = Like.where(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'Reply').exists? && !Like.find_by(user_id: h.current_user.id, likeable_id: model.id, likeable_type: 'Reply').like
       color = is_disliked ? '#ff0003' : 'black'
 
       h.link_to h.fa_icon('thumbs-down 2x', class: 'fa-flip-horizontal'), h.reply_likes_path(model, liked: false, type: 'reply'), method: :post, remote: true, id: 'dislike_icon', style: "color: #{color};"
