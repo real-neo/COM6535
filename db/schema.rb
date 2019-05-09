@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_05_09_010205) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "post_id"
     t.integer "user_id"
     t.boolean "like"
     t.datetime "created_at", null: false
@@ -71,7 +70,6 @@ ActiveRecord::Schema.define(version: 2019_05_09_010205) do
     t.string "likeable_type"
     t.integer "likeable_id"
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id"
-    t.index ["post_id"], name: "index_likes_on_post_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
