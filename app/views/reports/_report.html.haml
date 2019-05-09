@@ -7,5 +7,9 @@
         = report.time_since_posted
   .panel-body
     = render 'posts/post_reported', post: report.post
-
     = report.reason
+  .panel-footer
+    - unless defined?(closed)
+      = link_to 'Mark as done', done_report_path(report), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-check'
+      &nbsp;&nbsp;&nbsp;
+    = link_to 'Delete report', report, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'

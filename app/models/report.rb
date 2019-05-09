@@ -5,6 +5,7 @@
 # Table name: reports
 #
 #  id         :integer          not null, primary key
+#  open       :boolean          default(TRUE)
 #  reason     :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -23,6 +24,9 @@ class Report < ApplicationRecord
 
   belongs_to :user
   belongs_to :post
+
+  scope :open, -> { where(open: true) }
+  scope :close, -> { where(open: false) }
 
   def time_since_posted
     time_ago_in_words(self[:created_at]) + ' ago'

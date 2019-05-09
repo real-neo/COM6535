@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   resources :reports do
     member do
       post :show_report_modal
+      post :done
     end
   end
 
