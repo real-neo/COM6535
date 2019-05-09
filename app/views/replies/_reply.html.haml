@@ -1,4 +1,4 @@
-.panel.panel-default
+.panel.panel-default{id: "reply_#{reply.id}"}
   .panel-heading
     %h4.no-margin
       = reply.user.decorate.display_avatar(40,40)
@@ -15,6 +15,16 @@
     - if !reply.original_id.nil?
       = render 'replies/original_reply', reply: reply.original
     = simple_format reply.comment
+
+    .col-sm-3.col-xs-12{ style: 'text-align: center;margin-bottom: 10px;' }
+      .row
+        .col-sm-3
+          = reply.display_like
+          %br
+          = reply.display_dislike
+        .col-sm-9
+          %h6.text-lightgrey#likes_block
+            = reply.display_like_count
   .panel-footer
     = reply.display_reply_button
     &nbsp;&nbsp;&nbsp;

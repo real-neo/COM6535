@@ -7,7 +7,10 @@ class LikesController < ApplicationController
 
   def create
     @liked = params[:liked] == 'true'
-    post = Post.find(params[:post_id])
+    @type = params[:type] == 'post' ? 'Post' : 'Reply'
+
+    model = @type == 'post' ? Post.find(params[:post_id]) : Reply.find(params[:reply_id])
+    @id = model.id
 
     if already_liked?
       @like = @likes.first
@@ -18,11 +21,10 @@ class LikesController < ApplicationController
         @like.update(like: @liked)
       end
     else
-      @like = Like.create(user_id: current_user.id, post_id: post.id, like: @liked)
+      @like = Like.create(user_id: current_user.id, likeable_id: model.id, likeable_type: @type, like: @liked)
     end
 
-    @post_id = post.id
-    @like_text = post.decorate.display_like_count
+    @like_text = model.decorate.display_like_count
 
     respond_to(&:js)
   end
@@ -30,7 +32,7 @@ class LikesController < ApplicationController
   private
 
   def already_liked?
-    @likes = Like.where(user_id: current_user.id, post_id: params[:post_id])
+    @likes = Like.where(user_id: current_user.id, likeable_id: @id, likeable_type: @type)
     @likes.exists?
   end
 end

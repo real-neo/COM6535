@@ -26,6 +26,8 @@ class Reply < ApplicationRecord
   belongs_to :user
   belongs_to :post
 
+  has_many :likes, as: :likeable, dependent: :destroy
+
   belongs_to :original, class_name: 'Reply', optional: true
 
   def username

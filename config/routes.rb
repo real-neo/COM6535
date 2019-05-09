@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   resources :create_polls
 
   resources :replies do
+    resources :likes
     member do
       post :show_reply_modal
     end
