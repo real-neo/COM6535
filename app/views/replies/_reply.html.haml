@@ -12,19 +12,20 @@
       .time-since-posted
         = reply.time_since_posted
   .panel-body
-    - if !reply.original_id.nil?
-      = render 'replies/original_reply', reply: reply.original
-    = simple_format reply.comment
-
-    .col-sm-3.col-xs-12{ style: 'text-align: center;margin-bottom: 10px;' }
-      .row
-        .col-sm-3
-          = reply.display_like
-          %br
-          = reply.display_dislike
-        .col-sm-9
-          %h6.text-lightgrey#likes_block
-            = reply.display_like_count
+    .row
+      .col-sm-9.col-xs-12
+        - if !reply.original_id.nil?
+          = render 'replies/original_reply', reply: reply.original
+        = simple_format reply.comment
+      .col-sm-3.col-xs-12.text-center{ style: 'margin-bottom: 10px;' }
+        .row
+          .col-sm-3
+            = reply.display_like
+            %br
+            = reply.display_dislike
+          .col-sm-9
+            %h6.text-lightgrey#likes_block
+              = reply.display_like_count
   .panel-footer
     = reply.display_reply_button
     &nbsp;&nbsp;&nbsp;

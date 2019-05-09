@@ -1,6 +1,6 @@
 - content_for :title, @post.title
 
-.panel.panel-default
+.panel.panel-default{id: "post_#{@post.id}"}
   .panel-heading
     %h2.no-margin
       - if @post.post_type == 'App'
@@ -9,7 +9,20 @@
         = @post.user.decorate.display_avatar(70,70)
       = @post.title
   .panel-body
-    = simple_format @post.description
+    .row
+      .col-sm-9
+        = simple_format @post.description
+      .col-sm-3.text-center
+        .row
+          .col-sm-3
+            = @post.display_like
+            %br
+            = @post.display_dislike
+          .col-sm-9
+            %h6.text-lightgrey#likes_block
+              = @post.display_like_count
+            %button.btn{ class: btn_class(@post.post_type) }
+              = "#{ @post.replies.count } " + (@post.post_type == 'App' ? 'reviews' : 'comments')
     #poll_btn
       = raw @post.display_poll
     - if @post.post_type == 'App'

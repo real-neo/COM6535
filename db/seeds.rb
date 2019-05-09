@@ -17,8 +17,6 @@ user_list.each do |firstname, lastname, country, city, email, username, password
   User.create(firstname: firstname, lastname: lastname, location: country, city: city, email: email, username: username, password: password, admin: admin, confirmed_at: Time.now)
 end
 
-user1 = User.first
-
 post_list = [['This is a post about fitness', 'Describing something about fitness with a lot of words, this should be a bit long', 0],
              ['A post about exercises', 'How do you obtain abs?', 0],
              ['This is a post about diet', 'You should eat healthy to be healthy and fit', 1]]
@@ -26,10 +24,6 @@ post_list = [['This is a post about fitness', 'Describing something about fitnes
 post_list.each do |title, description, type|
   User.all.each { |user| (1..30).each { |_i| Post.create(user: user, title: title, description: description, post_type: type) } }
 end
-
-post1 = Post.first
-
-Like.create(user: user1, post: post1, like: true)
 
 User.all.each do |user|
   user.avatar.purge

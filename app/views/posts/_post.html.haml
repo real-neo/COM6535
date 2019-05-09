@@ -33,11 +33,11 @@
             = link_to post_path(post) do
               %button.btn{ class: btn_class(post.post_type) }
                 = "#{ post.replies.count } " + (post.post_type == 'App' ? 'reviews' : 'comments')
-      .col-sm-12.col-xs-12
-        = link_to 'View', post_path(post), class: 'fa fa-eye'
-        &nbsp;&nbsp;&nbsp;
-        = link_to post.post_type == 'App' ? 'Review' : 'Reply', post_path(post), class: 'fa fa-comment'
-        &nbsp;&nbsp;&nbsp;
-        = post.display_report_button
-        &nbsp;&nbsp;&nbsp;
-        = post.display_delete_link
+  .panel-footer
+    = link_to 'View', post_path(post), class: 'fa fa-eye'
+    &nbsp;&nbsp;&nbsp;
+    = link_to post.post_type == 'App' ? 'Review' : 'Reply', post_path(post), class: 'fa fa-comment'
+    &nbsp;&nbsp;&nbsp;
+    = post.display_report_button
+    &nbsp;&nbsp;&nbsp;
+    = post.display_delete_link
