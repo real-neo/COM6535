@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   require 'will_paginate/array'
 
   def home
-    @most_voted_posts = Post.includes(:likes, user: { avatar_attachment: :blob }).order(likes_count: :desc).limit(10)
+    @most_voted_posts = Post.includes(user: { avatar_attachment: :blob }).order(likes_count: :desc).limit(10)
     @most_voted_posts = PostDecorator.decorate_collection(@most_voted_posts)
 
     top_voted_posts
@@ -16,10 +16,10 @@ class PostsController < ApplicationController
 
   def top_voted_posts
     if session[:forum_type] != 'App'
-      @top_exercise = Post.includes(:likes).where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(5)
+      @top_exercise = Post.where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(5)
       @top_exercise = PostDecorator.decorate_collection(@top_exercise)
 
-      @top_diet = Post.includes(:likes).where(post_type: 'Diet').order(likes_count: :desc).limit(5)
+      @top_diet = Post.where(post_type: 'Diet').order(likes_count: :desc).limit(5)
       @top_diet = PostDecorator.decorate_collection(@top_diet)
     end
 
