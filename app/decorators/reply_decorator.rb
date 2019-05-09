@@ -47,11 +47,11 @@ class ReplyDecorator < Draper::Decorator
 
   def display_delete_link
     if h.user_signed_in? && (model.user_id == h.current_user.id || h.current_user.admin?)
-      h.link_to 'Delete', model, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
+      h.link_to h.fa_icon('trash', text: 'Delete'), model, method: :delete, data: { confirm: 'Are you sure?' }
     end
   end
 
   def display_reply_button
-    h.link_to 'Reply', h.show_reply_modal_reply_path(model.id, is_post: 0), method: :post, remote: true, class: 'fa fa-comment'
+    h.link_to h.fa_icon('comment', text: 'Reply'), h.show_reply_modal_reply_path(model.id, is_post: 0), method: :post, remote: true
   end
 end

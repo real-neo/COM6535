@@ -4,17 +4,7 @@
   Search Results
 
 .row
-  .col-sm-9
-    = render 'sort_buttons'
-    %br
-    = will_paginate @posts
-    #posts_array
-      - if @posts.blank?
-        = no_record_tr(5)
-      - else
-        = render @posts
-    = will_paginate @posts
-  .col-sm-3
+  .col-md-3.col-md-push-9
     %h4
       Advanced Search
     %hr
@@ -36,3 +26,13 @@
         = date_field_tag 'to', @to_date
       %hr
       = submit_tag 'Advanced Search', class: 'btn btn-default'
+  .col-md-9.col-md-pull-3
+    = render 'sort_buttons'
+    %br
+    = will_paginate @posts
+    #posts_array
+      - if @posts.blank?
+        = no_record_tr(5)
+      - else
+        = render @posts
+    = will_paginate @posts

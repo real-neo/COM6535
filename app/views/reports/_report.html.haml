@@ -10,6 +10,6 @@
     = report.reason
   .panel-footer
     - unless defined?(closed)
-      = link_to 'Mark as done', done_report_path(report), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-check'
+      = link_to fa_icon('check', text: 'Mark as done'), done_report_path(report), method: :post, data: { confirm: 'Are you sure?' }
       &nbsp;&nbsp;&nbsp;
-    = link_to 'Delete report', report, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
+    = link_to fa_icon('trash', text: 'Delete report'), report, method: :delete, data: { confirm: 'Are you sure?' }

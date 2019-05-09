@@ -12,8 +12,8 @@
       .col-sm-12
         %br
         - unless defined?(closed)
-          = link_to 'New App', '#', 'data-target': '#post-modal', 'data-toggle': 'modal', class: 'fa fa-pencil'
+          = link_to fa_icon('pencil', text: 'New App'), '#', 'data-target': '#post-modal', 'data-toggle': 'modal'
           &nbsp;&nbsp;&nbsp;
-          = link_to 'Mark as done', done_app_request_path(app_request), method: :post, data: { confirm: 'Are you sure?' }, class: 'fa fa-check'
+          = link_to fa_icon('check', text: 'Mark as done'), done_app_request_path(app_request), method: :post, data: { confirm: 'Are you sure?' }
           &nbsp;&nbsp;&nbsp;
-        = link_to 'Delete', app_request, method: :delete, data: { confirm: 'Are you sure?' }, class: 'fa fa-trash'
+        = link_to fa_icon('trash', text: 'Delete'), app_request, method: :delete, data: { confirm: 'Are you sure?' }

@@ -4,14 +4,14 @@
   Most Voted Posts
 
 .row
-  .col-sm-9
+  .col-md-9
     %br
     #posts_array
       - if @most_voted_posts.blank?
         = no_record_tr(5)
       - else
         = render @most_voted_posts
-  .col-sm-3.hidden-xs
+  .col-md-3.hidden-xs.hidden-sm
     %h3
       Top Exercise Posts
     %br

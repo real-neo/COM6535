@@ -19,7 +19,7 @@
         = link_to 'Create Poll', 'javascript: showLoginMessage()', class: "btn btn-lg btn-block #{btn_class(session[:forum_type])}"
 
 .row
-  .col-sm-9
+  .col-md-9
     = render 'sort_buttons'
     %br
     = will_paginate @posts
@@ -29,7 +29,7 @@
       - else
         = render @posts
     = will_paginate @posts
-  .col-sm-3.hidden-xs
+  .col-md-3.hidden-xs.hidden-sm
     - if session[:forum_type] != 'App'
       %h3
         Top Exercise Posts

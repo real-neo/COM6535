@@ -32,6 +32,12 @@ class ReportsController < ApplicationController
     end
   end
 
+  def destroy
+    report = Report.find(params[:id])
+    report.destroy
+    redirect_to reports_path, notice: 'Report deleted successfully.'
+  end
+
   def show_report_modal
     @post_id = params[:id]
     respond_to(&:js)
