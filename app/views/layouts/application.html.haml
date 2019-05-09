@@ -43,7 +43,7 @@
           = form_tag search_posts_path, method: :get, class: 'navbar-form search-form' do
             = text_field_tag :keyword, params[:keyword], placeholder: 'Search', class: 'form-control search-form-control'
             %span.input-group-btn
-              = submit_tag '🔍', class: 'btn btn-default'
+              = button_tag fa_icon('search'), class: 'btn btn-default', type: :submit
 
     .container#main-container{ style: 'padding-top: 0;' }
       .overlay#myNav
