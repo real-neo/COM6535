@@ -1,6 +1,10 @@
-let post = $('#post_<%= @post_id %>');
-let like_icon = post.find("#like_icon");
-let dislike_icon = post.find("#dislike_icon");
+<%- if @type == 'post' %>
+let model = $('#post_<%= @id %>');
+<%- else %>
+let model = $('#reply_<%= @id %>');
+<% end %>
+let like_icon = model.find("#like_icon");
+let dislike_icon = model.find("#dislike_icon");
 
 <%- if @like.valid? %>
   <%- if @liked.nil? %>
@@ -20,4 +24,4 @@ let dislike_icon = post.find("#dislike_icon");
   $.flashAlert('Illegal vote!', 'alert')
 <%- end %>
 
-post.find('#likes_block').html('<%= @like_text %>')
+model.find('#likes_block').html('<%= @like_text %>')
