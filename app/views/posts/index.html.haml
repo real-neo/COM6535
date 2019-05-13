@@ -27,8 +27,8 @@
       - if @posts.blank?
         = no_record_tr(5)
       - else
-        = render @posts
-    = will_paginate @posts
+        = render partial: 'posts/post', collection: @posts
+      = will_paginate @posts
   .col-md-3.hidden-xs.hidden-sm
     - if session[:forum_type] != 'App'
       %h3

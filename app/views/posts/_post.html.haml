@@ -18,7 +18,7 @@
         %p
           = simple_format truncate(post.description, length: 500)
         #poll_btn
-          = raw post.display_poll
+          = post.display_poll
       .col-sm-3.col-xs-12.text-center{ style: 'margin-bottom: 10px;' }
         .row
           - if post.post_type != 'App'

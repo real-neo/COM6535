@@ -25,13 +25,13 @@
               %button.btn{ class: btn_class(@post.post_type) }
                 = "#{ @post.replies.count } " + 'comments'
     #poll_btn
-      = raw @post.display_poll
+      = @post.display_poll
     - if @post.post_type == 'App'
       %br
       %div{ style: 'text-align: center;' }
         %h4
           Rate this app
-        = raw @post.display_rating
+        = @post.display_rating
   .panel-footer
     %h6.text-lightgrey
       = @post.time_posted
@@ -53,5 +53,5 @@
   - if @replies.blank?
     = no_record_tr(5)
   - else
-    = render @replies
+    = render partial: 'replies/reply', collection: @replies
 = will_paginate @replies

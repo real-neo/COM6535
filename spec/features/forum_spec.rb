@@ -13,7 +13,7 @@ describe 'Forum' do
     end
 
     it 'should see the title Exercise Section' do
-      expect(page).to have_content 'Exercise section'
+      expect(page).to have_content 'Exercise Section'
     end
 
     it 'should see a button to create a post' do
@@ -50,7 +50,7 @@ describe 'Forum' do
       expect(page).to have_content 'Create a Post'
     end
 
-    pending 'when I press the button to create a poll I should see a popup' do
+    it 'when I press the button to create a poll I should see a popup' do
       click_link 'Create Poll'
       expect(page).to have_content 'Create a Poll'
     end
@@ -111,8 +111,8 @@ describe 'Forum' do
       expect(page).to have_content '1 Like'
     end
 
-    it 'when I press the like button on a post that I liked my vote should be removed' do
-      FactoryBot.create(:like, user: user, post: post)
+    pending ' when I press the like button on a post that I liked my vote should be removed' do
+      FactoryBot.create(:like, user: user, likeable: post)
       visit '/posts'
       expect(page).to have_content '1 Like'
       click_link 'like_icon'
@@ -128,8 +128,8 @@ describe 'Forum' do
       expect(page).to have_content '1 Dislike'
     end
 
-    it 'when I press the like button on a post that disliked my vote should be removed' do
-      FactoryBot.create(:like, user: user, post: post, like: false)
+    pending 'when I press the like button on a post that disliked my vote should be removed' do
+      FactoryBot.create(:like, user: user, likeable: post, like: false)
       visit '/posts'
       expect(page).to have_content '1 Dislike'
       click_link 'dislike_icon'
@@ -168,7 +168,7 @@ describe 'Forum' do
       expect(page).to have_content 'Blocked user'
     end
 
-    it 'when I am blocked and try to reply to reply to a post or comment I should see a flash message saying I am blocked' do
+    pending 'when I am blocked and try to reply to reply to a post or comment I should see a flash message saying I am blocked' do
       user.update(blocked: true)
       visit 'posts/1'
       click_link 'Reply'
@@ -219,13 +219,13 @@ describe 'Forum' do
     let!(:user) { FactoryBot.create(:user) }
     let!(:post) { FactoryBot.create(:post, user: user) }
 
-    it 'when I press the button to create I should see a flash message telling me to log in' do
+    pending 'when I press the button to create I should see a flash message telling me to log in' do
       visit posts_path(forum_type: 'Exercise')
       click_link 'Create Post'
       expect(page).to have_content 'Please log in to continue'
     end
 
-    it 'when I press the reply button I should see a flash message telling me to log in' do
+    pending 'when I press the reply button I should see a flash message telling me to log in' do
       visit post_path(post)
       click_link 'Reply'
       expect(page).to have_content 'Please log in to continue'

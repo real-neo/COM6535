@@ -18,8 +18,6 @@
 
 FactoryBot.define do
   factory :like do
-    post { nil }
-    user { nil }
     like { true }
   end
 end

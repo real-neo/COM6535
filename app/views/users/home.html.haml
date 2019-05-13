@@ -7,7 +7,7 @@
 %h3 Recent Activities
 %br
 = will_paginate @replies_to_me, param_name: 'reply_to_me_page'
-= render @replies_to_me, replies_to_me: true
+= render partial: 'replies/reply', collection: @replies_to_me, replies_to_me: true
 = will_paginate @replies_to_me, param_name: 'reply_to_me_page'
 
 %hr
@@ -15,7 +15,7 @@
 %h3 Your Posts
 %br
 = will_paginate @posts, param_name: 'post_page'
-= render @posts
+= render partial: 'posts/post', collection: @posts
 = will_paginate @posts, param_name: 'post_page'
 
 %hr
@@ -23,5 +23,5 @@
 %h3 Your Replies
 %br
 = will_paginate @replies, param_name: 'reply_page'
-= render @replies, your_replies: true
+= render partial: 'replies/reply', collection: @replies, your_replies: true
 = will_paginate @replies, param_name: 'reply_page'

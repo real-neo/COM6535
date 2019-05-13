@@ -15,13 +15,13 @@ class PostsController < ApplicationController
   end
 
   def top_voted_posts
-    @top_exercise = Post.where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(5)
+    @top_exercise = Post.where(post_type: 'Exercise').group(:id).order(likes_count: :desc).limit(3)
     @top_exercise = PostDecorator.decorate_collection(@top_exercise)
 
-    @top_diet = Post.where(post_type: 'Diet').order(likes_count: :desc).limit(5)
+    @top_diet = Post.where(post_type: 'Diet').order(likes_count: :desc).limit(3)
     @top_diet = PostDecorator.decorate_collection(@top_diet)
 
-    @top_apps = Post.where(post_type: 'App').order(rating: :desc).limit(5)
+    @top_apps = Post.where(post_type: 'App').order(rating: :desc).limit(3)
     @top_apps = PostDecorator.decorate_collection(@top_apps)
   end
 
@@ -37,8 +37,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id]).decorate
-    @replies, @sort, @order = sorting_replies(Post.find(params[:id]).replies.includes(:user, :original))
+    @post = Post.find(allowed_id).decorate
+    @replies, @sort, @order = sorting_replies(Post.find(allowed_id).replies.includes(:user, :original))
     @replies = ReplyDecorator.decorate_collection(@replies.paginate(page: params[:page]))
   end
 
@@ -56,7 +56,7 @@ class PostsController < ApplicationController
           f.js { render 'create_fail.js.erb' }
         end
       elsif @post.post_type == 'App'
-        redirect_to @post, notice: 'Your post has been submitted!'
+        redirect_to URI.parse(@post), notice: 'Your post has been submitted!'
       else
         respond_to(&:js)
       end
@@ -145,25 +145,29 @@ class PostsController < ApplicationController
              posts = posts.order("created_at #{order}")
              'Time'
            end
-    order = (order == 'asc' ? 'up' : 'down') # do a exchange here
-    [posts, sort, order]
+
+    sort += (order == 'asc' ? '⬆️' : '⬇️')
+    [posts, sort]
   end
 
   def sorting_replies(replies)
-    order = (params[:order] == 'down' ? 'asc' : 'desc')
-    sort = case params[:sort]
-           when 'Likes'
-             replies = replies.order("likes_count #{order}")
-             'Likes'
-           else
-             replies = replies.order("created_at #{order}")
-             'Time'
-           end
-    order = (order == 'asc' ? 'up' : 'down')
-    [replies, sort, order]
+    order = if params[:order] == '⬆️'
+              'asc'
+            else
+              'desc'
+            end
+    replies = replies.order("created_at #{order}")
+    sort = 'Time'
+
+    sort += (order == 'asc' ? '⬆️' : '⬇️')
+    [replies, sort]
   end
 
   def allowed_params
     params.require(:post).permit(:post_type, :title, :description, :app_icon).merge(user_id: current_user.id)
+  end
+
+  def allowed_id
+    params.require(:id)
   end
 end

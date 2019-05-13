@@ -3,7 +3,7 @@
 %h3 Reports
 %br
 = will_paginate @reports, param_name: 'report_page'
-= render @reports
+= render partial: 'report', collection: @reports
 = will_paginate @reports, param_name: 'report_page'
 
 %hr
@@ -11,7 +11,7 @@
 %h3 Closed Reports
 %br
 = will_paginate @closed_reports, param_name: 'close_page'
-= render @closed_reports, closed: true
+= render partial: 'report', collection: @closed_reports, closed: true
 = will_paginate @closed_reports, param_name: 'close_page'
 
 %hr
