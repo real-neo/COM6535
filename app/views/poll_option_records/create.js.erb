@@ -1,8 +1,8 @@
 let post = $('#post_<%= @post_id %>');
 if(post.length)
-    post.find('#poll_btn').html('<%= @poll_buttons %>')
+    post.find('#poll_btn').html('<%= raw @poll_buttons %>')
 else
-    $('#poll_btn').html('<%= @poll_buttons %>')
+    $('#poll_btn').html('<%= raw @poll_buttons %>')
 
 <%- if @poll_option_record.nil? %>
   $.flashAlert('Your vote has been removed!', 'notice')
