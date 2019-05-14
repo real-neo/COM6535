@@ -34,5 +34,5 @@
       - if @posts.blank?
         = no_record_tr(5)
       - else
-        = render partial: 'posts/post', collection: @posts
+        = render @posts
     = will_paginate @posts
