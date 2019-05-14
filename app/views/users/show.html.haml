@@ -7,5 +7,5 @@
 %h3 #{ @user.firstname }'s Posts
 %br
 = will_paginate @posts, param_name: 'post_page'
-= render 'post', collection: @posts
+= render partial: 'posts/post', collection: @posts
 = will_paginate @posts, param_name: 'post_page'

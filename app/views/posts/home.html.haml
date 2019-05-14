@@ -10,7 +10,7 @@
       - if @most_voted_posts.blank?
         = no_record_tr(5)
       - else
-        = render @most_voted_posts
+        = render partial: 'posts/post', collection: @most_voted_posts
   .col-md-3.hidden-xs.hidden-sm
     %h3
       Top Exercise Posts

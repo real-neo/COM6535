@@ -6,8 +6,7 @@
 %br
 = will_paginate @app_requests, param_name: 'open_page'
 -#= render @app_requests
-= render @app_requests
-
+= render partial: 'app_request', collection: @app_requests
 = will_paginate @app_requests, param_name: 'open_page'
 
 %hr
@@ -15,5 +14,5 @@
 %h3 Closed Requests
 %br
 = will_paginate @closed_app_requests, param_name: 'close_page'
-= render @closed_app_requests, closed: true
+= render partial: 'app_request', collection: @closed_app_requests, closed: true
 = will_paginate @closed_app_requests, param_name: 'close_page'
