@@ -1,0 +1,146 @@
+
+== Brakeman Report ==
+
+Application Path: /home/alexis/Desktop/PersonalFitness/project
+Rails Version: 5.2.1
+Brakeman Version: 4.5.0
+Scan Date: 2019-05-09 11:33:52 +0100
+Duration: 1.512452694 seconds
+Checks Run: BasicAuth, BasicAuthTimingAttack, ContentTag, CreateWith, CrossSiteScripting, DefaultRoutes, Deserialize, DetailedExceptions, DigestDoS, DynamicFinders, EscapeFunction, Evaluation, Execute, FileAccess, FileDisclosure, FilterSkipping, ForgerySetting, HeaderDoS, I18nXSS, JRubyXML, JSONEncoding, JSONParsing, LinkTo, LinkToHref, MailTo, MassAssignment, MimeTypeDoS, ModelAttrAccessible, ModelAttributes, ModelSerialize, NestedAttributes, NestedAttributesBypass, NumberToCurrency, PermitAttributes, QuoteTableName, Redirect, RegexDoS, Render, RenderDoS, RenderInline, ResponseSplitting, RouteDoS, SQL, SQLCVEs, SSLVerify, SafeBufferManipulation, SanitizeMethods, SelectTag, SelectVulnerability, Send, SendFile, SessionManipulation, SessionSettings, SimpleFormat, SingleQuotes, SkipBeforeFilter, SprocketsPathTraversal, StripTags, SymbolDoSCVE, TranslateBug, UnsafeReflection, ValidationRegex, WithoutProtection, XMLDoS, YAMLParsing
+
+== Overview ==
+
+Controllers: 12
+Models: 11
+Templates: 64
+Errors: 0
+Security Warnings: 15
+
+== Warning Types ==
+
+Cross-Site Scripting: 4
+Dynamic Render Path: 10
+Redirect: 1
+
+== Warnings ==
+
+Confidence: High
+Category: Cross-Site Scripting
+Check: CrossSiteScripting
+Message: Unescaped model attribute
+Code: Post.find(params[:post_id]).decorate.display_poll
+File: app/views/poll_option_records/create.js.erb
+Line: 3
+
+Confidence: High
+Category: Cross-Site Scripting
+Check: CrossSiteScripting
+Message: Unescaped model attribute
+Code: Post.find(params[:post_id]).decorate.display_poll
+File: app/views/poll_option_records/create.js.erb
+Line: 5
+
+Confidence: High
+Category: Cross-Site Scripting
+Check: CrossSiteScripting
+Message: Unescaped model attribute
+Code: Post.find(params[:id]).decorate.display_rating
+File: app/views/posts/show.html.haml
+Line: 33
+
+Confidence: High
+Category: Cross-Site Scripting
+Check: CrossSiteScripting
+Message: Unescaped model attribute
+Code: Post.find(params[:id]).decorate.display_poll
+File: app/views/posts/show.html.haml
+Line: 27
+
+Confidence: High
+Category: Redirect
+Check: Redirect
+Message: Possible unprotected redirect
+Code: redirect_to(Post.create(allowed_params).decorate, :notice => "Your post has been submitted!")
+File: app/controllers/posts_controller.rb
+Line: 62
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => AppRequest.open.includes(:user).all.order(:created_at => :desc).paginate(:page => params[:open_page], :per_page => 10), {})
+File: app/views/app_requests/index.html.haml
+Line: 8
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => ReplyDecorator.decorate_collection(Reply.includes(:user, :original, :post).where(:posts => ({ :user_id => current_user.decorate.id })).where.not(:posts => ({ :post_type => "App" })).or(Reply.includes(:user, :original, :post).where(:originals_replies => ({ :user_id => current_user.decorate.id }))).order(:created_at => :desc).paginate(:page => params[:reply_to_me_page], :per_page => 4)), { :replies_to_me => true })
+File: app/views/users/home.html.haml
+Line: 10
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => ReplyDecorator.decorate_collection(Reply.includes(:user, :original, :post).where(:user_id => current_user.decorate.id).order(:created_at => :desc).paginate(:page => params[:reply_page], :per_page => 4)), { :your_replies => true })
+File: app/views/users/home.html.haml
+Line: 26
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => PostDecorator.decorate_collection(@posts.paginate(:page => params[:page])), {})
+File: app/views/posts/index.html.haml
+Line: 30
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => PostDecorator.decorate_collection([].paginate(:page => params[:page])), {})
+File: app/views/posts/search.html.haml
+Line: 15
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => ReplyDecorator.decorate_collection(@replies.paginate(:page => params[:page])), {})
+File: app/views/posts/show.html.haml
+Line: 53
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => PostDecorator.decorate_collection(Post.includes(:user, :poll_options).where.not(:post_type => "App").where(:user_id => current_user.decorate.id).order(:created_at => :desc).paginate(:page => params[:post_page], :per_page => 4)), {})
+File: app/views/users/home.html.haml
+Line: 18
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => Report.includes(:user => :avatar_attachment, :post => ({ :user => :avatar_attachment })).all.paginate(:page => params[:report_page]), {})
+File: app/views/reports/index.html.haml
+Line: 10
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => AppRequest.close.includes(:user).all.order(:created_at => :desc).paginate(:page => params[:close_page], :per_page => 10), { :closed => true })
+File: app/views/app_requests/index.html.haml
+Line: 16
+
+Confidence: Weak
+Category: Dynamic Render Path
+Check: Render
+Message: Render path contains parameter value
+Code: render(action => PostDecorator.decorate_collection(Post.includes(:user, :poll_options).where.not(:post_type => "App").where(:user_id => User.find(params[:id]).decorate.id).order(:created_at => :desc).paginate(:page => params[:post_page], :per_page => 10)), {})
+File: app/views/users/show.html.haml
+Line: 10
+

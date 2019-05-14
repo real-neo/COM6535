@@ -10,7 +10,11 @@
 
 user_list = [
     ['Bowen', 'Yu', 'UK', 'Sheffield', 'questionyugood@gmail.com', 'Neo', '12345678', true],
-    ['Alexis', 'Ioannou', 'Cyprus', 'Limassol', 'ioannou.alexis95@gmail.com', 'acp18ai', 'qweqweqwe', true]
+    ['Alexis', 'Ioannou', 'Cyprus', 'Limassol', 'ioannou.alexis95@gmail.com', 'acp18ai', 'qweqweqwe', true],
+    ['Harriet', 'Holman', 'Sheffiled', 'Genesys', 'harriet.holman@epignenesys.org.uk', 'ac4hh', 'genesys_semester2', true],
+    ['Chris', 'Murray', 'Sheffiled', 'Genesys', 'chris.murray@epigenesys.org.uk', 'aca03cem', 'genesys_semester2', true],
+    ['Shared', 'Genesys', 'Sheffiled', 'Genesys', 'com6535@shefcompsci.org.uk', 'ac6gene', 'genesys_semester2', true],
+
 ]
 
 user_list.each do |firstname, lastname, country, city, email, username, password, admin|
