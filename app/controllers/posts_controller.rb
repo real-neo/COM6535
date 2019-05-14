@@ -146,21 +146,22 @@ class PostsController < ApplicationController
              'Time'
            end
 
-    sort += (order == 'asc' ? '⬆️' : '⬇️')
-    [posts, sort]
+    order = (order == 'asc' ? 'up' : 'down') # do a exchange here
+    [posts, sort, order]
   end
 
   def sorting_replies(replies)
-    order = if params[:order] == '⬆️'
-              'asc'
-            else
-              'desc'
-            end
-    replies = replies.order("created_at #{order}")
-    sort = 'Time'
-
-    sort += (order == 'asc' ? '⬆️' : '⬇️')
-    [replies, sort]
+    order = (params[:order] == 'down' ? 'asc' : 'desc')
+    sort = case params[:sort]
+           when 'Likes'
+             replies = replies.order("likes_count #{order}")
+             'Likes'
+           else
+             replies = replies.order("created_at #{order}")
+             'Time'
+           end
+    order = (order == 'asc' ? 'up' : 'down')
+    [replies, sort, order]
   end
 
   def allowed_params

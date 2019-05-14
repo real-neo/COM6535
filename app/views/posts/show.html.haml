@@ -31,7 +31,7 @@
       %div{ style: 'text-align: center;' }
         %h4
           Rate this app
-        = @post.display_rating
+        = raw @post.display_rating
   .panel-footer
     %h6.text-lightgrey
       = @post.time_posted
