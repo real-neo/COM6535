@@ -79,7 +79,7 @@ class PostsController < ApplicationController
     @from_date = Date.current.last_month
     @to_date = Date.current
     if !keyword.nil? && (!keyword.eql? '')
-      @posts = Post.includes(user: { avatar_attachment: :blob }).where("(title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type != ?", keyword, keyword, 'App')
+      @posts = Post.includes(user: { avatar_attachment: :blob }).where("(title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type != ?", keyword, keyword, 2)
       @posts, @sort, @order = sorting_posts(@posts)
     else
       @posts = []
@@ -110,13 +110,13 @@ class PostsController < ApplicationController
 
     if !keyword.nil? && (!keyword.eql? '') && (params[:exercise] == '✅' || params[:diet] == '✅')
       if params[:exercise] == '✅' && params[:diet] == '✅'
-        @posts = Post.includes(user: :avatar_attachment).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type != ?", from, to, keyword, keyword, 'App')
+        @posts = Post.includes(user: :avatar_attachment).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type != ?", from, to, keyword, keyword, 2)
         @exercise_is_checked = @diet_is_checked = true
       elsif params[:exercise] == '✅'
-        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, 'Exercise')
+        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, 0)
         @exercise_is_checked = true
       else
-        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, 'Diet')
+        @posts = Post.includes(:user).where("created_at > ? AND created_at < ? AND (title LIKE '%' || ? || '%' OR description LIKE '%' || ? || '%') AND post_type = ?", from, to, keyword, keyword, 1)
         @diet_is_checked = true
       end
       @posts, @sort, @order = sorting_posts(@posts)
