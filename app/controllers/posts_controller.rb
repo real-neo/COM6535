@@ -56,7 +56,7 @@ class PostsController < ApplicationController
           f.js { render 'create_fail.js.erb' }
         end
       elsif @post.post_type == 'App'
-        redirect_to URI.parse(@post), notice: 'Your post has been submitted!'
+        redirect_to @post, notice: 'Your post has been submitted!'
       else
         respond_to(&:js)
       end
